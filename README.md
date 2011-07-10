@@ -1,24 +1,22 @@
 Asynchronous Twitter client API for node.js
 ===========================================
 
-[node-twitter](https://github.com/jdub/node-twitter) aims to provide a complete, asynchronous client library for Twitter (and other compliant endpoints), including REST, stream and search APIs. It was inspired by, and uses some code from, technoweenie's [twitter-node](https://github.com/technoweenie/twitter-node).
+[ntwitter](http://github.com/AvianFlu/ntwitter) is an upgraded, more supported version of jdub's [node-twitter](http://github.com/jdub/node-twitter), which in turn was inspired by, and uses some code from, technoweenie's [twitter-node](http://github.com/technoweenie/twitter-node).
 
-## Requirements
+## Version 0.2.0
 
-You can install node-twitter and its dependencies with npm: `npm install twitter`.
+## Installation
 
-- [node](http://nodejs.org/) v0.2+
-- [node-oauth](https://github.com/ciaranj/node-oauth)
-- [cookie-node](https://github.com/jed/cookie-node)
+You can install ntwitter and its dependencies with npm: `npm install ntwitter`.
+
 
 ## Getting started
 
-It's early days for node-twitter, so I'm going to assume a fair amount of knowledge for the moment. Better documentation to come as we head towards a stable release.
+It's early days for ntwitter, so I'm going to assume a fair amount of knowledge for the moment. Better documentation to come as we head towards a stable release.
 
 ### Setup API (stable)
 
-	var sys = require('sys'),
-	    twitter = require('twitter');
+	var twitter = require('twitter');
 	var twit = new twitter({
 		consumer_key: 'STATE YOUR NAME',
 		consumer_secret: 'STATE YOUR NAME',
@@ -42,7 +40,7 @@ Note that all functions may be chained:
 		.verifyCredentials(function (data) {
 			sys.puts(sys.inspect(data));
 		})
-		.updateStatus('Test tweet from node-twitter/' + twitter.VERSION,
+		.updateStatus('Test tweet from ntwitter/' + twitter.VERSION,
 			function (data) {
 				sys.puts(sys.inspect(data));
 			}
@@ -64,7 +62,7 @@ The stream() callback receives a Stream-like EventEmitter:
 		});
 	});
 
-node-twitter also supports user and site streams:
+ntwitter also supports user and site streams:
 
 	twit.stream('user', {track:'nodejs'}, function(stream) {
 		stream.on('data', function (data) {
@@ -76,11 +74,12 @@ node-twitter also supports user and site streams:
 
 ## Contributors
 
-- [Jeff Waugh](http://github.com/jdub) (author)
+- [AvianFlu](http://github.com/AvianFlu) - Upgrades and current support
+- [Jeff Waugh](http://github.com/jdub) (primary author)
 - [rick](http://github.com/technoweenie) (parser.js and, of course, twitter-node!)
 
 ## TODO
 
 - Complete the convenience functions, preferably generated
 - Support [recommended reconnection behaviour](http://dev.twitter.com/pages/user_streams_suggestions) for the streaming APIs
-- Should probably implement basic auth for non-Twitter endpoints
+
