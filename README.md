@@ -1,7 +1,7 @@
 Asynchronous Twitter client API for node.js
 ===========================================
 
-[ntwitter](http://github.com/AvianFlu/ntwitter) is an upgraded, more supported version of jdub's [node-twitter](http://github.com/jdub/node-twitter), which in turn was inspired by, and uses some code from, technoweenie's [twitter-node](http://github.com/technoweenie/twitter-node).
+[ntwitter](http://github.com/AvianFlu/ntwitter) is an upgraded version of jdub's [node-twitter](http://github.com/jdub/node-twitter), which in turn was inspired by, and uses some code from, technoweenie's [twitter-node](http://github.com/technoweenie/twitter-node).
 
 ## Version 0.2.0
 
@@ -12,11 +12,13 @@ You can install ntwitter and its dependencies with npm: `npm install ntwitter`.
 
 ## Getting started
 
-It's early days for ntwitter, so I'm going to assume a fair amount of knowledge for the moment. Better documentation to come as we head towards a stable release.
+This library is, for the most part, the same API as `node-twitter`, with a few fixes and proper adherence to Node.js error-handling conventions for callback APIs.  Much of the documentation below is straight from `node-twitter` - credit goes to [jdub](http://github.com/jdub) for putting all this together in the first place. 
 
 ### Setup API (stable)
 
-	var twitter = require('twitter');
+The keys listed below can be obtained from [here](http://dev.twitter.com)
+
+	var twitter = require('ntwitter');
 	var twit = new twitter({
 		consumer_key: 'STATE YOUR NAME',
 		consumer_secret: 'STATE YOUR NAME',
