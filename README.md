@@ -23,7 +23,7 @@ The most significant API change involves error handling in callbacks.  Callbacks
 
 Where `callback` is the parent function's callback.  (Or any other function you want to call on error.)
 
-### Setup API (stable)
+### Setup API 
 
 The keys listed below can be obtained from [here](http://dev.twitter.com)
 
@@ -35,15 +35,8 @@ The keys listed below can be obtained from [here](http://dev.twitter.com)
 		access_token_secret: 'STATE YOUR NAME'
 	});
 
-### Basic OAuth-enticated GET/POST API (stable)
 
-The convenience APIs aren't finished, but you can get started with the basics:
-
-	twit.get('/statuses/show/27593302936.json', {include_entities:true}, function(data) {
-		sys.puts(sys.inspect(data));
-	});
-
-### REST API (unstable, may change)
+### REST API 
 
 Note that all functions may be chained:
 
@@ -57,13 +50,13 @@ Note that all functions may be chained:
 			}
 		);
 
-### Search API (unstable, may change)
+### Search API 
 
 	twit.search('nodejs OR #node', function(err, data) {
 		sys.puts(sys.inspect(data));
 	});
 
-### Streaming API (stable)
+### Streaming API 
 
 The stream() callback receives a Stream-like EventEmitter:
 
