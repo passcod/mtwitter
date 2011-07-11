@@ -12,7 +12,16 @@ You can install ntwitter and its dependencies with npm: `npm install ntwitter`.
 
 ## Getting started
 
-This library is, for the most part, the same API as `node-twitter`, with a few fixes and proper adherence to Node.js error-handling conventions for callback APIs.  Much of the documentation below is straight from `node-twitter` - credit goes to [jdub](http://github.com/jdub) for putting all this together in the first place. 
+This library is, for the most part, the same API as `node-twitter`. Much of the documentation below is straight from `node-twitter` - credit goes to [jdub](http://github.com/jdub) for putting all this together in the first place. 
+
+The most significant API change involves error handling in callbacks.  Callbacks should now look something like this:
+
+     function (err, result) {
+       if (err) {return callback(err)}
+       // Real code goes here
+     }
+
+Where `callback` is the parent function's callback method.  (Or any other function you want to call on error, really.)
 
 ### Setup API (stable)
 
