@@ -21,7 +21,7 @@ The most significant API change involves error handling in callbacks.  Callbacks
        // Real code goes here
      }
 
-Where `callback` is the parent function's callback method.  (Or any other function you want to call on error, really.)
+Where `callback` is the parent function's callback.  (Or any other function you want to call on error.)
 
 ### Setup API (stable)
 
@@ -48,18 +48,18 @@ The convenience APIs aren't finished, but you can get started with the basics:
 Note that all functions may be chained:
 
 	twit
-		.verifyCredentials(function (data) {
+		.verifyCredentials(function (err, data) {
 			sys.puts(sys.inspect(data));
 		})
 		.updateStatus('Test tweet from ntwitter/' + twitter.VERSION,
-			function (data) {
+			function (err, data) {
 				sys.puts(sys.inspect(data));
 			}
 		);
 
 ### Search API (unstable, may change)
 
-	twit.search('nodejs OR #node', function(data) {
+	twit.search('nodejs OR #node', function(err, data) {
 		sys.puts(sys.inspect(data));
 	});
 
