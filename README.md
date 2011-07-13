@@ -18,21 +18,22 @@ The most significant API change involves error handling in callbacks.  Callbacks
 
      function (err, result) {
        if (err) {return callback(err)}
-       // Real code goes here
+       // Do something with 'result' here
      }
 
 Where `callback` is the parent function's callback.  (Or any other function you want to call on error.)
 
 ### Setup API 
 
-The keys listed below can be obtained from [here](http://dev.twitter.com)
+The keys listed below can be obtained from [dev.twitter.com](http://dev.twitter.com) after setting up a new App.
 
 	var twitter = require('ntwitter');
+
 	var twit = new twitter({
-		consumer_key: 'STATE YOUR NAME',
-		consumer_secret: 'STATE YOUR NAME',
-		access_token_key: 'STATE YOUR NAME',
-		access_token_secret: 'STATE YOUR NAME'
+		consumer_key: 'Twitter',
+		consumer_secret: 'API',
+		access_token_key: 'keys',
+		access_token_secret: 'go here'
 	});
 
 
@@ -42,18 +43,18 @@ Note that all functions may be chained:
 
 	twit
 		.verifyCredentials(function (err, data) {
-			sys.puts(sys.inspect(data));
+			console.log(console.dir(data));
 		})
 		.updateStatus('Test tweet from ntwitter/' + twitter.VERSION,
 			function (err, data) {
-				sys.puts(sys.inspect(data));
+				console.log(console.dir(data));
 			}
 		);
 
 ### Search API 
 
 	twit.search('nodejs OR #node', function(err, data) {
-		sys.puts(sys.inspect(data));
+		console.log(console.dir(data));
 	});
 
 ### Streaming API 
@@ -62,7 +63,7 @@ The stream() callback receives a Stream-like EventEmitter:
 
 	twit.stream('statuses/sample', function(stream) {
 		stream.on('data', function (data) {
-			sys.puts(sys.inspect(data));
+			console.log(console.dir(data));
 		});
 	});
 
@@ -70,7 +71,7 @@ ntwitter also supports user and site streams:
 
 	twit.stream('user', {track:'nodejs'}, function(stream) {
 		stream.on('data', function (data) {
-			sys.puts(sys.inspect(data));
+			console.log(console.dir(data));
 		});
 		// Disconnect stream after five seconds
 		setTimeout(stream.destroy, 5000);
