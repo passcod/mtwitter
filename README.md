@@ -61,9 +61,19 @@ Note that all functions may be chained:
 
 The stream() callback receives a Stream-like EventEmitter:
 
+Here is an example of how to call the 'statuses/sample' method:
+
 	twit.stream('statuses/sample', function(stream) {
 		stream.on('data', function (data) {
-			console.log(console.dir(data));
+			console.log(data);
+		});
+	});
+	
+Here is an example of how to call the 'statuses/filter' method with a bounding box over San Fransisco and New York City:
+
+	twit.stream('statuses/filter', {'locations':'-122.75,36.8,-121.75,37.8,-74,40,-73,41'}, function(stream) {
+		stream.on('data', function (data) {
+			console.log(data);
 		});
 	});
 
