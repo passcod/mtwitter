@@ -1,6 +1,6 @@
 { 
 	"name": "ntwitter", 
-	"version": "v0.2.6", 
+	"version": "v0.2.6-1", 
 	"description": "Asynchronous Twitter REST/stream/search client API for node.js.", 
 	"keywords": ["twitter","streaming","oauth"], 
 	"homepage": "https://github.com/AvianFlu/ntwitter", 
