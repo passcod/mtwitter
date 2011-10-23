@@ -3,7 +3,7 @@ Asynchronous Twitter client API for node.js
 
 [ntwitter](http://github.com/AvianFlu/ntwitter) is an upgraded version of jdub's [node-twitter](http://github.com/jdub/node-twitter), which in turn was inspired by, and uses some code from, technoweenie's [twitter-node](http://github.com/technoweenie/twitter-node).
 
-## Version 0.2.7
+## Version 0.2.8
 
 ## Installation
 
@@ -92,6 +92,9 @@ ntwitter also supports user and site streams:
 - [AvianFlu](http://github.com/AvianFlu) - Upgrades and current support
 - [Jeff Waugh](http://github.com/jdub) (primary author)
 - [rick](http://github.com/technoweenie) (parser.js and, of course, twitter-node!)
+And many, many more.
+
+If you contribute and would like to see your name here, please add it with your changes!
 
 ## TODO
 
