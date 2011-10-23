@@ -92,7 +92,11 @@ ntwitter also supports user and site streams:
 - [AvianFlu](http://github.com/AvianFlu) - Upgrades and current support
 - [Jeff Waugh](http://github.com/jdub) (primary author)
 - [rick](http://github.com/technoweenie) (parser.js and, of course, twitter-node!)
-And many, many more.
+- [Cole Gillespie](http://github.com/coleGillespie) (additional documentation)
+- [Tim Cameron Ryan](http://github.com/timcameronryan)
+- [Jonathan Griggs](https://github.com/boatmeme)
+- [pwagener](https://github.com/pwagener)
+- [fatshotty](https://github.com/fatshotty)
 
 If you contribute and would like to see your name here, please add it with your changes!
 
