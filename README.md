@@ -3,8 +3,6 @@ Asynchronous Twitter client API for node.js
 
 [ntwitter](http://github.com/AvianFlu/ntwitter) is an upgraded version of jdub's [node-twitter](http://github.com/jdub/node-twitter), which in turn was inspired by, and uses some code from, technoweenie's [twitter-node](http://github.com/technoweenie/twitter-node).
 
-## Version 0.2.8
-
 ## Installation
 
 You can install ntwitter and its dependencies with npm: `npm install ntwitter`.
@@ -16,10 +14,10 @@ This library is, for the most part, the same API as `node-twitter`. Much of the 
 
 The most significant API change involves error handling in callbacks.  Callbacks should now look something like this:
 
-     function (err, result) {
-       if (err) {return callback(err)}
-       // Do something with 'result' here
-     }
+         function (err, result) {
+           if (err) {return callback(err)}
+           // Do something with 'result' here
+         }
 
 Where `callback` is the parent function's callback.  (Or any other function you want to call on error.)
 
@@ -27,35 +25,42 @@ Where `callback` is the parent function's callback.  (Or any other function you 
 
 The keys listed below can be obtained from [dev.twitter.com](http://dev.twitter.com) after setting up a new App.
 
-	var twitter = require('ntwitter');
+        var twitter = require('ntwitter');
 
-	var twit = new twitter({
-		consumer_key: 'Twitter',
-		consumer_secret: 'API',
-		access_token_key: 'keys',
-		access_token_secret: 'go here'
-	});
+        var twit = new twitter({
+          consumer_key: 'Twitter',
+          consumer_secret: 'API',
+          access_token_key: 'keys',
+          access_token_secret: 'go here'
+        });
 
 
 ### REST API 
 
+
+Interaction with other parts of Twitter is accomplished through their RESTful API.
+The best documentation for this exists at [dev.twitter.com](http://dev.twitter.com).  Convenience methods exist
+for many of the available methods, but some may be more up-to-date than others.
+If your Twitter interaction is very important, double-check the parameters in the code with 
+Twitter's current documentation.
+
 Note that all functions may be chained:
 
-	twit
-		.verifyCredentials(function (err, data) {
-			console.log(console.dir(data));
-		})
-		.updateStatus('Test tweet from ntwitter/' + twitter.VERSION,
-			function (err, data) {
-				console.log(console.dir(data));
-			}
-		);
+        twit
+          .verifyCredentials(function (err, data) {
+            console.log(console.dir(data));
+          })
+          .updateStatus('Test tweet from ntwitter/' + twitter.VERSION,
+            function (err, data) {
+              console.log(console.dir(data));
+            }
+          );
 
 ### Search API 
 
-	twit.search('nodejs OR #node', function(err, data) {
-		console.log(console.dir(data));
-	});
+        twit.search('nodejs OR #node', function(err, data) {
+          console.log(console.dir(data));
+        });
 
 ### Streaming API 
 
@@ -63,29 +68,29 @@ The stream() callback receives a Stream-like EventEmitter:
 
 Here is an example of how to call the 'statuses/sample' method:
 
-	twit.stream('statuses/sample', function(stream) {
-		stream.on('data', function (data) {
-			console.log(data);
-		});
-	});
-	
+        twit.stream('statuses/sample', function(stream) {
+          stream.on('data', function (data) {
+            console.log(data);
+          });
+        });
+        
 Here is an example of how to call the 'statuses/filter' method with a bounding box over San Fransisco and New York City ( see streaming api for more details on [locations](https://dev.twitter.com/docs/streaming-api/methods#locations) ):
 
-	twit.stream('statuses/filter', {'locations':'-122.75,36.8,-121.75,37.8,-74,40,-73,41'}, function(stream) {
-		stream.on('data', function (data) {
-			console.log(data);
-		});
-	});
+        twit.stream('statuses/filter', {'locations':'-122.75,36.8,-121.75,37.8,-74,40,-73,41'}, function(stream) {
+          stream.on('data', function (data) {
+            console.log(data);
+          });
+        });
 
 ntwitter also supports user and site streams:
 
-	twit.stream('user', {track:'nodejs'}, function(stream) {
-		stream.on('data', function (data) {
-			console.log(console.dir(data));
-		});
-		// Disconnect stream after five seconds
-		setTimeout(stream.destroy, 5000);
-	});
+        twit.stream('user', {track:'nodejs'}, function(stream) {
+          stream.on('data', function (data) {
+            console.log(console.dir(data));
+          });
+          // Disconnect stream after five seconds
+          setTimeout(stream.destroy, 5000);
+        });
 
 ## Contributors
 
