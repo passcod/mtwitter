@@ -102,6 +102,7 @@ ntwitter also supports user and site streams:
 - [Jonathan Griggs](https://github.com/boatmeme)
 - [pwagener](https://github.com/pwagener)
 - [fatshotty](https://github.com/fatshotty)
+- [Ian Babrou](https://github.com/bobrik)
 
 If you contribute and would like to see your name here, please add it with your changes!
 
