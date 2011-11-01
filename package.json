@@ -1,10 +1,10 @@
 { 
   "name": "ntwitter", 
-  "version": "0.2.8", 
+  "version": "0.2.9", 
   "description": "Asynchronous Twitter REST/stream/search client API for node.js.", 
   "keywords": ["twitter","streaming","oauth"], 
   "homepage": "https://github.com/AvianFlu/ntwitter", 
-  "author": "jdub, changes by AvianFlu", 
+  "author": "AvianFlu <charlie@charlieistheman.com>", 
   "licenses": { 
     "type": "MIT", 
     "url": "http://github.com/AvianFlu/ntwitter/raw/master/LICENSE"
