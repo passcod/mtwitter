@@ -48,18 +48,18 @@ Note that all functions may be chained:
 
         twit
           .verifyCredentials(function (err, data) {
-            console.log(console.dir(data));
+            console.log(data);
           })
           .updateStatus('Test tweet from ntwitter/' + twitter.VERSION,
             function (err, data) {
-              console.log(console.dir(data));
+              console.log(data);
             }
           );
 
 ### Search API 
 
         twit.search('nodejs OR #node', function(err, data) {
-          console.log(console.dir(data));
+          console.log(data);
         });
 
 ### Streaming API 
@@ -86,7 +86,7 @@ ntwitter also supports user and site streams:
 
         twit.stream('user', {track:'nodejs'}, function(stream) {
           stream.on('data', function (data) {
-            console.log(console.dir(data));
+            console.log(data);
           });
           stream.on('end', function (response) {
             // Handle a disconnection
