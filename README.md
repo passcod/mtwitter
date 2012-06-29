@@ -115,5 +115,5 @@ If you contribute and would like to see your name here, please add it with your 
 ## TODO
 
 - Complete the convenience functions, preferably generated
-- Support [recommended reconnection behaviour](http://dev.twitter.com/pages/user_streams_suggestions) for the streaming APIs
+- Support [recommended reconnection behaviour](https://dev.twitter.com/docs/streaming-apis/connecting#Best_practices) for the streaming APIs
 
