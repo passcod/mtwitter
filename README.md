@@ -1,39 +1,30 @@
-Asynchronous Twitter client API for node.js
-===========================================
+Twitter 1.1 client API for NodeJS
+=================================
 
-[ntwitter](http://github.com/AvianFlu/ntwitter) is an improved version of
-jdub's [node-twitter](http://github.com/jdub/node-twitter), which in turn was
-inspired by, and uses some code from, technoweenie's
-[twitter-node](http://github.com/technoweenie/twitter-node).
+__[mtwitter](/passcod/mtwitter)__ is an updated version of
+@AvianFlu's [ntwitter](/AvianFlu/ntwitter), which in turn was
+forked from @jdub's [node-twitter](/jdub/node-twitter), and so on…
 
 
 ## Installation
 
-You can install ntwitter and its dependencies with npm: `npm install ntwitter`.
+You can install __mtwitter__ and its dependencies with npm:
+
+``` bash
+$ npm install mtwitter
+```
+
+but you should really put it in your
+[package.json](http://package.json.nodejitsu.com/) and run:
+
+``` bash
+$ npm install
+```
+
+to install everything.
 
 
 ## Getting started
-
-This library is, for the most part, the same API as `node-twitter`. Much of the
-documentation below is straight from `node-twitter` - credit goes to
-[jdub](http://github.com/jdub) for putting all this together in the first place.
-
-The most significant API change involves error handling in callbacks. Callbacks
-now receive the error as a separate parameter, rather than as part of the data.
-This is consistent with node's standard library. Callbacks should now look
-something like this:
-
-``` javascript
-function (err, result) {
-  if (err) return callback(err);
-
-  // Do something with 'result' here
-}
-```
-
-Where `callback` is the parent function's callback.  (Or any other function you
-want to call on error.)
-
 
 ### Setup API 
 
@@ -42,7 +33,7 @@ The keys listed below can be obtained from
 [setting up a new App](https://dev.twitter.com/apps/new).
 
 ``` javascript
-var twitter = require('ntwitter');
+var twitter = require('mtwitter');
 
 var twit = new twitter({
   consumer_key: 'Twitter',
@@ -69,7 +60,7 @@ twit
   .verifyCredentials(function (err, data) {
     console.log(data);
   })
-  .updateStatus('Test tweet from ntwitter/' + twitter.VERSION,
+  .updateStatus('Test tweet from mtwitter/' + twitter.VERSION,
     function (err, data) {
       console.log(data);
     }
@@ -126,7 +117,7 @@ twit.stream('statuses/filter', {track: ['cool'], delimited: 'length'}, function(
 });
 ```
 
-ntwitter also supports user and site streams:
+__mtwitter__ also supports user and site streams:
 
 ``` javascript
 twit.stream('user', {track:'nodejs'}, function(stream) {
@@ -146,16 +137,9 @@ twit.stream('user', {track:'nodejs'}, function(stream) {
 
 ## Community
 
-Forked from [AvianFlu's seemingly dead
+Forked from @AvianFlu's [seemingly dead
 repo](https://github.com/AvianFlu/ntwitter),
-with contributions from:
-
-- AvianFlu/ntwitter#77
-- AvianFlu/ntwitter#95
-- AvianFlu/ntwitter#79
-- AvianFlu/ntwitter#94
-- AvianFlu/ntwitter#86
-- AvianFlu/ntwitter#82
+with contributions from various PRs.
 
 All contributors are listed in the
 [`package.json`](package.json).
