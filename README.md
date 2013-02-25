@@ -1,7 +1,10 @@
 Asynchronous Twitter client API for node.js
 ===========================================
 
-[ntwitter](http://github.com/AvianFlu/ntwitter) is an improved version of jdub's [node-twitter](http://github.com/jdub/node-twitter), which in turn was inspired by, and uses some code from, technoweenie's [twitter-node](http://github.com/technoweenie/twitter-node).
+[ntwitter](http://github.com/AvianFlu/ntwitter) is an improved version of
+jdub's [node-twitter](http://github.com/jdub/node-twitter), which in turn was
+inspired by, and uses some code from, technoweenie's
+[twitter-node](http://github.com/technoweenie/twitter-node).
 
 
 ## Installation
@@ -11,9 +14,14 @@ You can install ntwitter and its dependencies with npm: `npm install ntwitter`.
 
 ## Getting started
 
-This library is, for the most part, the same API as `node-twitter`. Much of the documentation below is straight from `node-twitter` - credit goes to [jdub](http://github.com/jdub) for putting all this together in the first place. 
+This library is, for the most part, the same API as `node-twitter`. Much of the
+documentation below is straight from `node-twitter` - credit goes to
+[jdub](http://github.com/jdub) for putting all this together in the first place.
 
-The most significant API change involves error handling in callbacks. Callbacks now receive the error as a separate parameter, rather than as part of the data. This is consistent with node's standard library. Callbacks should now look something like this:
+The most significant API change involves error handling in callbacks. Callbacks
+now receive the error as a separate parameter, rather than as part of the data.
+This is consistent with node's standard library. Callbacks should now look
+something like this:
 
 ``` javascript
 function (err, result) {
@@ -23,7 +31,8 @@ function (err, result) {
 }
 ```
 
-Where `callback` is the parent function's callback.  (Or any other function you want to call on error.)
+Where `callback` is the parent function's callback.  (Or any other function you
+want to call on error.)
 
 
 ### Setup API 
@@ -45,10 +54,11 @@ var twit = new twitter({
 ### REST API 
 
 Interaction with other parts of Twitter is accomplished through their RESTful API.
-The best documentation for this exists at [dev.twitter.com](http://dev.twitter.com).  Convenience methods exist
-for many of the available methods, but some may be more up-to-date than others.
-If your Twitter interaction is very important, double-check the parameters in the code with 
-Twitter's current documentation.
+The best documentation for this exists at [dev.twitter.com](http://dev.twitter.com).
+
+Convenience methods exist for many of the available methods, but some may be
+more up-to-date than others. If your Twitter interaction is very important,
+double-check the parameters in the code with Twitter's current documentation.
 
 Note that all functions may be chained:
 
@@ -86,7 +96,9 @@ twit.stream('statuses/sample', function(stream) {
 });
 ```
         
-Here is an example of how to call the 'statuses/filter' method with a bounding box over San Fransisco and New York City ( see streaming api for more details on [locations](https://dev.twitter.com/docs/streaming-api/methods#locations) ):
+Here is an example of how to call the 'statuses/filter' method with a bounding
+box over San Fransisco and New York City ( see streaming api for more details
+on [locations](https://dev.twitter.com/docs/streaming-api/methods#locations) ):
 
 ``` javascript
 twit.stream('statuses/filter', {'locations':'-122.75,36.8,-121.75,37.8,-74,40,-73,41'}, function(stream) {
@@ -96,7 +108,9 @@ twit.stream('statuses/filter', {'locations':'-122.75,36.8,-121.75,37.8,-74,40,-7
 });
 ```
 
-Here is an example of how to call the 'statuses/filter' method using the track and delimited request parameter for more details on [Streaming API request parameters](https://dev.twitter.com/docs/streaming-apis/parameters#delimited) ):
+Here is an example of how to call the 'statuses/filter' method using the track
+and delimited request parameter for more details on [Streaming API request
+parameters](https://dev.twitter.com/docs/streaming-apis/parameters#delimited):
 
 ``` javascript
 twit.stream('statuses/filter', {track: ['cool'], delimited: 'length'}, function(stream) {
@@ -128,12 +142,16 @@ twit.stream('user', {track:'nodejs'}, function(stream) {
 });
 ```
 
-## Contributors
+## Community
 
-[Lots of people contribute to this project. You should too!](https://github.com/AvianFlu/ntwitter/contributors)
+Forked from [AvianFlu's seemingly dead
+repo](https://github.com/AvianFlu/ntwitter),
+with contributions from:
 
-## TODO
-
-- Complete the convenience functions, preferably generated
-- Support [recommended reconnection behaviour](https://dev.twitter.com/docs/streaming-apis/connecting#Best_practices) for the streaming APIs
+- AvianFlu/ntwitter#77
+- AvianFlu/ntwitter#95
+- AvianFlu/ntwitter#79
+- AvianFlu/ntwitter#94
+- AvianFlu/ntwitter#86
+- AvianFlu/ntwitter#82
 
