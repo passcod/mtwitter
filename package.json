@@ -1,6 +1,6 @@
 { 
   "name": "mtwitter", 
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Twitter 1.1 client API for NodeJS", 
   "keywords": ["twitter", "streaming", "oauth"], 
   "homepage": "https://npmjs.org/package/mtwitter", 
@@ -57,7 +57,7 @@
   },
   "repository": { 
     "type": "git", 
-    "url": "https://github.com/passcod/ntwitter.git"
+    "url": "https://github.com/passcod/mtwitter.git"
   }, 
   "dependencies": { 
     "oauth": ">=0.8.4", 

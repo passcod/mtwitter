@@ -1,9 +1,11 @@
 Twitter 1.1 client API for NodeJS
 =================================
 
-__[mtwitter](/passcod/mtwitter)__ is an updated version of
-@AvianFlu's [ntwitter](/AvianFlu/ntwitter), which in turn was
-forked from @jdub's [node-twitter](/jdub/node-twitter), and so on…
+__[mtwitter](https://github.com/passcod/mtwitter)__ is an updated
+version of [@AvianFlu](https://github.com/AvianFlu)'s
+[ntwitter](https://github.com/AvianFlu/ntwitter), which in turn was
+forked from [@jdub](https://github.com/jdub)'s
+[node-twitter](https://github.com/jdub/node-twitter), and so on…
 
 
 ## Installation
@@ -29,7 +31,7 @@ to install everything.
 ### Setup API 
 
 The keys listed below can be obtained from
-[dev.twitter.com](http://dev.twitter.com) after
+[dev.twitter.com](https://dev.twitter.com) after
 [setting up a new App](https://dev.twitter.com/apps/new).
 
 ``` javascript
@@ -47,7 +49,7 @@ var twit = new twitter({
 ### REST API 
 
 Interaction with other parts of Twitter is accomplished through their RESTful API.
-The best documentation for this exists at [dev.twitter.com](http://dev.twitter.com).
+The best documentation for this exists at [dev.twitter.com](https://dev.twitter.com).
 
 Convenience methods exist for many of the available methods, but some may be
 more up-to-date than others. If your Twitter interaction is very important,
@@ -142,4 +144,4 @@ repo](https://github.com/AvianFlu/ntwitter),
 with contributions from various PRs.
 
 All contributors are listed in the
-[`package.json`](package.json).
+[`package.json`](https://github.com/passcod/mtwitter/blob/master/package.json).
