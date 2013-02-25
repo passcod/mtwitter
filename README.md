@@ -37,7 +37,9 @@ want to call on error.)
 
 ### Setup API 
 
-The keys listed below can be obtained from [dev.twitter.com](http://dev.twitter.com) after [setting up a new App](https://dev.twitter.com/apps/new).
+The keys listed below can be obtained from
+[dev.twitter.com](http://dev.twitter.com) after
+[setting up a new App](https://dev.twitter.com/apps/new).
 
 ``` javascript
 var twitter = require('ntwitter');
@@ -155,3 +157,5 @@ with contributions from:
 - AvianFlu/ntwitter#86
 - AvianFlu/ntwitter#82
 
+All contributors are listed in the
+[`package.json`](package.json).
