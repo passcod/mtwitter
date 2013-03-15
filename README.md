@@ -45,6 +45,34 @@ var twit = new twitter({
 });
 ```
 
+#### App-only Authentication
+
+``` javascript
+var twit = new twitter({
+    consumer_key: config.key,
+    consumer_secret: config.secret,
+    application_only: true
+});
+
+twit.appAuth(function (err, data) {
+    if (err) {
+        console.log(err);
+        return;
+    }
+
+    # Ready!
+    console.log(data);
+    
+    # Example: search
+    twt.search("test", {count: 100}, function (err, data) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.log(data);
+    });
+});
+```
 
 ### REST API 
 

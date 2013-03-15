@@ -1,11 +1,12 @@
 { 
   "name": "mtwitter", 
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Twitter 1.1 client API for NodeJS", 
   "keywords": ["twitter", "streaming", "oauth"], 
   "homepage": "https://npmjs.org/package/mtwitter", 
   "author": "Various",
   "contributors": [
+    {"name": "Francisco F Reynolds", "email": "francisco@iamat.com"},
     {"name": "Félix Saparelli", "email": "me@passcod.name"},
     {"name": "Won Dong", "email": "fkiller@gmail.com"},
     {"name": "Dominic Rout", "email": "d.rout@sheffield.ac.uk"},
@@ -62,8 +63,9 @@
   "dependencies": { 
     "oauth": ">=0.8.4", 
     "cookies": "0.1.x",
-    "keygrip": "0.2.x"
-  }, 
+    "keygrip": "0.2.x",
+    "request": "2.16.x"
+  },
   "devDependencies": {
     "should": "*",
     "mocha": "*"
