@@ -1,5 +1,7 @@
-Twitter 1.1 client API for NodeJS
+Twitter API for NodeJS
 =================================
+
+[![Build Status](https://travis-ci.org/passcod/mtwitter.png)](https://travis-ci.org/passcod/mtwitter)
 
 __[mtwitter][t1]__ is an updated version of [@AvianFlu][t2]'s [ntwitter][t3],
 which in turn was forked from [@jdub][t4]'s [node-twitter][t5], and so on…
