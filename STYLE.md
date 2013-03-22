@@ -12,21 +12,21 @@ amendments and additions below:
 Options used:
 
 ```
-node:     true
-curly:    true
-eqeqeq:   true
-immed:    true
-indent:   2
-latedef:  true
-noarg:    true
-noempty:  true
-nonew:    true
-plusplus: true
-quotmark: single
-undef:    true
-unused:   true
-trailing: true
-maxlen:   80
+node:     true    Code is running inside of the Node runtime environment
+curly:    true    Always put curly braces around blocks in loops and conditionals
+eqeqeq:   true    Prohibits the use of == and != in favor of === and !==
+immed:    true    Prohibits the use of immediate function invocations without parens
+indent:   2       Two spaces for indentation
+latedef:  true    Prohibits the use of a variable before it was defined
+noarg:    true    Prohibits the use of arguments.caller and arguments.callee
+noempty:  true    Warns when you have an empty block in your code
+nonew:    true    Prohibits the use of constructor functions for side-effects
+plusplus: true    Prohibits the use of unary increment and decrement operators
+quotmark: single  Enforces the consistency of quotation marks
+undef:    true    Prohibits the use of explicitly undeclared variables
+unused:   true    Warns when you define and never use your variables
+trailing: true    Makes it an error to leave a trailing whitespace in your code
+maxlen:   80      Line length
 ```
 
 `/*global escape*/` is also needed in `twitter.js` as `node: true`
@@ -38,9 +38,9 @@ The following options can be used to further enforce naming convention. The
 existing code doesn't pass these yet.
 
 ```
-camelcase: true
-newcap:    true
-nomen:     true
+camelcase: true   Force all variable names to use either camelCase style or UPPER_CASE
+newcap:    true   Requires you to capitalize names of constructor functions
+nomen:     true   Disallows the use of dangling _ in variables
 ```
 
 
