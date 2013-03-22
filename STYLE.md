@@ -1,9 +1,12 @@
 Style Guide
 ===========
 
+_This complete version can be used instead: [passcod/node-style-guide]._
+
 Code style is as [Felix's Node.js Style Guide][1], with the
 amendments and additions below:
 
+[passcod/node-style-guide]: https://github.com/passcod/node-style-guide
 [1]: http://nodeguide.com/style.html
 
 
