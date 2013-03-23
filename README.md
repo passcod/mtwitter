@@ -3,6 +3,7 @@ Twitter API for NodeJS
 
 [![Build Status](https://travis-ci.org/passcod/mtwitter.png)](https://travis-ci.org/passcod/mtwitter)
 [![NPM version](https://badge.fury.io/js/mtwitter.png)](http://badge.fury.io/js/mtwitter)
+[![Dependency Status](https://gemnasium.com/passcod/mtwitter.png)](https://gemnasium.com/passcod/mtwitter)
 
 __[mtwitter][t1]__ is an updated version of [@AvianFlu][t2]'s [ntwitter][t3],
 which in turn was forked from [@jdub][t4]'s [node-twitter][t5], and so on…
