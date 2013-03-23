@@ -2,6 +2,7 @@ Twitter API for NodeJS
 =================================
 
 [![Build Status](https://travis-ci.org/passcod/mtwitter.png)](https://travis-ci.org/passcod/mtwitter)
+[![NPM version](https://badge.fury.io/js/mtwitter.png)](http://badge.fury.io/js/mtwitter)
 
 __[mtwitter][t1]__ is an updated version of [@AvianFlu][t2]'s [ntwitter][t3],
 which in turn was forked from [@jdub][t4]'s [node-twitter][t5], and so on…
@@ -183,8 +184,10 @@ twit.stream('user', {track:'nodejs'}, function(stream) {
 
 Forked from @AvianFlu's [inactive repo][c1], with contributions merged in.
 
-All contributors are listed in the
-[`package.json`][c2].
+All contributors are listed in the [`package.json`][c2].
+
+Style guide: [passcod/node-style-guide][c3].
 
 [c1]: https://github.com/AvianFlu/ntwitter
 [c2]: https://github.com/passcod/mtwitter/blob/master/package.json
+[c3]: https://github.com/passcod/node-style-guide
