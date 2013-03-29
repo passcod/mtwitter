@@ -2,8 +2,8 @@
 'use strict';
 
 var assert = require('assert');
-var Twitter = require('mtwitter');
-var config = require('../config');
+var Twitter = require('../index');
+var config = require('./config').get();
 
 describe('Twitter', function() {
   it('should be a function', function() {

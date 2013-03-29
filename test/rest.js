@@ -2,8 +2,9 @@
 'use strict';
 
 //var assert = require('assert');
-var Twitter = require('mtwitter');
-var config = require('../config');
+var Twitter = require('../index');
+var config = require('./config').get();
+
 
 var req = {
   get: '/application/rate_limit_status.json',
