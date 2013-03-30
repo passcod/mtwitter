@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>errors.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="index.html">
+                index.js
+              </a>
+            
+              
+              <a class="source" href="defaults.html">
+                defaults.js
+              </a>
+            
+              
+              <a class="source" href="errors.html">
+                errors.js
+              </a>
+            
+              
+              <a class="source" href="parser.html">
+                parser.js
+              </a>
+            
+              
+              <a class="source" href="rest.html">
+                rest.js
+              </a>
+            
+              
+              <a class="source" href="twitter.html">
+                twitter.js
+              </a>
+            
+              
+              <a class="source" href="utils.html">
+                utils.js
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>errors.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="string">'use strict'</span>;
+
+<span class="keyword">var</span> _     = require(<span class="string">'underscore'</span>);
+<span class="keyword">var</span> http  = require(<span class="string">'http'</span>);
+
+<span class="function"><span class="keyword">function</span> <span class="title">HTTPError</span><span class="params">(error)</span> {</span>
+  <span class="keyword">this</span>.name = <span class="string">'HTTPError'</span>;
+  <span class="keyword">this</span>.statusCode = error.statusCode;
+  <span class="keyword">this</span>.data = error.data;
+  <span class="keyword">this</span>.originalError = error;
+  <span class="keyword">this</span>.message = <span class="keyword">this</span>.statusCode + <span class="string">': '</span> + http.STATUS_CODES[<span class="keyword">this</span>.statusCode];
+}
+HTTPError.prototype = <span class="keyword">new</span> Error();
+exports.HTTPError = HTTPError;
+
+<span class="function"><span class="keyword">function</span> <span class="title">NoCallbackError</span><span class="params">()</span> {</span>
+  <span class="keyword">this</span>.name = <span class="string">'NoCallbackError'</span>;
+  <span class="keyword">this</span>.message = <span class="string">'No callback provided'</span>;
+}
+NoCallbackError.prototype = <span class="keyword">new</span> TypeError();
+exports.NoCallbackError = NoCallbackError;
+
+<span class="function"><span class="keyword">function</span> <span class="title">ArgumentError</span><span class="params">(arg, message)</span> {</span>
+  <span class="keyword">this</span>.name = <span class="string">'ArgumentError'</span>;
+  <span class="keyword">this</span>.message = <span class="string">'The argument '</span> + arg + <span class="string">' '</span> + message;
+}
+ArgumentError.prototype = <span class="keyword">new</span> Error();
+exports.ArgumentError = ArgumentError;
+
+<span class="function"><span class="keyword">function</span> <span class="title">ArgumentRequiredError</span><span class="params">(arg, message)</span> {</span>
+  <span class="keyword">this</span>.name = <span class="string">'ArgumentRequiredError'</span>;
+  <span class="keyword">this</span>.message = <span class="string">'The argument '</span> + arg + <span class="string">' is required'</span>;
+  <span class="keyword">if</span> (message) {
+    <span class="keyword">this</span>.message += <span class="string">' '</span> + message;
+  }
+}
+ArgumentRequiredError.prototype = <span class="keyword">new</span> TypeError();
+exports.ArgumentRequiredError = ArgumentRequiredError;
+
+<span class="function"><span class="keyword">function</span> <span class="title">TwitterError</span><span class="params">(errors)</span> {</span>
+  <span class="keyword">this</span>.errors = errors;
+  <span class="keyword">this</span>.name = <span class="string">'TwitterError'</span>;
+  <span class="keyword">this</span>.message = _.pluck(errors, <span class="string">'message'</span>).join(<span class="string">', '</span>);
+  <span class="keyword">this</span>.codes = _.pluck(errors, <span class="string">'code'</span>);
+}
+TwitterError.prototype = <span class="keyword">new</span> Error();
+exports.TwitterError = TwitterError;</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

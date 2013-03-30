@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>rest.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="index.html">
+                index.js
+              </a>
+            
+              
+              <a class="source" href="defaults.html">
+                defaults.js
+              </a>
+            
+              
+              <a class="source" href="errors.html">
+                errors.js
+              </a>
+            
+              
+              <a class="source" href="parser.html">
+                parser.js
+              </a>
+            
+              
+              <a class="source" href="rest.html">
+                rest.js
+              </a>
+            
+              
+              <a class="source" href="twitter.html">
+                twitter.js
+              </a>
+            
+              
+              <a class="source" href="utils.html">
+                utils.js
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>rest.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="string">'use strict'</span>;
+
+<span class="keyword">var</span> _             = require(<span class="string">'underscore'</span>);
+<span class="keyword">var</span> errors        = require(<span class="string">'./errors'</span>);
+<span class="keyword">var</span> request       = require(<span class="string">'request'</span>);
+<span class="keyword">var</span> utils         = require(<span class="string">'./utils'</span>);
+
+
+module.exports = <span class="function"><span class="keyword">function</span> <span class="title">TwitterRest</span><span class="params">(options)</span> {</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>Rather than storing state directly on the
+<code>this</code> object, or in a multitude of variables,
+there are only two: <code>options</code>, which hold the
+global options and is passed to us, and <code>state</code>
+which is outlined below.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> state = {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Instead of firing off requests immediately, they
+are stored in <code>pools</code> and executed later on, not
+always sequentially. For example, requests that
+have hit the rate limit will be kept in and run
+within the next available window.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    pools: {
+      todo: [],
+      doing: []
+    },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Rate limits are kept up-to-date dynamically here.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    rateLimits: {},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>Contains the information found at <code>/help/configuration</code>.
+This is requested at startup and every 24 hours
+after this.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    config: {},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Contains information and configuration about
+scheduling: the process of managing and firing
+off requests depending on timings and rate limiting.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    scheduling: {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Perform a main drain every minute, limited
+to 50 requests. This should be more than enough,
+and will pace the throughput a bit if hit.</p>
+<p>Of course, these values can be modified.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      main: {
+        interval: <span class="number">60</span> * <span class="number">1000</span>,
+        limit: <span class="number">50</span>
+      },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>Refresh the global rate limit information
+once every 15 minutes. These are also refreshed
+on a per-request basis.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      limits: {
+        interval: <span class="number">15</span> * <span class="number">60</span> * <span class="number">1000</span>
+      }
+    }
+  };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>Convert a URL such as <code>/favorites/create.json</code>
+to <code>POST favorites/create</code>, by looking it up
+in the resource list (see near the bottom).</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> resourceFromUrl = <span class="keyword">function</span>(url, post) {
+    post = !!post;
+
+    <span class="keyword">var</span> result;
+    Object.keys(module.exports.resources).forEach(<span class="keyword">function</span>(resource) {
+      resource = resource.split(<span class="string">' '</span>);
+      <span class="keyword">if</span> (result || (post &amp;&amp; resource[<span class="number">0</span>] !== <span class="string">'POST'</span>)) {
+        <span class="keyword">return</span>;
+      }
+
+      <span class="keyword">var</span> pattern = <span class="keyword">new</span> RegExp(resource[<span class="number">1</span>].replace(<span class="regexp">/\/\//g</span>, <span class="string">'/([^/])/'</span>), <span class="string">'i'</span>);
+      <span class="keyword">if</span> (pattern.test(url)) {
+        result = resource.join(<span class="string">' '</span>);
+      }
+    });
+    <span class="keyword">return</span> result;
+  };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>Update the rate limit information given a resource
+string and a response (HTTP). At the moment, only
+GET requests are explicitely rate limited, so we
+ignore the rest. Additionally, only resources we
+know about are considered. The <code>reset</code> field is
+converted to a <code>Date</code> object for ease of use.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> updateRateLimits = <span class="keyword">function</span>(resource, response) {
+    <span class="keyword">var</span> isListed = _.has(module.exports.resources, resource);
+    <span class="keyword">if</span> (isListed &amp;&amp; response.req.method === <span class="string">'GET'</span>) {
+      <span class="keyword">var</span> limits = {};
+      [<span class="string">'reset'</span>, <span class="string">'remaining'</span>, <span class="string">'limit'</span>].forEach(<span class="keyword">function</span>(h) {
+        <span class="keyword">if</span> (_.has(response.headers, <span class="string">'x-rate-limit-'</span> + h)) {
+          limits[h] = +response.headers[<span class="string">'x-rate-limit-'</span> + h];
+        }
+      });
+      <span class="keyword">if</span> (limits.reset) {
+        limits.reset = <span class="keyword">new</span> Date(limits.reset * <span class="number">1000</span>);
+      }
+      state.rateLimits[resource] = limits;
+    }
+  };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>Valid URLs that are passed in match the regex
+<code>^/?[a-zA-Z0-9/_]+(\.json)?$</code>. We want to have
+them all in full absolute format, ready to be
+used in a request.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> canonizeUrl = <span class="keyword">function</span>(url) {
+    <span class="keyword">if</span> (url.charAt(<span class="number">0</span>) !== <span class="string">'/'</span>) {
+      url = <span class="string">'/'</span> + url;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>Don&#39;t pass in absolute URLs, thanks.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">if</span> (<span class="regexp">/http/i</span>.test(url)) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> errors.ArgumentError(<span class="string">'url'</span>, <span class="string">'must be a relative URL'</span>);
+      }
+    }
+
+    <span class="keyword">if</span> (!<span class="regexp">/\.json$/i</span>.test(url)) {
+      url += <span class="string">'.json'</span>;
+    }
+
+    <span class="keyword">return</span> options.rest_base + url;
+  };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <h2>Queue a request (add it to the pool).</h2>
+<p>This is mostly a matter of filtering the input
+to make sure everything is as expected, and to
+arrange what input we do let through exactly as
+we want it.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> queueRequest = <span class="keyword">function</span>(method, url, params, callback) {
+    <span class="keyword">var</span> post = <span class="regexp">/post/i</span>.test(method);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>The <code>params</code> argument is optional, everything
+else is required. The code below is pretty much
+self-explanatory.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="keyword">if</span> (<span class="keyword">typeof</span> params === <span class="string">'function'</span>) {
+      callback = params;
+      params = <span class="literal">null</span>;
+    }
+
+    <span class="keyword">if</span> (post) {
+      <span class="keyword">if</span> (!params) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> errors.ArgumentRequiredError(<span class="string">'params'</span>, <span class="string">'for POST'</span>);
+      }
+
+      <span class="keyword">if</span> (!params.content) {
+        <span class="keyword">throw</span> <span class="keyword">new</span> errors.ArgumentRequiredError(<span class="string">'params.content'</span>, <span class="string">'for POST'</span>);
+      }
+
+      <span class="keyword">if</span> (!params.contentType) {
+        params.contentType = <span class="string">'application/x-www-form-urlencoded'</span>;
+      }
+    }
+
+    <span class="keyword">if</span> (<span class="keyword">typeof</span> callback !== <span class="string">'function'</span>) {
+      <span class="keyword">throw</span> <span class="keyword">new</span> errors.NoCallbackError();
+    }
+
+    state.pools.todo.push({
+      post: post,
+      url: canonizeUrl(url),
+      resource: resourceFromUrl(url, post),
+      params: params,
+      callback: callback
+    });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>Attempt to run the request immediately.
+This might not work, for various reasons,
+in which case the request will just be
+processed later on.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    drainPool(<span class="number">1</span>);
+  };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <h2>Process a request.</h2>
+<p>This is done in three parts: first, the request
+options are prepared, including any special
+requirements for authentication and POST;
+second, the request is checked for rate limiting;
+and finally, the request is sent and its response
+is parsed and triaged.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> processRequest = <span class="keyword">function</span>(req) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>Move the request from one pool to
+the other, so it is not run twice.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="keyword">var</span> i = state.pools.todo.indexOf(req);
+    state.pools.doing.push(req);
+    <span class="keyword">delete</span> state.pools.todo[i];
+
+    <span class="keyword">var</span> handleResponse = <span class="keyword">function</span>(error, response) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>Update the rate limits (see above), and
+delete the request from the pools, now that
+it has run.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      updateRateLimits(req.resource, response);
+      <span class="keyword">var</span> i = state.pools.doing.indexOf(req);
+      <span class="keyword">delete</span> state.pools.doing[i];
+
+      <span class="keyword">if</span> (!error) {
+        <span class="keyword">try</span> {
+          <span class="keyword">var</span> json = JSON.parse(response.body);
+          <span class="keyword">if</span> (json.errors) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> errors.TwitterError(json.errors);
+          }
+
+          <span class="keyword">return</span> req.callback(<span class="literal">null</span>, json, response);
+        } <span class="keyword">catch</span> (err) {
+          error = err;
+        }
+      } <span class="keyword">else</span> <span class="keyword">if</span> (error.statusCode) {
+        error.response = response;
+        error = <span class="keyword">new</span> errors.HTTPError(error);
+      }
+      req.callback(error, <span class="literal">null</span>, response);
+    };
+
+    <span class="keyword">var</span> method = request.post;
+    <span class="keyword">var</span> headers = {};
+    <span class="keyword">var</span> reqOptions = {
+      url: req.url,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>This is technically not useful, but you
+never know what Twitter might do next.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      followAllRedirects: <span class="literal">true</span>
+    };
+
+    <span class="keyword">if</span> (options.application_only) {
+      headers.Authorization = <span class="string">'Bearer '</span> + options.bearer_token;
+    } <span class="keyword">else</span> {
+      reqOptions.oauth = {
+        consumer_key:     options.consumer_key,
+        consumer_secret:  options.consumer_secret,
+        token:            options.access_token_key,
+        token_secret:     options.access_token_secret
+      };
+    }
+
+    <span class="keyword">if</span> (req.post) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>This header&#39;s case is important due to how <code>request</code>
+is coded (badly!) (see mikeal/request#499)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      headers[<span class="string">'content-type'</span>] = req.params.contentType;
+      reqOptions.body = req.params.content;
+    } <span class="keyword">else</span> {
+      method = request.get;
+      reqOptions.qs = req.params;
+    }
+
+    reqOptions.headers = utils.merge(options.headers, headers);
+    method(reqOptions, handleResponse);
+  };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <p>Start processing the queue, up to <code>limit</code> requests at
+a time. By default, this is 180, which should be more
+than enough (contrast with the 50 requests-per-minute
+that are run on the main schedule).</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> drainPool = <span class="keyword">function</span>(limit) {
+    <span class="keyword">if</span> (!limit) {
+      limit = <span class="number">180</span>;
+    }
+
+    console.log(<span class="string">'Draining '</span> + limit);
+    _.chain(state.pools.todo).first(limit).each(processRequest);
+  };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <p>Get the config from /help/configuration. This should
+be run at startup and every 24 hours after that.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> getConfig = <span class="keyword">function</span>() {
+    <span class="keyword">var</span> setConfig = <span class="keyword">function</span>(error, data) {
+      <span class="keyword">if</span> (!error) {
+        state.config = data;
+      }
+    };
+    queueRequest(<span class="string">'GET'</span>, <span class="string">'/help/configuration'</span>, setConfig);
+  };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <p>Get the latest global rate-limit information. See <code>state</code>
+object near the top for scheduling details.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> getLimits = <span class="keyword">function</span>() {
+    <span class="keyword">var</span> setLimits = <span class="keyword">function</span>(error, data) {
+      <span class="keyword">if</span> (!error) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <p>The twitter response is divided accross &quot;families&quot; of
+requests. We don&#39;t really care for all that.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        data.resources.forEach(<span class="function"><span class="keyword">function</span> <span class="title">eachFamily</span><span class="params">(family)</span> {</span>
+          family.forEach(<span class="function"><span class="keyword">function</span> <span class="title">eachResource</span><span class="params">(resource, limits)</span> {</span>
+            resource = resourceFromUrl(resource);
+            state.rateLimits[resource] = limits;
+          });
+        });
+      }
+      console.log(state.rateLimits);
+    };
+    queueRequest(<span class="string">'GET'</span>, <span class="string">'/application/rate_limit_status'</span>, setLimits);
+  };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
+              <p>The scheduling is the clockwork and logic behind
+automagic request firing and transparent rate limit
+respecting. It is named thus for its yet-unborn
+sibling, <code>stopScheduling</code>, which would allow one to
+&quot;pause&quot; network usage on that side of the road, unless
+requested. (<code>queueRequest</code> always tried to fire the
+request off straigntaway.)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> startScheduling = <span class="keyword">function</span>() {
+    <span class="keyword">var</span> main = state.scheduling.main;
+    main.timer = setInterval(<span class="function"><span class="keyword">function</span> <span class="title">mainBurst</span><span class="params">()</span> {</span>
+      drainPool(main.limit);
+    }, main.interval);
+
+    <span class="keyword">var</span> limits = state.scheduling.limits;
+    limits.timer = setInterval(getLimits, limits.interval);
+
+    drainPool(main.limit);
+  };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#182;</a>
+              </div>
+              <p>Expose properties and methods</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="keyword">this</span>.drainPool = drainPool;
+  <span class="keyword">this</span>.queueRequest = queueRequest;
+  <span class="keyword">this</span>.state = state;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              <p>Start the machine!</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  getConfig();
+  getLimits();
+  startScheduling();
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-28">&#182;</a>
+              </div>
+              <h3>A list of all resources in the REST API.</h3>
+<p><em>Does not include Stream API resources.</em></p>
+<p>See <a href="https://dev.twitter.com/docs/api/1.1">https://dev.twitter.com/docs/api/1.1</a></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>module.exports.resources = {
+  <span class="string">'GET statuses/mentions_timeline'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'GET statuses/user_timeline'</span>: {
+    rateLimits: {user: <span class="number">180</span>, app: <span class="number">300</span>}
+  },
+  <span class="string">'GET statuses/home_timeline'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'GET statuses/retweets_of_me'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'GET statuses/retweets/'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">60</span>}
+  },
+  <span class="string">'GET statuses/show/'</span>: {
+    rateLimits: {user: <span class="number">180</span>, app: <span class="number">180</span>}
+  },
+  <span class="string">'POST statuses/destroy/'</span>: {
+    rateLimits: <span class="literal">false</span>
+  },
+  <span class="string">'POST statuses/update'</span>: {
+    rateLimits: <span class="literal">false</span>
+  },
+  <span class="string">'POST statuses/retweet/'</span>: {
+    rateLimits: <span class="literal">false</span>
+  },
+  <span class="string">'POST statuses/update_with_media'</span>: {
+    rateLimits: <span class="literal">false</span>
+  },
+  <span class="string">'GET statuses/oembed'</span>: {
+    rateLimits: {user: <span class="number">180</span>, app: <span class="number">180</span>}
+  },
+
+  <span class="string">'GET search/tweets'</span>: {
+    rateLimits: {user: <span class="number">180</span>, app: <span class="number">450</span>}
+  },
+
+  <span class="string">'GET direct_messages'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'GET direct_messages/sent'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'GET direct_messages/show'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'POST direct_messages/destroy'</span>: {
+    rateLimits: <span class="literal">false</span>
+  },
+  <span class="string">'POST direct_messages/new'</span>: {
+    rateLimits: <span class="literal">false</span>
+  },
+
+  <span class="string">'GET friendships/no_retweets/ids'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'GET friends/ids'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+  },
+  <span class="string">'GET followers/ids'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+  },
+  <span class="string">'GET friendships/lookup'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'GET friendships/incoming'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'GET friendships/outgoing'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'POST friendships/create'</span>: {
+    rateLimits: <span class="literal">false</span>
+  },
+  <span class="string">'POST friendships/destroy'</span>: {
+    rateLimits: <span class="literal">false</span>
+  },
+  <span class="string">'POST friendships/update'</span>: {
+    rateLimits: <span class="literal">false</span>
+  },
+  <span class="string">'GET friendships/show'</span>: {
+    rateLimits: {user: <span class="number">180</span>, app: <span class="number">15</span>}
+  },
+  <span class="string">'GET friends/list'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">30</span>}
+  },
+  <span class="string">'GET followers/list'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">30</span>}
+  },
+
+  <span class="string">'GET account/settings'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'GET account/verify_credentials'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'POST account/settings'</span>: {
+    rateLimits: <span class="literal">false</span>
+  },
+  <span class="string">'POST account/update_delivery_device'</span>: {
+    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'POST account/update_profile'</span>: {
+    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'POST account/update_profile_background_image'</span>: {
+    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'POST account/update_profile_colors'</span>: {
+    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'POST account/update_profile_image'</span>: {
+    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+  },
+
+  <span class="string">'GET blocks/list'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'GET blocks/ids'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'POST blocks/create'</span>: {
+    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'POST blocks/destroy'</span>: {
+    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+  },
+
+  <span class="string">'GET users/lookup'</span>: {
+    rateLimits: {user: <span class="number">180</span>, app: <span class="number">60</span>}
+  },
+  <span class="string">'GET users/show'</span>: {
+    rateLimits: {user: <span class="number">180</span>, app: <span class="number">180</span>}
+  },
+  <span class="string">'GET users/search'</span>: {
+    rateLimits: {user: <span class="number">180</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'GET users/contributees'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'GET users/contributors'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  },
+
+  <span class="string">'POST account/remove_profile_banner'</span>: {
+    rateLimits: <span class="literal">false</span>
+  },
+  <span class="string">'POST account/update_profile_banner'</span>: {
+    rateLimits: <span class="literal">false</span>
+  },
+  <span class="string">'GET users/profile_banner'</span>: {
+    rateLimits: {user: <span class="number">180</span>, app: <span class="number">0</span>}
+  },
+
+  <span class="string">'GET users/suggestions/'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+  },
+  <span class="string">'GET users/suggestions'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+  },
+  <span class="string">'GET users/suggestions//members'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+  },
+
+  <span class="string">'GET favorites/list'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+  },
+  <span class="string">'POST favorites/destroy'</span>: {
+    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'POST favorites/create'</span>: {
+    rateLimits: <span class="literal">false</span>
+  },
+
+  <span class="string">'GET favorites/'</span>: {
+    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+  },
+
+  <span class="string">'GET lists/list'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+  },
+  <span class="string">'GET lists/statuses'</span>: {
+    rateLimits: {user: <span class="number">180</span>, app: <span class="number">180</span>}
+  },
+  <span class="string">'POST lists/members/destroy'</span>: {
+    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'GET lists/memberships'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+  },
+  <span class="string">'GET lists/subscribers'</span>: {
+    rateLimits: {user: <span class="number">180</span>, app: <span class="number">15</span>}
+  },
+  <span class="string">'POST lists/subscribers/create'</span>: {
+    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'GET lists/subscribers/show'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+  },
+  <span class="string">'POST lists/subscribers/destroy'</span>: {
+    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'POST lists/members/create_all'</span>: {
+    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'GET lists/members/show'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+  },
+  <span class="string">'GET lists/members'</span>: {
+    rateLimits: {user: <span class="number">180</span>, app: <span class="number">15</span>}
+  },
+  <span class="string">'POST lists/members/create'</span>: {
+    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'POST lists/destroy'</span>: {
+    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'POST lists/update'</span>: {
+    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'POST lists/create'</span>: {
+    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'GET lists/show'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+  },
+  <span class="string">'GET lists/subscribtions'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+  },
+  <span class="string">'GET lists/members/destroy_all'</span>: {
+    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+  },
+
+  <span class="string">'GET saved_searches/list'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'GET saved_searches/show/'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'POST saved_searches/create'</span>: {
+    rateLimits: <span class="literal">false</span>
+  },
+  <span class="string">'POST saved_searches/destroy/'</span>: {
+    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+  },
+
+  <span class="string">'GET geo/id/'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'GET geo/reverse_geocode'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'GET geo/search'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'GET geo/similar_places'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  },
+  <span class="string">'POST geo/place'</span>: {
+    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+  },
+
+  <span class="string">'GET trends/place'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+  },
+  <span class="string">'GET trends/available'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+  },
+  <span class="string">'GET trends/closest'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+  },
+
+  <span class="string">'POST users/report_spam'</span>: {
+    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+  },
+
+  <span class="string">'GET oauth/authenticate'</span>: {
+    rateLimits: <span class="literal">false</span>
+  },
+  <span class="string">'GET oauth/authorize'</span>: {
+    rateLimits: <span class="literal">false</span>
+  },
+  <span class="string">'POST oauth/access_token'</span>: {
+    rateLimits: <span class="literal">false</span>
+  },
+  <span class="string">'POST oauth/request_token'</span>: {
+    rateLimits: <span class="literal">false</span>
+  },
+  <span class="string">'POST oauth2/token'</span>: {
+    rateLimits: <span class="literal">false</span>
+  },
+  <span class="string">'POST oauth2/invalidate_token'</span>: {
+    rateLimits: <span class="literal">false</span>
+  },
+
+  <span class="string">'GET help/configuration'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+  },
+  <span class="string">'GET help/languages'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+  },
+  <span class="string">'GET help/privacy'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+  },
+  <span class="string">'GET help/tos'</span>: {
+    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+  },
+
+  <span class="string">'GET application/rate_limit_status'</span>: {
+    rateLimits: {user: <span class="number">180</span>, app: <span class="number">180</span>}
+  }
+};</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
