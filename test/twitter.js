@@ -27,7 +27,7 @@ describe('An instance of Twitter', function() {
     assert.equal(typeof t.post, 'function');
   });
 
-  it('should have .rest (DEBUG)', function() {
+  it('should have .rest', function() {
     assert.equal(typeof t.rest, 'object');
   });
 

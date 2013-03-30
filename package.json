@@ -67,7 +67,8 @@
   },
   "devDependencies": {
     "jshint": "1.1.x",
-    "mocha": "1.8.x"
+    "mocha": "1.8.x",
+    "docco": "0.6.x"
   },
   "engines": {
     "node": ">=0.4.0"
@@ -75,6 +76,7 @@
   "main": "./lib/twitter",
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec",
-    "lint": "./node_modules/.bin/jshint --config=./jshint.json lib test"
+    "lint": "./node_modules/.bin/jshint --config=./jshint.json lib test",
+    "doc": "./node_modules/.bin/docco -o doc lib/*.js index.js"
   }
 }
