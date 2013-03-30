@@ -74,7 +74,7 @@
   },
   "main": "./lib/twitter",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha --reporter spec",
-    "lint": "./node_modules/jshint/bin/jshint --config=./jshint.json lib test"
+    "test": "./node_modules/.bin/mocha --reporter spec",
+    "lint": "./node_modules/.bin/jshint --config=./jshint.json lib test"
   }
 }

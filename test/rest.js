@@ -16,17 +16,20 @@ var req = {
 
 describe('rest.js', function() {
   var t = new Twitter(config);
+  this.timeout(5000);
 
   it('should be able to perform a GET request', function(done) {
     t.get(req.get, done);
     t.rest.drainPool();
   });
 
-  it.skip('should be able to perform a POST request', function(done) {
+  it('should be able to perform a POST request', function(done) {
     t.post(req.post.url, req.post.content, null, function(error) {
-      console.log(error);
-      console.log(error.originalError.response.req);
-      done(error);
+      if (error.codes[0] === 139) {
+        done();
+      } else {
+        done(error);
+      }
     });
     t.rest.drainPool();
   });
