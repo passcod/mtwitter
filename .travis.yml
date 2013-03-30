@@ -18,3 +18,5 @@ env:
     - secure: ! 'WyXxiOGmx+Fvt1Gr7o5V5DCfDhvU/hXIb8ziABX43dNoaxq8HxnsOtG9rQA/
       qJ6St5eL+RB8AlWvwrhJQHvJjzuoNnG6Y8nBWeKxAzwKafBrtFyGhRUVizaB
       Rrw81FOpxsCEtHJtAKooAh/GiFLgM41IVJ22X6XLe3VlnwVniEc='
+notifications:
+  irc: "irc.freenode.net#mtwitter"
