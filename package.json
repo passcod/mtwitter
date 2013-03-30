@@ -61,7 +61,6 @@
     "url": "https://github.com/passcod/mtwitter.git"
   }, 
   "dependencies": {
-    "oauth": ">=0.8.4",
     "request": "2.16.x",
     "pkginfo": "0.3.x",
     "underscore": "1.4.x"
