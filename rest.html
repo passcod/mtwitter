@@ -83,6 +83,7 @@
 <span class="keyword">var</span> request       = require(<span class="string">'request'</span>);
 <span class="keyword">var</span> utils         = require(<span class="string">'./utils'</span>);
 
+
 module.exports = <span class="function"><span class="keyword">function</span> <span class="title">TwitterRest</span><span class="params">(options)</span> {</span></pre></div></div>
             
         </li>
@@ -736,8 +737,22 @@ requested.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>module.exports.resources = {
-  <span class="string">'GET statuses/mentions_timeline'</span>: {
+            <div class="content"><div class='highlight'><pre>module.exports.resources = {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-29">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-29">&#182;</a>
+              </div>
+              <h3>Statuses</h3>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="string">'GET statuses/mentions_timeline'</span>: {
     rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
   },
   <span class="string">'GET statuses/user_timeline'</span>: {
@@ -769,13 +784,39 @@ requested.</p>
   },
   <span class="string">'GET statuses/oembed'</span>: {
     rateLimits: {user: <span class="number">180</span>, app: <span class="number">180</span>}
-  },
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-30">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-30">&#182;</a>
+              </div>
+              <h3>Search</h3>
 
-  <span class="string">'GET search/tweets'</span>: {
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="string">'GET search/tweets'</span>: {
     rateLimits: {user: <span class="number">180</span>, app: <span class="number">450</span>}
-  },
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-31">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-31">&#182;</a>
+              </div>
+              <h3>Direct Messages</h3>
 
-  <span class="string">'GET direct_messages'</span>: {
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="string">'GET direct_messages'</span>: {
     rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
   },
   <span class="string">'GET direct_messages/sent'</span>: {
@@ -789,9 +830,22 @@ requested.</p>
   },
   <span class="string">'POST direct_messages/new'</span>: {
     rateLimits: <span class="literal">false</span>
-  },
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-32">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-32">&#182;</a>
+              </div>
+              <h3>Friendships (followers / following)</h3>
 
-  <span class="string">'GET friendships/no_retweets/ids'</span>: {
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="string">'GET friendships/no_retweets/ids'</span>: {
     rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
   },
   <span class="string">'GET friends/ids'</span>: {
@@ -826,9 +880,22 @@ requested.</p>
   },
   <span class="string">'GET followers/list'</span>: {
     rateLimits: {user: <span class="number">15</span>, app: <span class="number">30</span>}
-  },
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-33">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-33">&#182;</a>
+              </div>
+              <h3>Account settings</h3>
 
-  <span class="string">'GET account/settings'</span>: {
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="string">'GET account/settings'</span>: {
     rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
   },
   <span class="string">'GET account/verify_credentials'</span>: {
@@ -851,9 +918,22 @@ requested.</p>
   },
   <span class="string">'POST account/update_profile_image'</span>: {
     rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
-  },
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-34">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-34">&#182;</a>
+              </div>
+              <h3>Blocks (ban, ignore)</h3>
 
-  <span class="string">'GET blocks/list'</span>: {
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="string">'GET blocks/list'</span>: {
     rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
   },
   <span class="string">'GET blocks/ids'</span>: {
@@ -864,9 +944,42 @@ requested.</p>
   },
   <span class="string">'POST blocks/destroy'</span>: {
     rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
-  },
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-35">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-35">&#182;</a>
+              </div>
+              <h4>Profile banner</h4>
 
-  <span class="string">'GET users/lookup'</span>: {
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="string">'POST account/remove_profile_banner'</span>: {
+    rateLimits: <span class="literal">false</span>
+  },
+  <span class="string">'POST account/update_profile_banner'</span>: {
+    rateLimits: <span class="literal">false</span>
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-36">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-36">&#182;</a>
+              </div>
+              <h3>Users</h3>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="string">'GET users/lookup'</span>: {
     rateLimits: {user: <span class="number">180</span>, app: <span class="number">60</span>}
   },
   <span class="string">'GET users/show'</span>: {
@@ -880,19 +993,39 @@ requested.</p>
   },
   <span class="string">'GET users/contributors'</span>: {
     rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
-  },
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-37">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-37">&#182;</a>
+              </div>
+              <h4>Profile banner</h4>
 
-  <span class="string">'POST account/remove_profile_banner'</span>: {
-    rateLimits: <span class="literal">false</span>
-  },
-  <span class="string">'POST account/update_profile_banner'</span>: {
-    rateLimits: <span class="literal">false</span>
-  },
-  <span class="string">'GET users/profile_banner'</span>: {
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="string">'GET users/profile_banner'</span>: {
     rateLimits: {user: <span class="number">180</span>, app: <span class="number">0</span>}
-  },
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-38">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h4">
+                <a class="pilcrow" href="#section-38">&#182;</a>
+              </div>
+              <h4>Suggestions</h4>
 
-  <span class="string">'GET users/suggestions/'</span>: {
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="string">'GET users/suggestions/'</span>: {
     rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
   },
   <span class="string">'GET users/suggestions'</span>: {
@@ -900,9 +1033,22 @@ requested.</p>
   },
   <span class="string">'GET users/suggestions//members'</span>: {
     rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
-  },
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-39">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-39">&#182;</a>
+              </div>
+              <h3>Favorites</h3>
 
-  <span class="string">'GET favorites/list'</span>: {
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="string">'GET favorites/list'</span>: {
     rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
   },
   <span class="string">'POST favorites/destroy'</span>: {
@@ -911,12 +1057,24 @@ requested.</p>
   <span class="string">'POST favorites/create'</span>: {
     rateLimits: <span class="literal">false</span>
   },
-
   <span class="string">'GET favorites/'</span>: {
     rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
-  },
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-40">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-40">&#182;</a>
+              </div>
+              <h3>Lists</h3>
 
-  <span class="string">'GET lists/list'</span>: {
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="string">'GET lists/list'</span>: {
     rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
   },
   <span class="string">'GET lists/statuses'</span>: {
@@ -969,9 +1127,22 @@ requested.</p>
   },
   <span class="string">'GET lists/members/destroy_all'</span>: {
     rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
-  },
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-41">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-41">&#182;</a>
+              </div>
+              <h3>Saved searches</h3>
 
-  <span class="string">'GET saved_searches/list'</span>: {
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="string">'GET saved_searches/list'</span>: {
     rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
   },
   <span class="string">'GET saved_searches/show/'</span>: {
@@ -982,9 +1153,22 @@ requested.</p>
   },
   <span class="string">'POST saved_searches/destroy/'</span>: {
     rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
-  },
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-42">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-42">&#182;</a>
+              </div>
+              <h3>Geo-data</h3>
 
-  <span class="string">'GET geo/id/'</span>: {
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="string">'GET geo/id/'</span>: {
     rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
   },
   <span class="string">'GET geo/reverse_geocode'</span>: {
@@ -998,9 +1182,22 @@ requested.</p>
   },
   <span class="string">'POST geo/place'</span>: {
     rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
-  },
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-43">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-43">&#182;</a>
+              </div>
+              <h3>Trends</h3>
 
-  <span class="string">'GET trends/place'</span>: {
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="string">'GET trends/place'</span>: {
     rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
   },
   <span class="string">'GET trends/available'</span>: {
@@ -1008,13 +1205,40 @@ requested.</p>
   },
   <span class="string">'GET trends/closest'</span>: {
     rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
-  },
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-44">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-44">&#182;</a>
+              </div>
+              <h3>Report spam</h3>
+<p>Also adds a block</p>
 
-  <span class="string">'POST users/report_spam'</span>: {
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="string">'POST users/report_spam'</span>: {
     rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
-  },
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-45">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-45">&#182;</a>
+              </div>
+              <h3>Authentication</h3>
 
-  <span class="string">'GET oauth/authenticate'</span>: {
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="string">'GET oauth/authenticate'</span>: {
     rateLimits: <span class="literal">false</span>
   },
   <span class="string">'GET oauth/authorize'</span>: {
@@ -1031,9 +1255,22 @@ requested.</p>
   },
   <span class="string">'POST oauth2/invalidate_token'</span>: {
     rateLimits: <span class="literal">false</span>
-  },
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-46">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-46">&#182;</a>
+              </div>
+              <h3>Resources</h3>
 
-  <span class="string">'GET help/configuration'</span>: {
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="string">'GET help/configuration'</span>: {
     rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
   },
   <span class="string">'GET help/languages'</span>: {
@@ -1044,9 +1281,22 @@ requested.</p>
   },
   <span class="string">'GET help/tos'</span>: {
     rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
-  },
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-47">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-47">&#182;</a>
+              </div>
+              <h3>Rate limiting</h3>
 
-  <span class="string">'GET application/rate_limit_status'</span>: {
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="string">'GET application/rate_limit_status'</span>: {
     rateLimits: {user: <span class="number">180</span>, app: <span class="number">180</span>}
   }
 };</pre></div></div>
