@@ -112,10 +112,11 @@ which is outlined below.</p>
         <li id="section-3">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h3">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>Instead of firing off requests immediately, they
+              <h3>Request pools</h3>
+<p>Instead of firing off requests immediately, they
 are stored in <code>pools</code> and executed later on, not
 always sequentially. For example, requests that
 have hit the rate limit will be kept in and run
@@ -134,10 +135,11 @@ within the next available window.</p>
         <li id="section-4">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h3">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>Rate limits are kept up-to-date dynamically here.</p>
+              <h3>Rate limiting</h3>
+<p>Rate limits are kept up-to-date dynamically here.</p>
 
             </div>
             
@@ -149,10 +151,11 @@ within the next available window.</p>
         <li id="section-5">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h3">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>Contains the information found at <code>/help/configuration</code>.
+              <h3>Twitter configuration</h3>
+<p>Contains the information found at <code>/help/configuration</code>.
 This is requested at startup and every 24 hours
 after this.</p>
 
@@ -166,10 +169,11 @@ after this.</p>
         <li id="section-6">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h3">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <p>Contains information and configuration about
+              <h3>Scheduling</h3>
+<p>Contains information and configuration about
 scheduling: the process of managing and firing
 off requests depending on timings and rate limiting.</p>
 <p>All values can be modified <em>at runtime.</em></p>
@@ -184,10 +188,11 @@ off requests depending on timings and rate limiting.</p>
         <li id="section-7">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h4">
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
-              <p>Perform a main drain every minute, limited
+              <h4>Main drain</h4>
+<p>Perform a main drain every minute, limited
 to 50 requests. This should be more than enough,
 and will pace the throughput a bit if hit.</p>
 
@@ -204,17 +209,19 @@ and will pace the throughput a bit if hit.</p>
         <li id="section-8">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h4">
                 <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
-              <p>Refresh the global rate limit information
-once every 15 minutes. These are also refreshed
-on a per-request basis.</p>
+              <h4>Reduced main drain.</h4>
+<p>This is used when an unexpected 429 is hit.
+If a 429 is hit again while using this, the
+main drain schedule is stopped for a full window.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      limits: {
-        interval: <span class="number">15</span> * <span class="number">60</span> * <span class="number">1000</span>
+            <div class="content"><div class='highlight'><pre>      reduced: {
+        interval: <span class="number">60</span> * <span class="number">1000</span>,
+        limit: <span class="number">5</span>
       },</pre></div></div>
             
         </li>
@@ -223,18 +230,18 @@ on a per-request basis.</p>
         <li id="section-9">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h4">
                 <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
-              <p>Reduced main drain. This is used when an unexpected
-429 is hit. If a 429 is hit again while using this,
-the main drain schedule is stopped for a full window.</p>
+              <h4>Rate limit information</h4>
+<p>Refresh the global rate limit information
+once every 15 minutes. These are also refreshed
+on a per-request basis.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      reduced: {
-        interval: <span class="number">60</span> * <span class="number">1000</span>,
-        limit: <span class="number">5</span>
+            <div class="content"><div class='highlight'><pre>      limits: {
+        interval: <span class="number">15</span> * <span class="number">60</span> * <span class="number">1000</span>
       }
     }
   };</pre></div></div>
@@ -245,10 +252,11 @@ the main drain schedule is stopped for a full window.</p>
         <li id="section-10">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h2">
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
-              <p>Convert a URL such as <code>/favorites/create.json</code>
+              <h2>Utilities</h2>
+<p>Convert a URL such as <code>/favorites/create.json</code>
 to <code>POST favorites/create</code>, by looking it up
 in the resource list (see near the bottom).</p>
 
@@ -654,10 +662,11 @@ requests. We don&#39;t really care for all that.</p>
         <li id="section-25">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h2">
                 <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
-              <p>The scheduling is the clockwork and logic behind
+              <h2>Scheduling</h2>
+<p>The scheduling is the clockwork and logic behind
 automagic request firing and transparent rate limit
 respecting. It is named thus for its yet-unborn
 sibling, <code>stopScheduling</code>, which would allow one to
@@ -720,10 +729,10 @@ request off straigntaway.)</p>
         <li id="section-28">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap for-h2">
                 <a class="pilcrow" href="#section-28">&#182;</a>
               </div>
-              <h3>A list of all resources in the REST API.</h3>
+              <h2>A list of all resources in the REST API.</h2>
 <p><em>Does not include Stream API resources.</em></p>
 <p>See <a href="https://dev.twitter.com/docs/api/1.1">https://dev.twitter.com/docs/api/1.1</a></p>
 
