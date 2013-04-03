@@ -1,6 +1,13 @@
-// ## mtwitter source documentation
+// ## Twitter API for Node.JS
+// - GitHub: https://github.com/passcod/mtwitter
+// - NPM: http://npmjs.org/package/mtwitter
+// - Travis CI: https://travis-ci.org/passcod/mtwitter
+// - This document: https://passcod.name/mtwitter
+
 module.exports = require('./lib/twitter');
 
+// ## mtwitter source documentation
+//
 // - [twitter.js](twitter.html) — the main file, does nothing more
 //   than handle options, initialise the main object, and bring
 //   everything together.
