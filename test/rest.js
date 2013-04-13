@@ -1,19 +1,8 @@
 /*global describe, it, beforeEach*/
 'use strict';
 
-var _       = require('underscore');
-var assert  = require('assert');
 var Twitter = require('../index');
 var config  = require('./config').get();
-
-
-var req = {
-  get: '/application/rate_limit_status',
-  post: {
-    url: '/favorites/create',
-    content: 'id=317050755691454464'
-  }
-};
 
 describe('#rest', function() {
   var t;
@@ -21,30 +10,25 @@ describe('#rest', function() {
 
   beforeEach(function() {
     t = new Twitter(config);
+    t.rest.state.scheduling.main.interval = 1000;
   });
 
   it('should be able to perform a GET request', function(done) {
-    t.get(req.get, done);
+    t.get('/application/rate_limit_status', done);
+    t.rest.drain();
+    // This is currently necessary for the requests to run
+    // successfully, although I have no idea why. _It just
+    // doesn't make sense._ I shall have to investigate.
   });
 
   it('should be able to perform a POST request', function(done) {
-    t.post(req.post.url, req.post.content, null, function(error) {
+    t.post('/favorites/create', 'id=317050755691454464', null, function(error) {
       if (!error || error.codes[0] === 139) {
         done();
       } else {
         done(error);
       }
     });
-  });
-
-  it('should have retrieve Twitter’s configuration', function(done) {
-    t.get(req.get, function(error) {
-      if (error) {
-        done(error);
-      } else {
-        assert(!_.isEmpty(t.rest.state.config));
-        done();
-      }
-    });
+    t.rest.drain();
   });
 });

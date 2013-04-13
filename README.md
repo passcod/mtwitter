@@ -1,18 +1,29 @@
+mtwitter roadmap
+----------------
+
+The last backward-compatible version (i.e. that can be used as a drop-in
+replacement for ntwitter) was __1.0.x__. If you do not want breakage, do
+specify this in your `package.json`. Version numbers now start at __1.3.x__
+and follow Node.js numbering: _odd_ versions are unstable, _even_ versions
+are stable. There ___will___ be breakage if you ignore this warning.
+
+For more details into what will go in releases, see the [milestone list][r1].
+[r1]: https://github.com/passcod/mtwitter/issues/milestones
+
+[![Build Status](https://travis-ci.org/passcod/mtwitter.png)](https://travis-ci.org/passcod/mtwitter)
+[![NPM version](https://badge.fury.io/js/mtwitter.png)](http://badge.fury.io/js/mtwitter)
+[![Dependency Status](https://gemnasium.com/passcod/mtwitter.png)](https://gemnasium.com/passcod/mtwitter)
+
+Documentation for the __1.3.x__ release:
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 Twitter API for Node.JS
 ========================
 
 [![Build Status](https://travis-ci.org/passcod/mtwitter.png)](https://travis-ci.org/passcod/mtwitter)
 [![NPM version](https://badge.fury.io/js/mtwitter.png)](http://badge.fury.io/js/mtwitter)
 [![Dependency Status](https://gemnasium.com/passcod/mtwitter.png)](https://gemnasium.com/passcod/mtwitter)
-
-__[mtwitter][t1]__ is an updated version of [@AvianFlu][t2]'s [ntwitter][t3],
-which in turn was forked from [@jdub][t4]'s [node-twitter][t5], and so on…
-
-[t1]: https://github.com/passcod/mtwitter
-[t2]: https://github.com/AvianFlu
-[t3]: https://github.com/AvianFlu/ntwitter
-[t4]: https://github.com/jdub
-[t5]: https://github.com/jdub/node-twitter
 
 
 ## Installation
@@ -71,115 +82,12 @@ twit.appAuth(function (err, data) {
   }
   
   // Ready!
-  console.log(data);
-  
-  // Example: search
-  twt.search("test", {count: 100}, function (err, data) {
-    if (err) {
-      console.log(err);
-      return;
-    }
-    console.log(data);
-  });
 });
 ```
 
 ### REST API 
 
-Interaction with other parts of Twitter is accomplished through their RESTful API.
-The best documentation for this exists at [dev.twitter.com][b3].
-
-[b3]: https://dev.twitter.com
-
-Convenience methods exist for many of the available methods, but some may be
-more up-to-date than others. If your Twitter interaction is very important,
-double-check the parameters in the code with Twitter's current documentation.
-
-Note that all functions may be chained:
-
-``` javascript
-twit.verifyCredentials(function(err, data) {
-  console.log(data);
-}).updateStatus('Test tweet', function(err, data) {
-  console.log(data);
-});
-```
-
-### Search API 
-
-``` javascript
-twit.search('nodejs OR #node', {}, function(err, data) {
-  console.log(data);
-});
-```
-
-### Streaming API 
-
-The stream() callback receives a Stream-like EventEmitter.
-
-Here is an example of how to call the `statuses/sample` method:
-
-``` javascript
-twit.stream('statuses/sample', function(stream) {
-  stream.on('data', function(data) {
-    console.log(data);
-  });
-});
-```
-        
-Here is an example of how to call the 'statuses/filter' method with a bounding
-box over San Fransisco and New York City ( see streaming api for more details
-on [locations][b4] ):
-
-[b4]: https://dev.twitter.com/docs/streaming-api/methods#locations
-
-``` javascript
-twit.stream(
-  'statuses/filter',
-  {'locations':'-122.75,36.8,-121.75,37.8,-74,40,-73,41'},
-function(stream) {
-  stream.on('data', function (data) {
-    console.log(data);
-  });
-});
-```
-
-Here is an example of how to call the 'statuses/filter' method using the track
-and delimited request parameter for more details on [Streaming API request
-parameters](https://dev.twitter.com/docs/streaming-apis/parameters#delimited):
-
-``` javascript
-twit.stream(
-  'statuses/filter',
-  {track: ['cool'], delimited: 'length'},
-function(stream) {
-  stream.on('data', function (data) {
-    if ('number' === typeof data) {
-      console.log(data);
-    } else {
-      console.log(data.text);
-    }
-  });
-});
-```
-
-__mtwitter__ also supports user and site streams:
-
-``` javascript
-twit.stream('user', {track:'nodejs'}, function(stream) {
-  stream.on('data', function(data) {
-    console.log(data);
-  });
-  stream.on('end', function(response) {
-    // Handle a disconnection
-  });
-  stream.on('destroy', function(response) {
-    // Handle a 'silent' disconnection from Twitter, no end/error event fired
-  });
-  // Disconnect stream after five seconds
-  setTimeout(stream.destroy, 5000);
-});
-```
+TBD
 
 ## Community
 
