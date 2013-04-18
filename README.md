@@ -97,6 +97,17 @@ All contributors are listed in the [`package.json`][c2].
 
 Style guide: [passcod/node-style-guide][c3].
 
+### Pull requests
+
+ - Topical branches and standard PR etiquette is preferred.
+ - Both linting and testing should pass (the Travis build will fail
+   a PR if there are linting errors):
+
+   ``` bash
+   $ npm test
+   $ npm run-script lint
+   ```
+
 [c1]: https://github.com/AvianFlu/ntwitter
 [c2]: https://github.com/passcod/mtwitter/blob/master/package.json
 [c3]: https://github.com/passcod/node-style-guide
