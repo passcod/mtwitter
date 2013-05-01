@@ -80,6 +80,7 @@
 
 <span class="keyword">var</span> _             = require(<span class="string">'underscore'</span>);
 <span class="keyword">var</span> errors        = require(<span class="string">'./errors'</span>);
+<span class="keyword">var</span> Fantail       = require(<span class="string">'fantail'</span>);
 <span class="keyword">var</span> request       = require(<span class="string">'request'</span>);
 <span class="keyword">var</span> utils         = require(<span class="string">'./utils'</span>);
 
@@ -114,19 +115,12 @@ which is outlined below.</p>
               <div class="pilwrap for-h3">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <h3>Request pools</h3>
-<p>Instead of firing off requests immediately, they
-are stored in <code>pools</code> and executed later on, not
-always sequentially. For example, requests that
-have hit the rate limit will be kept in and run
-within the next available window.</p>
+              <h3>Queue</h3>
+<p>See <a href="https://passcod.name/fantail">https://passcod.name/fantail</a></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    pools: {
-      todo: [],
-      doing: []
-    },</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    queue: <span class="keyword">new</span> Fantail(),</pre></div></div>
             
         </li>
         
@@ -160,7 +154,8 @@ after this.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    config: {},</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    config: {}
+  };</pre></div></div>
             
         </li>
         
@@ -168,110 +163,8 @@ after this.</p>
         <li id="section-6">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-6">&#182;</a>
-              </div>
-              <h3>Scheduling</h3>
-<p>Contains information and configuration about
-scheduling: the process of managing and firing
-off requests depending on timings and rate limiting.</p>
-<p>All values can be modified <em>at runtime.</em></p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>    scheduling: {</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-7">
-            <div class="annotation">
-              
-              <div class="pilwrap for-h4">
-                <a class="pilcrow" href="#section-7">&#182;</a>
-              </div>
-              <h4>Main drain</h4>
-<p>Perform a main drain every minute, limited
-to 50 requests. This should be more than enough,
-and will pace the throughput a bit if hit.</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>      main: {
-        interval: <span class="number">60</span> * <span class="number">1000</span>,
-        limit: <span class="number">50</span>
-      },</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-8">
-            <div class="annotation">
-              
-              <div class="pilwrap for-h4">
-                <a class="pilcrow" href="#section-8">&#182;</a>
-              </div>
-              <h4>Reduced main drain</h4>
-<p>This is used when an unexpected 429 is hit.
-If a 429 is hit again while using this, the
-main drain schedule is stopped for a full window.</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>      reduced: {
-        interval: <span class="number">60</span> * <span class="number">1000</span>,
-        limit: <span class="number">5</span>
-      },</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-9">
-            <div class="annotation">
-              
-              <div class="pilwrap for-h4">
-                <a class="pilcrow" href="#section-9">&#182;</a>
-              </div>
-              <h4>Rate limit information</h4>
-<p>Refresh the global rate limit information
-once every 15 minutes. These are also refreshed
-on a per-request basis.</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>      limits: {
-        interval: <span class="number">15</span> * <span class="number">60</span> * <span class="number">1000</span>
-      },</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-10">
-            <div class="annotation">
-              
-              <div class="pilwrap for-h4">
-                <a class="pilcrow" href="#section-10">&#182;</a>
-              </div>
-              <h4>Twitter configuration</h4>
-<p>Twitter recommends its configuration to be fetched at
-application start and every 24 hours after that.</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>      config: {
-        interval: <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">1000</span>
-      }
-    }
-  };</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-11">
-            <div class="annotation">
-              
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-11">&#182;</a>
+                <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
               <h2>Utilities</h2>
 <p>Convert a URL such as <code>/favorites/create.json</code>
@@ -301,11 +194,11 @@ in the resource list (see near the bottom).</p>
         </li>
         
         
-        <li id="section-12">
+        <li id="section-7">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-12">&#182;</a>
+                <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
               <p>Update the rate limit information given a resource
 string and a response (HTTP). At the moment, only
@@ -335,11 +228,11 @@ converted to a <code>Date</code> object for ease of use.</p>
         </li>
         
         
-        <li id="section-13">
+        <li id="section-8">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-13">&#182;</a>
+                <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
               <p>Valid URLs that are passed in match the regex
 <code>^/?[a-zA-Z0-9/_]+(\.json)?$</code>. We want to have
@@ -355,11 +248,11 @@ used in a request.</p>
         </li>
         
         
-        <li id="section-14">
+        <li id="section-9">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-14">&#182;</a>
+                <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
               <p>Don&#39;t pass in absolute URLs, thanks.</p>
 
@@ -380,11 +273,11 @@ used in a request.</p>
         </li>
         
         
-        <li id="section-15">
+        <li id="section-10">
             <div class="annotation">
               
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-15">&#182;</a>
+                <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <h2>Queue a request</h2>
 <p>This is mostly a matter of filtering the input
@@ -400,11 +293,11 @@ we want it.</p>
         </li>
         
         
-        <li id="section-16">
+        <li id="section-11">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-16">&#182;</a>
+                <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
               <p>The <code>params</code> argument is optional, everything
 else is required. The code below is pretty much
@@ -435,7 +328,7 @@ self-explanatory.</p>
       <span class="keyword">throw</span> <span class="keyword">new</span> errors.NoCallbackError();
     }
 
-    state.pools.todo.push({
+    state.queue.push({
       post: post,
       url: canonizeUrl(url),
       resource: resourceFromUrl(url, post),
@@ -447,11 +340,11 @@ self-explanatory.</p>
         </li>
         
         
-        <li id="section-17">
+        <li id="section-12">
             <div class="annotation">
               
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-17">&#182;</a>
+                <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <h2>Requeue a request</h2>
 <p>If we&#39;ve hit the rate limit, requeue the
@@ -461,17 +354,17 @@ request and schedule a targeted drain.</p>
             
             <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> requeueRequest = <span class="keyword">function</span>(req) {
     console.log(<span class="string">'Hit rate limit, requeuing.'</span>);
-    state.pools.todo.push(req);
+    state.queue.push(req);
   };</pre></div></div>
             
         </li>
         
         
-        <li id="section-18">
+        <li id="section-13">
             <div class="annotation">
               
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-18">&#182;</a>
+                <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
               <h2>Process a request</h2>
 <p>This is done in three parts: first, the request
@@ -483,46 +376,9 @@ is parsed and triaged.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> processRequest = <span class="keyword">function</span>(req) {</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-19">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-19">&#182;</a>
-              </div>
-              <p>Move the request from one pool to
-the other, so it is not run twice.</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>    <span class="keyword">var</span> i = state.pools.todo.indexOf(req);
-    state.pools.doing.push(req);
-    <span class="keyword">delete</span> state.pools.todo[i];
-
-    <span class="keyword">var</span> handleResponse = <span class="keyword">function</span>(error, response) {</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-20">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-20">&#182;</a>
-              </div>
-              <p>Update the rate limits (see above), and
-delete the request from the pools, now that
-it has run.</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>      updateRateLimits(req.resource, response);
-      <span class="keyword">var</span> i = state.pools.doing.indexOf(req);
-      <span class="keyword">delete</span> state.pools.doing[i];
+            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> processRequest = <span class="keyword">function</span>(req) {
+    <span class="keyword">var</span> handleResponse = <span class="keyword">function</span>(error, response) {
+      updateRateLimits(req.resource, response);
 
       <span class="keyword">if</span> (!error) {
         <span class="keyword">try</span> {
@@ -569,11 +425,11 @@ it has run.</p>
         </li>
         
         
-        <li id="section-21">
+        <li id="section-14">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-21">&#182;</a>
+                <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
               <p>This header&#39;s case is important due to how <code>request</code>
 is coded (badly!) (see mikeal/request#499)</p>
@@ -594,11 +450,11 @@ is coded (badly!) (see mikeal/request#499)</p>
         </li>
         
         
-        <li id="section-22">
+        <li id="section-15">
             <div class="annotation">
               
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-22">&#182;</a>
+                <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
               <h2>Scheduling</h2>
 <h3>Twitter configuration</h3>
@@ -614,17 +470,17 @@ be run at startup and every 24 hours after that.</p>
       }
     };
     queueRequest(<span class="string">'GET'</span>, <span class="string">'/help/configuration'</span>, setConfig);
-    setTimeout(getConfig, state.scheduling.config.interval);
+    setTimeout(getConfig, <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">1000</span>);
   };</pre></div></div>
             
         </li>
         
         
-        <li id="section-23">
+        <li id="section-16">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-23">&#182;</a>
+                <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
               <h3>Rate limits</h3>
 <p>Get the latest global rate-limit information. See <code>state</code>
@@ -639,11 +495,11 @@ object near the top for scheduling details.</p>
         </li>
         
         
-        <li id="section-24">
+        <li id="section-17">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-24">&#182;</a>
+                <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
               <p>The twitter response is divided accross &quot;families&quot; of
 requests. We don&#39;t really care for all that.</p>
@@ -659,60 +515,80 @@ requests. We don&#39;t really care for all that.</p>
       }
     };
     queueRequest(<span class="string">'GET'</span>, <span class="string">'/application/rate_limit_status'</span>, setLimits);
-    setTimeout(getLimits, state.scheduling.limits.interval);
-  };</pre></div></div>
+    setTimeout(getLimits, <span class="number">15</span> * <span class="number">60</span> * <span class="number">1000</span>);
+  };
+
+  state.queue.addHandler(<span class="string">'process'</span>, processRequest);</pre></div></div>
             
         </li>
         
         
-        <li id="section-25">
+        <li id="section-18">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-25">&#182;</a>
+                <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
-              <h3>Main drain</h3>
+              <h3>POST drain</h3>
+<p>Post requests don&#39;t have explicit rate limits,
+so run them all as they come.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> mainDrain = <span class="keyword">function</span>() {
-    _(state.pools.todo).chain()
-      .first(<span class="number">50</span>)
-      .each(processRequest);
-
-    setTimeout(mainDrain, state.scheduling.main.interval);
-  };</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  state.queue.addPicker(<span class="function"><span class="keyword">function</span> <span class="title">postDrain</span><span class="params">(req)</span> {</span>
+    <span class="keyword">if</span> (req.post) {
+      <span class="keyword">this</span>.handle(<span class="string">'process'</span>);
+    }
+  }, <span class="number">1000</span>, <span class="number">10</span>);</pre></div></div>
             
         </li>
         
         
-        <li id="section-26">
+        <li id="section-19">
             <div class="annotation">
               
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-26">&#182;</a>
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
-              <p><em>Expose properties and start tasks</em></p>
+              <h3>GET drain</h3>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">this</span>.queueRequest = queueRequest;
-  <span class="keyword">this</span>.drain = mainDrain;
-  <span class="keyword">this</span>.state = state;
+            <div class="content"><div class='highlight'><pre>  state.queue.addPicker(<span class="function"><span class="keyword">function</span> <span class="title">getDrain</span><span class="params">(req)</span> {</span>
+    <span class="keyword">if</span> (!req.post) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>Rate limit screening</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="keyword">this</span>.handle(<span class="string">'process'</span>);
+    }
+  }, <span class="number">1000</span>, <span class="number">5</span>);
 
   getConfig();
   getLimits();
-  mainDrain();
+  state.queue.start();
+  <span class="keyword">this</span>.queueRequest = queueRequest;
+  <span class="keyword">this</span>.state = state;
 };</pre></div></div>
             
         </li>
         
         
-        <li id="section-27">
+        <li id="section-21">
             <div class="annotation">
               
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-27">&#182;</a>
+                <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
               <h2>List of all resources</h2>
 <p><em>Does not include Stream API resources.</em></p>
@@ -725,11 +601,11 @@ requests. We don&#39;t really care for all that.</p>
         </li>
         
         
-        <li id="section-28">
+        <li id="section-22">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-28">&#182;</a>
+                <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
               <h3>Statuses</h3>
 
@@ -772,11 +648,11 @@ requests. We don&#39;t really care for all that.</p>
         </li>
         
         
-        <li id="section-29">
+        <li id="section-23">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-29">&#182;</a>
+                <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
               <h3>Search</h3>
 
@@ -789,11 +665,11 @@ requests. We don&#39;t really care for all that.</p>
         </li>
         
         
-        <li id="section-30">
+        <li id="section-24">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-30">&#182;</a>
+                <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
               <h3>Direct Messages</h3>
 
@@ -818,11 +694,11 @@ requests. We don&#39;t really care for all that.</p>
         </li>
         
         
-        <li id="section-31">
+        <li id="section-25">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-31">&#182;</a>
+                <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
               <h3>Friendships (followers / following)</h3>
 
@@ -868,11 +744,11 @@ requests. We don&#39;t really care for all that.</p>
         </li>
         
         
-        <li id="section-32">
+        <li id="section-26">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-32">&#182;</a>
+                <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
               <h3>Account settings</h3>
 
@@ -906,11 +782,11 @@ requests. We don&#39;t really care for all that.</p>
         </li>
         
         
-        <li id="section-33">
+        <li id="section-27">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-33">&#182;</a>
+                <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
               <h3>Blocks (ban, ignore)</h3>
 
@@ -932,11 +808,11 @@ requests. We don&#39;t really care for all that.</p>
         </li>
         
         
-        <li id="section-34">
+        <li id="section-28">
             <div class="annotation">
               
               <div class="pilwrap for-h4">
-                <a class="pilcrow" href="#section-34">&#182;</a>
+                <a class="pilcrow" href="#section-28">&#182;</a>
               </div>
               <h4>Profile banner</h4>
 
@@ -952,11 +828,11 @@ requests. We don&#39;t really care for all that.</p>
         </li>
         
         
-        <li id="section-35">
+        <li id="section-29">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-35">&#182;</a>
+                <a class="pilcrow" href="#section-29">&#182;</a>
               </div>
               <h3>Users</h3>
 
@@ -981,11 +857,11 @@ requests. We don&#39;t really care for all that.</p>
         </li>
         
         
-        <li id="section-36">
+        <li id="section-30">
             <div class="annotation">
               
               <div class="pilwrap for-h4">
-                <a class="pilcrow" href="#section-36">&#182;</a>
+                <a class="pilcrow" href="#section-30">&#182;</a>
               </div>
               <h4>Profile banner</h4>
 
@@ -998,11 +874,11 @@ requests. We don&#39;t really care for all that.</p>
         </li>
         
         
-        <li id="section-37">
+        <li id="section-31">
             <div class="annotation">
               
               <div class="pilwrap for-h4">
-                <a class="pilcrow" href="#section-37">&#182;</a>
+                <a class="pilcrow" href="#section-31">&#182;</a>
               </div>
               <h4>Suggestions</h4>
 
@@ -1021,11 +897,11 @@ requests. We don&#39;t really care for all that.</p>
         </li>
         
         
-        <li id="section-38">
+        <li id="section-32">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-38">&#182;</a>
+                <a class="pilcrow" href="#section-32">&#182;</a>
               </div>
               <h3>Favorites</h3>
 
@@ -1047,11 +923,11 @@ requests. We don&#39;t really care for all that.</p>
         </li>
         
         
-        <li id="section-39">
+        <li id="section-33">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-39">&#182;</a>
+                <a class="pilcrow" href="#section-33">&#182;</a>
               </div>
               <h3>Lists</h3>
 
@@ -1115,11 +991,11 @@ requests. We don&#39;t really care for all that.</p>
         </li>
         
         
-        <li id="section-40">
+        <li id="section-34">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-40">&#182;</a>
+                <a class="pilcrow" href="#section-34">&#182;</a>
               </div>
               <h3>Saved searches</h3>
 
@@ -1141,11 +1017,11 @@ requests. We don&#39;t really care for all that.</p>
         </li>
         
         
-        <li id="section-41">
+        <li id="section-35">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-41">&#182;</a>
+                <a class="pilcrow" href="#section-35">&#182;</a>
               </div>
               <h3>Geo-data</h3>
 
@@ -1170,11 +1046,11 @@ requests. We don&#39;t really care for all that.</p>
         </li>
         
         
-        <li id="section-42">
+        <li id="section-36">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-42">&#182;</a>
+                <a class="pilcrow" href="#section-36">&#182;</a>
               </div>
               <h3>Trends</h3>
 
@@ -1193,11 +1069,11 @@ requests. We don&#39;t really care for all that.</p>
         </li>
         
         
-        <li id="section-43">
+        <li id="section-37">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-43">&#182;</a>
+                <a class="pilcrow" href="#section-37">&#182;</a>
               </div>
               <h3>Report spam</h3>
 <p>Also adds a block</p>
@@ -1211,11 +1087,11 @@ requests. We don&#39;t really care for all that.</p>
         </li>
         
         
-        <li id="section-44">
+        <li id="section-38">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-44">&#182;</a>
+                <a class="pilcrow" href="#section-38">&#182;</a>
               </div>
               <h3>Authentication</h3>
 
@@ -1243,11 +1119,11 @@ requests. We don&#39;t really care for all that.</p>
         </li>
         
         
-        <li id="section-45">
+        <li id="section-39">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-45">&#182;</a>
+                <a class="pilcrow" href="#section-39">&#182;</a>
               </div>
               <h3>Resources</h3>
 
@@ -1269,11 +1145,11 @@ requests. We don&#39;t really care for all that.</p>
         </li>
         
         
-        <li id="section-46">
+        <li id="section-40">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-46">&#182;</a>
+                <a class="pilcrow" href="#section-40">&#182;</a>
               </div>
               <h3>Rate limiting</h3>
 

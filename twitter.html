@@ -167,6 +167,11 @@ value to pick the default: (<code>application/x-www-form-urlencoded</code>)</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>  <span class="keyword">this</span>.post = <span class="keyword">function</span>(url, content, contentType, callback) {
+    <span class="keyword">if</span> (<span class="keyword">typeof</span> contentType === <span class="string">'function'</span>) {
+      callback = contentType;
+      contentType = <span class="literal">null</span>;
+    }
+
     <span class="keyword">return</span> rest.queueRequest(<span class="string">'POST'</span>, url, {
       content: content,
       contentType: contentType
