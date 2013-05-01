@@ -440,7 +440,12 @@ is coded (badly!) (see mikeal/request#499)</p>
 
       <span class="keyword">var</span> isMultipart = req.params.contentType &amp;&amp;
         req.params.contentType.toLowerCase() === <span class="string">'multipart/form-data'</span>;
-      reqOptions.body = req.params.content;
+
+      <span class="keyword">if</span> (isMultipart) {
+        reqOptions.multipart = req.params.content;
+      } <span class="keyword">else</span> {
+        reqOptions.body = req.params.content;
+      }
     } <span class="keyword">else</span> {
       method = request.get;
       reqOptions.qs = req.params;
