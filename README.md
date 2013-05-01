@@ -96,9 +96,6 @@ twitter.post(
   null,                     // Content-Type (null to use default)
   function() { ... }        // Callback has the same signature as above
 );
-
-// Using the 1.3.x unstable, this is necessary:
-twitter.rest.drain();
 ```
 
 

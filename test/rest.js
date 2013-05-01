@@ -10,15 +10,10 @@ describe('#rest', function() {
 
   beforeEach(function() {
     t = new Twitter(config);
-    t.rest.state.scheduling.main.interval = 1000;
   });
 
   it('should be able to perform a GET request', function(done) {
     t.get('/application/rate_limit_status', done);
-    t.rest.drain();
-    // This is currently necessary for the requests to run
-    // successfully, although I have no idea why. _It just
-    // doesn't make sense._ I shall have to investigate.
   });
 
   it('should be able to perform a POST request', function(done) {
@@ -29,6 +24,5 @@ describe('#rest', function() {
         done(error);
       }
     });
-    t.rest.drain();
   });
 });
