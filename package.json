@@ -1,11 +1,12 @@
 {
   "name": "mtwitter",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "Twitter API for Node.JS",
   "keywords": ["twitter", "streaming", "oauth"],
   "homepage": "https://npmjs.org/package/mtwitter",
   "author": "Various",
   "contributors": [
+    {"name": "Masih Yeganeh", "email": "goodboy.php@gmail.com"},
     {"name": "Matthew Palmer", "email": "matt@palmer.im"},
     {"name": "Francisco F Reynolds", "email": "francisco@iamat.com"},
     {"name": "Félix Saparelli", "email": "me@passcod.name"},
