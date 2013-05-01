@@ -437,6 +437,9 @@ is coded (badly!) (see mikeal/request#499)</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>      headers[<span class="string">'content-type'</span>] = req.params.contentType;
+
+      <span class="keyword">var</span> isMultipart = req.params.contentType &amp;&amp;
+        req.params.contentType.toLowerCase() === <span class="string">'multipart/form-data'</span>;
       reqOptions.body = req.params.content;
     } <span class="keyword">else</span> {
       method = request.get;
