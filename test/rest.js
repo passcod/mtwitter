@@ -7,7 +7,7 @@ var config  = require('./config').get();
 
 describe('Using client auth', function() {
   var t;
-  this.timeout(5000);
+  this.timeout(10000);
 
   beforeEach(function() {
     t = new Twitter(config);
@@ -40,7 +40,7 @@ describe('Using client auth', function() {
 
 describe('Using app-only auth', function() {
   var t;
-  this.timeout(5000);
+  this.timeout(10000);
 
   beforeEach(function() {
     t = new Twitter(_.extend(config, {application_only: true}));

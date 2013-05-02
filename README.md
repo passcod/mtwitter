@@ -9,7 +9,7 @@ Twitter API for Node.JS
 [NPM][i2] & Versioning
 ----------------------
 
-_Latest stable: 1.4.0_
+_Latest stable: 1.4.1_
 
 Use a [package.json][i1]. Yes, even if you're not making a redistributable
 yourself. It's just good practice. Specify the version number exactly or to

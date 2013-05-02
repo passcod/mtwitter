@@ -1,6 +1,6 @@
 {
   "name": "mtwitter",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Twitter API for Node.JS",
   "keywords": ["twitter", "streaming", "oauth"],
   "homepage": "https://npmjs.org/package/mtwitter",
