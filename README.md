@@ -9,7 +9,7 @@ Twitter API for Node.JS
 [NPM][i2] & Versioning
 ----------------------
 
-_Latest stable: 1.0.3_
+_Latest stable: 1.4.0_
 
 Use a [package.json][i1]. Yes, even if you're not making a redistributable
 yourself. It's just good practice. Specify the version number exactly or to
@@ -113,13 +113,8 @@ twit.get('search/tweets', {q: 'node.js'}, function(err, item) {
 });
 
 // Post a new status
-//
-// You can use the `jape` npm module to convert
-// hashmaps to the right format.
-var content = 'status=Maybe%20he%27ll%20finally%20find%20his%20keys.%20%23peterfalk';
-twit.post('statuses/update', content, null, function(err, item) {
-  // The content-type (3rd argument) defaults to
-  // 'application/x-www-form-urlencoded'.
+var content = {status: 'Maybe he'll finally find his keys. @peterfalk'};
+twit.post('statuses/update', content, function(err, item) {
   console.log(err, item);
 });
 ```
