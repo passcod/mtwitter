@@ -95,7 +95,7 @@ exports.HTTPError = HTTPError;
   <span class="keyword">this</span>.name = <span class="string">'NoCallbackError'</span>;
   <span class="keyword">this</span>.message = <span class="string">'No callback provided'</span>;
 }
-NoCallbackError.prototype = <span class="keyword">new</span> TypeError();
+NoCallbackError.prototype = <span class="keyword">new</span> Error();
 exports.NoCallbackError = NoCallbackError;
 
 <span class="function"><span class="keyword">function</span> <span class="title">ArgumentError</span><span class="params">(arg, message)</span> {</span>
@@ -111,8 +111,9 @@ exports.ArgumentError = ArgumentError;
   <span class="keyword">if</span> (message) {
     <span class="keyword">this</span>.message += <span class="string">' '</span> + message;
   }
+  console.log(<span class="keyword">this</span>.message);
 }
-ArgumentRequiredError.prototype = <span class="keyword">new</span> TypeError();
+ArgumentRequiredError.prototype = <span class="keyword">new</span> Error();
 exports.ArgumentRequiredError = ArgumentRequiredError;
 
 <span class="function"><span class="keyword">function</span> <span class="title">TwitterError</span><span class="params">(errors)</span> {</span>
@@ -122,7 +123,15 @@ exports.ArgumentRequiredError = ArgumentRequiredError;
   <span class="keyword">this</span>.codes = _.pluck(errors, <span class="string">'code'</span>);
 }
 TwitterError.prototype = <span class="keyword">new</span> Error();
-exports.TwitterError = TwitterError;</pre></div></div>
+exports.TwitterError = TwitterError;
+
+<span class="function"><span class="keyword">function</span> <span class="title">BearerTokenError</span><span class="params">(error, message)</span> {</span>
+  <span class="keyword">this</span>.originalError = error;
+  <span class="keyword">this</span>.name = <span class="string">'BearerTokenError'</span>;
+  <span class="keyword">this</span>.message = message;
+}
+BearerTokenError.prototype = <span class="keyword">new</span> Error();
+exports.BearerTokenError = BearerTokenError;</pre></div></div>
             
         </li>
         
