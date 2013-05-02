@@ -81,6 +81,7 @@
 <span class="keyword">var</span> _             = require(<span class="string">'underscore'</span>);
 <span class="keyword">var</span> errors        = require(<span class="string">'./errors'</span>);
 <span class="keyword">var</span> Fantail       = require(<span class="string">'fantail'</span>);
+<span class="keyword">var</span> jape          = require(<span class="string">'jape'</span>);
 <span class="keyword">var</span> request       = require(<span class="string">'request'</span>);
 <span class="keyword">var</span> utils         = require(<span class="string">'./utils'</span>);
 
@@ -309,6 +310,10 @@ pretty much self-explanatory.</p>
 
       <span class="keyword">if</span> (!params.content) {
         <span class="keyword">throw</span> <span class="keyword">new</span> errors.ArgumentRequiredError(<span class="string">'params.content'</span>, <span class="string">'for POST'</span>);
+      }
+
+      <span class="keyword">if</span> (<span class="keyword">typeof</span> params.content !== <span class="string">'string'</span>) {
+        params.content = jape(params.content);
       }
 
       <span class="keyword">if</span> (!params.contentType) {
