@@ -26,6 +26,16 @@ describe('Using client auth', function() {
       }
     });
   });
+
+  it('should be able to serialise the object itself', function(done) {
+    t.post('/favorites/create', {id: '317050755691454464'}, function(error) {
+      if (!error || error.codes[0] === 139) {
+        done();
+      } else {
+        done(error);
+      }
+    });
+  });
 });
 
 describe('Using app-only auth', function() {
