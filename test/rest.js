@@ -7,7 +7,7 @@ var config  = require('./config').get();
 
 describe('Using client auth', function() {
   var t;
-  this.timeout(10000);
+  this.timeout(5000);
 
   beforeEach(function() {
     t = new Twitter(config);
@@ -28,12 +28,12 @@ describe('Using client auth', function() {
   });
 });
 
-describe.skip('Using app-only auth', function() {
+describe('Using app-only auth', function() {
   var t;
   this.timeout(5000);
 
   beforeEach(function() {
-    t = new Twitter(_.defaults(config,{application_only: true}));
+    t = new Twitter(_.extend(config, {application_only: true}));
   });
 
   it('should be able to perform a GET request', function(done) {
@@ -41,9 +41,8 @@ describe.skip('Using app-only auth', function() {
   });
 
   it('should be able to perform a POST request', function(done) {
-    t.post('/favorites/create', 'id=317050755691454464', null, function(error, d, res) {
-      console.log(error, res);
-      if (!error || error.codes[0] === 139) {
+    t.post('/favorites/create', 'id=317050755691454464', null, function(error) {
+      if (!error || error.codes[0] === 220) {
         done();
       } else {
         done(error);
