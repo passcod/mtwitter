@@ -27,11 +27,11 @@ performance fixes only). Examples:
 
  - 1.0.3 == _Stable_ release, 3rd bugfix.
  - 1.3.0 == _Unstable_ release.
- - 1.3.1 == _Unstable_ release, may have breakage.
+ - 1.3.5 == _Unstable_ release, may have breakage.
  - 1.4.0 == _Stable_ release.
 
 The latest (often unstable) version can always be found at
-the [NPM page for the package][i2].
+the [NPM page for the package][i2]. The latest stable is found above.
 
 
 Instantiation & Keys
@@ -73,7 +73,7 @@ var twitter = new Twitter({
 REST Interface
 --------------
 
-The REST interface is fully managed, which means it transparently handles
+The REST interface is fully managed, which means it (will) transparently handles
 rate-limiting (in a more intelligent fashion than just waiting 15 minutes
 when an HTTP 429 is hit), and also takes care of fetching and refreshing
 configuration data as recommended by Twitter.
@@ -92,8 +92,8 @@ function logResponse(error, data, response) {
 
 twitter.post(
   '/favorites/create',      // URL. Don't use https:// ones
-  'id=317050755691454464',  // Body content
-  null,                     // Content-Type (null to use default)
+  'id=317050755691454464',  // Body content (can be a string or hashmap)
+                            // Content-Type (omit to use default)
   function() { ... }        // Callback has the same signature as above
 );
 ```
@@ -113,7 +113,7 @@ twit.get('search/tweets', {q: 'node.js'}, function(err, item) {
 });
 
 // Post a new status
-var content = {status: 'Maybe he'll finally find his keys. @peterfalk'};
+var content = {status: 'Maybe he\'ll finally find his keys. /@peterfalk'};
 twit.post('statuses/update', content, function(err, item) {
   console.log(err, item);
 });
