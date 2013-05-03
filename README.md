@@ -130,6 +130,8 @@ All contributors are listed in the [`package.json`][c2].
 
 Style guide: [passcod/node-style-guide][c3].
 
+IRC Channel: #mtwitter on Freenode
+
 ### Pull requests
 
  - Topical branches and standard PR etiquette is preferred.
