@@ -1,6 +1,6 @@
 {
   "name": "mtwitter",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Twitter API for Node.JS",
   "keywords": ["twitter", "streaming", "oauth"],
   "homepage": "https://npmjs.org/package/mtwitter",
@@ -70,7 +70,7 @@
     "underscore": "1.4.x"
   },
   "devDependencies": {
-    "jshint": "1.1.x",
+    "jshint": "2.0.x",
     "mocha": "1.9.x",
     "docco": "0.6.x"
   },
