@@ -34,23 +34,13 @@
               </a>
             
               
-              <a class="source" href="parser.html">
-                parser.js
+              <a class="source" href="mtwitter.html">
+                mtwitter.js
               </a>
             
               
               <a class="source" href="rest.html">
                 rest.js
-              </a>
-            
-              
-              <a class="source" href="twitter.html">
-                twitter.js
-              </a>
-            
-              
-              <a class="source" href="utils.html">
-                utils.js
               </a>
             
           </div>
@@ -78,12 +68,11 @@
             
             <div class="content"><div class='highlight'><pre><span class="string">'use strict'</span>;
 
-<span class="keyword">var</span> _             = require(<span class="string">'underscore'</span>);
-<span class="keyword">var</span> errors        = require(<span class="string">'./errors'</span>);
-<span class="keyword">var</span> Fantail       = require(<span class="string">'fantail'</span>);
-<span class="keyword">var</span> jape          = require(<span class="string">'jape'</span>);
-<span class="keyword">var</span> request       = require(<span class="string">'request'</span>);
-<span class="keyword">var</span> utils         = require(<span class="string">'./utils'</span>);
+<span class="keyword">var</span> _       = require(<span class="string">'underscore'</span>);
+<span class="keyword">var</span> errors  = require(<span class="string">'./errors'</span>);
+<span class="keyword">var</span> Fantail = require(<span class="string">'fantail'</span>);
+<span class="keyword">var</span> jape    = require(<span class="string">'jape'</span>);
+<span class="keyword">var</span> request = require(<span class="string">'request'</span>);
 
 module.exports = <span class="function"><span class="keyword">function</span> <span class="title">TwitterRest</span><span class="params">(options)</span> {</span></pre></div></div>
             
@@ -201,40 +190,6 @@ in the resource list (see near the bottom).</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
-              <p>Update the rate limit information given a resource
-string and a response (HTTP). At the moment, only
-GET requests are explicitely rate limited, so we
-ignore the rest. Additionally, only resources we
-know about are considered. The <code>reset</code> field is
-converted to a <code>Date</code> object for ease of use.</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> updateRateLimits = <span class="keyword">function</span>(resource, response) {
-    <span class="keyword">var</span> isListed = _.has(module.exports.resources, resource);
-    <span class="keyword">if</span> (isListed &amp;&amp; response.req.method === <span class="string">'GET'</span>) {
-      <span class="keyword">var</span> limits = {};
-      [<span class="string">'reset'</span>, <span class="string">'remaining'</span>, <span class="string">'limit'</span>].forEach(<span class="keyword">function</span>(h) {
-        <span class="keyword">if</span> (_.has(response.headers, <span class="string">'x-rate-limit-'</span> + h)) {
-          limits[h] = +response.headers[<span class="string">'x-rate-limit-'</span> + h];
-        }
-      });
-      <span class="keyword">if</span> (limits.reset) {
-        limits.reset = <span class="keyword">new</span> Date(limits.reset * <span class="number">1000</span>);
-      }
-      state.rateLimits[resource] = limits;
-    }
-  };</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-8">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-8">&#182;</a>
-              </div>
               <p>Valid URLs that are passed in match the regex
 <code>^/?[a-zA-Z0-9/_]+(\.json)?$</code>. We want to have
 them all in full absolute format, ready to be
@@ -254,17 +209,17 @@ used in a request.</p>
       url += <span class="string">'.json'</span>;
     }
 
-    <span class="keyword">return</span> options.rest_base + url;
+    <span class="keyword">return</span> options.urls.restBase + url;
   };</pre></div></div>
             
         </li>
         
         
-        <li id="section-9">
+        <li id="section-8">
             <div class="annotation">
               
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-9">&#182;</a>
+                <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
               <h2>Queue a request</h2>
 <p>This is mostly a matter of filtering the input
@@ -280,11 +235,11 @@ we want it.</p>
         </li>
         
         
-        <li id="section-10">
+        <li id="section-9">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-10">&#182;</a>
+                <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
               <p>The <code>params</code> and <code>opts</code> arguments are optional,
 everything else is required. The code below is
@@ -339,11 +294,11 @@ pretty much self-explanatory.</p>
         </li>
         
         
-        <li id="section-11">
+        <li id="section-10">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-11">&#182;</a>
+                <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <p>For those requests that shouldn&#39;t go through
 the queue (mostly internals).</p>
@@ -359,11 +314,11 @@ the queue (mostly internals).</p>
         </li>
         
         
-        <li id="section-12">
+        <li id="section-11">
             <div class="annotation">
               
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-12">&#182;</a>
+                <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
               <h2>Requeue a request</h2>
 <p>If we&#39;ve hit the rate limit, requeue the
@@ -379,11 +334,11 @@ request and schedule a targeted drain.</p>
         </li>
         
         
-        <li id="section-13">
+        <li id="section-12">
             <div class="annotation">
               
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-13">&#182;</a>
+                <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <h2>Process a request</h2>
 <p>This is done in three parts: first, the request
@@ -397,8 +352,6 @@ is parsed and triaged.</p>
             
             <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> processRequest = <span class="keyword">function</span>(req) {
     <span class="keyword">var</span> handleResponse = <span class="keyword">function</span>(error, response) {
-      updateRateLimits(req.resource, response);
-
       <span class="keyword">if</span> (!error) {
         <span class="keyword">try</span> {
           <span class="keyword">var</span> json = JSON.parse(response.body);
@@ -444,11 +397,11 @@ is parsed and triaged.</p>
         </li>
         
         
-        <li id="section-14">
+        <li id="section-13">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-14">&#182;</a>
+                <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
               <p>This header&#39;s case is important due to how <code>request</code>
 is coded (badly!) (see mikeal/request#499)</p>
@@ -473,11 +426,11 @@ is coded (badly!) (see mikeal/request#499)</p>
         </li>
         
         
-        <li id="section-15">
+        <li id="section-14">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-15">&#182;</a>
+                <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
               <p>Headers are overwritten by each subsequent
 object. The req.options.headers field together
@@ -486,7 +439,7 @@ used to create a completely different request.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    reqOptions.headers = utils.merge(
+            <div class="content"><div class='highlight'><pre>    reqOptions.headers = _.extend(
       options.headers,
       headers,
       req.options.headers
@@ -498,11 +451,11 @@ used to create a completely different request.</p>
         </li>
         
         
-        <li id="section-16">
+        <li id="section-15">
             <div class="annotation">
               
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-16">&#182;</a>
+                <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
               <h2>Prerequisites</h2>
 <h3>Twitter configuration</h3>
@@ -532,11 +485,11 @@ be run at startup and every 24 hours after that.</p>
         </li>
         
         
-        <li id="section-17">
+        <li id="section-16">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-17">&#182;</a>
+                <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
               <h3>Rate limits</h3>
 <p>Get the latest global rate-limit information. See <code>state</code>
@@ -551,19 +504,19 @@ object near the top for scheduling details.</p>
         </li>
         
         
-        <li id="section-18">
+        <li id="section-17">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-18">&#182;</a>
+                <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
               <p>The twitter response is divided accross &quot;families&quot; of
 requests. We don&#39;t really care for all that.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        data.resources.forEach(<span class="function"><span class="keyword">function</span> <span class="title">eachFamily</span><span class="params">(family)</span> {</span>
-          family.forEach(<span class="function"><span class="keyword">function</span> <span class="title">eachResource</span><span class="params">(resource, limits)</span> {</span>
+            <div class="content"><div class='highlight'><pre>        _.each(data.resources, <span class="function"><span class="keyword">function</span> <span class="title">eachFamily</span><span class="params">(family)</span> {</span>
+          _.each(family, <span class="function"><span class="keyword">function</span> <span class="title">eachResource</span><span class="params">(resource, limits)</span> {</span>
             resource = resourceFromUrl(resource);
             state.rateLimits[resource] = limits;
           });
@@ -585,11 +538,11 @@ requests. We don&#39;t really care for all that.</p>
         </li>
         
         
-        <li id="section-19">
+        <li id="section-18">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-19">&#182;</a>
+                <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
               <h3>Bearer token</h3>
 <p>Get the application-only bearer token if one
@@ -616,7 +569,7 @@ isn&#39;t provided already.</p>
 
     queueRequest(
       <span class="string">'POST'</span>,
-      options.authenticate_application_url,
+      options.urls.appAuth,
       {content: <span class="string">'grant_type=client_credentials'</span>},
       setToken,
       {skipQueue: <span class="literal">true</span>, headers: {Authorization: auth}}
@@ -628,11 +581,11 @@ isn&#39;t provided already.</p>
         </li>
         
         
-        <li id="section-20">
+        <li id="section-19">
             <div class="annotation">
               
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-20">&#182;</a>
+                <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
               <h2>Drains</h2>
 <p>Drains schedule requests to be processed.
@@ -652,11 +605,11 @@ so run them all as they come.</p>
         </li>
         
         
-        <li id="section-21">
+        <li id="section-20">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-21">&#182;</a>
+                <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
               <h3>GET drain</h3>
 
@@ -668,11 +621,11 @@ so run them all as they come.</p>
         </li>
         
         
-        <li id="section-22">
+        <li id="section-21">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-22">&#182;</a>
+                <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
               <p>Rate limit screening</p>
 
@@ -711,11 +664,11 @@ so run them all as they come.</p>
         </li>
         
         
-        <li id="section-23">
+        <li id="section-22">
             <div class="annotation">
               
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-23">&#182;</a>
+                <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
               <h2>List of all resources</h2>
 <p><em>Does not include Stream API resources.</em></p>
@@ -728,11 +681,11 @@ so run them all as they come.</p>
         </li>
         
         
-        <li id="section-24">
+        <li id="section-23">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-24">&#182;</a>
+                <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
               <h3>Statuses</h3>
 
@@ -775,11 +728,11 @@ so run them all as they come.</p>
         </li>
         
         
-        <li id="section-25">
+        <li id="section-24">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-25">&#182;</a>
+                <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
               <h3>Search</h3>
 
@@ -792,11 +745,11 @@ so run them all as they come.</p>
         </li>
         
         
-        <li id="section-26">
+        <li id="section-25">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-26">&#182;</a>
+                <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
               <h3>Direct Messages</h3>
 
@@ -821,11 +774,11 @@ so run them all as they come.</p>
         </li>
         
         
-        <li id="section-27">
+        <li id="section-26">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-27">&#182;</a>
+                <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
               <h3>Friendships (followers / following)</h3>
 
@@ -871,11 +824,11 @@ so run them all as they come.</p>
         </li>
         
         
-        <li id="section-28">
+        <li id="section-27">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-28">&#182;</a>
+                <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
               <h3>Account settings</h3>
 
@@ -909,11 +862,11 @@ so run them all as they come.</p>
         </li>
         
         
-        <li id="section-29">
+        <li id="section-28">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-29">&#182;</a>
+                <a class="pilcrow" href="#section-28">&#182;</a>
               </div>
               <h3>Blocks (ban, ignore)</h3>
 
@@ -935,11 +888,11 @@ so run them all as they come.</p>
         </li>
         
         
-        <li id="section-30">
+        <li id="section-29">
             <div class="annotation">
               
               <div class="pilwrap for-h4">
-                <a class="pilcrow" href="#section-30">&#182;</a>
+                <a class="pilcrow" href="#section-29">&#182;</a>
               </div>
               <h4>Profile banner</h4>
 
@@ -955,11 +908,11 @@ so run them all as they come.</p>
         </li>
         
         
-        <li id="section-31">
+        <li id="section-30">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-31">&#182;</a>
+                <a class="pilcrow" href="#section-30">&#182;</a>
               </div>
               <h3>Users</h3>
 
@@ -984,11 +937,11 @@ so run them all as they come.</p>
         </li>
         
         
-        <li id="section-32">
+        <li id="section-31">
             <div class="annotation">
               
               <div class="pilwrap for-h4">
-                <a class="pilcrow" href="#section-32">&#182;</a>
+                <a class="pilcrow" href="#section-31">&#182;</a>
               </div>
               <h4>Profile banner</h4>
 
@@ -1001,11 +954,11 @@ so run them all as they come.</p>
         </li>
         
         
-        <li id="section-33">
+        <li id="section-32">
             <div class="annotation">
               
               <div class="pilwrap for-h4">
-                <a class="pilcrow" href="#section-33">&#182;</a>
+                <a class="pilcrow" href="#section-32">&#182;</a>
               </div>
               <h4>Suggestions</h4>
 
@@ -1024,11 +977,11 @@ so run them all as they come.</p>
         </li>
         
         
-        <li id="section-34">
+        <li id="section-33">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-34">&#182;</a>
+                <a class="pilcrow" href="#section-33">&#182;</a>
               </div>
               <h3>Favorites</h3>
 
@@ -1050,11 +1003,11 @@ so run them all as they come.</p>
         </li>
         
         
-        <li id="section-35">
+        <li id="section-34">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-35">&#182;</a>
+                <a class="pilcrow" href="#section-34">&#182;</a>
               </div>
               <h3>Lists</h3>
 
@@ -1118,11 +1071,11 @@ so run them all as they come.</p>
         </li>
         
         
-        <li id="section-36">
+        <li id="section-35">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-36">&#182;</a>
+                <a class="pilcrow" href="#section-35">&#182;</a>
               </div>
               <h3>Saved searches</h3>
 
@@ -1144,11 +1097,11 @@ so run them all as they come.</p>
         </li>
         
         
-        <li id="section-37">
+        <li id="section-36">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-37">&#182;</a>
+                <a class="pilcrow" href="#section-36">&#182;</a>
               </div>
               <h3>Geo-data</h3>
 
@@ -1173,11 +1126,11 @@ so run them all as they come.</p>
         </li>
         
         
-        <li id="section-38">
+        <li id="section-37">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-38">&#182;</a>
+                <a class="pilcrow" href="#section-37">&#182;</a>
               </div>
               <h3>Trends</h3>
 
@@ -1196,11 +1149,11 @@ so run them all as they come.</p>
         </li>
         
         
-        <li id="section-39">
+        <li id="section-38">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-39">&#182;</a>
+                <a class="pilcrow" href="#section-38">&#182;</a>
               </div>
               <h3>Report spam</h3>
 <p>Also adds a block</p>
@@ -1214,11 +1167,11 @@ so run them all as they come.</p>
         </li>
         
         
-        <li id="section-40">
+        <li id="section-39">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-40">&#182;</a>
+                <a class="pilcrow" href="#section-39">&#182;</a>
               </div>
               <h3>Authentication</h3>
 
@@ -1246,11 +1199,11 @@ so run them all as they come.</p>
         </li>
         
         
-        <li id="section-41">
+        <li id="section-40">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-41">&#182;</a>
+                <a class="pilcrow" href="#section-40">&#182;</a>
               </div>
               <h3>Resources</h3>
 
@@ -1272,11 +1225,11 @@ so run them all as they come.</p>
         </li>
         
         
-        <li id="section-42">
+        <li id="section-41">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-42">&#182;</a>
+                <a class="pilcrow" href="#section-41">&#182;</a>
               </div>
               <h3>Rate limiting</h3>
 

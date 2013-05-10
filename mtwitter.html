@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>twitter.js</title>
+  <title>mtwitter.js</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="docco.css" />
@@ -34,23 +34,13 @@
               </a>
             
               
-              <a class="source" href="parser.html">
-                parser.js
+              <a class="source" href="mtwitter.html">
+                mtwitter.js
               </a>
             
               
               <a class="source" href="rest.html">
                 rest.js
-              </a>
-            
-              
-              <a class="source" href="twitter.html">
-                twitter.js
-              </a>
-            
-              
-              <a class="source" href="utils.html">
-                utils.js
               </a>
             
           </div>
@@ -61,7 +51,7 @@
         
           <li id="title">
               <div class="annotation">
-                  <h1>twitter.js</h1>
+                  <h1>mtwitter.js</h1>
               </div>
           </li>
         
@@ -78,10 +68,10 @@
             
             <div class="content"><div class='highlight'><pre><span class="string">'use strict'</span>;
 
-<span class="keyword">var</span> defaults      = require(<span class="string">'./defaults'</span>);
-<span class="keyword">var</span> utils         = require(<span class="string">'./utils'</span>);
+<span class="keyword">var</span> _         = require(<span class="string">'underscore'</span>);
+<span class="keyword">var</span> defaults  = require(<span class="string">'./defaults'</span>);
 
-module.exports = <span class="function"><span class="keyword">function</span> <span class="title">Twitter</span><span class="params">(options)</span> {</span></pre></div></div>
+module.exports = <span class="function"><span class="keyword">function</span> <span class="title">MegaTwitter</span><span class="params">(options)</span> {</span></pre></div></div>
             
         </li>
         
@@ -97,8 +87,8 @@ called differently.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">if</span> (!(<span class="keyword">this</span> <span class="keyword">instanceof</span> Twitter)) {
-    <span class="keyword">return</span> <span class="keyword">new</span> Twitter(options);
+            <div class="content"><div class='highlight'><pre>  <span class="keyword">if</span> (!(<span class="keyword">this</span> <span class="keyword">instanceof</span> MegaTwitter)) {
+    <span class="keyword">return</span> <span class="keyword">new</span> MegaTwitter(options);
   }</pre></div></div>
             
         </li>
@@ -116,7 +106,7 @@ argument to this function.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">this</span>.options = utils.merge(defaults.options, options, defaults.urls);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  <span class="keyword">this</span>.options = _.extend(defaults.options, options);</pre></div></div>
             
         </li>
         

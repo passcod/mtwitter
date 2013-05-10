@@ -34,23 +34,13 @@
               </a>
             
               
-              <a class="source" href="parser.html">
-                parser.js
+              <a class="source" href="mtwitter.html">
+                mtwitter.js
               </a>
             
               
               <a class="source" href="rest.html">
                 rest.js
-              </a>
-            
-              
-              <a class="source" href="twitter.html">
-                twitter.js
-              </a>
-            
-              
-              <a class="source" href="utils.html">
-                utils.js
               </a>
             
           </div>
@@ -100,19 +90,6 @@ We want them namespaced.</p>
 }
 exports.pkginfo = pkginfo.exports;
 
-exports.urls = {
-  request_token_url: <span class="string">'https://api.twitter.com/oauth/request_token'</span>,
-  access_token_url: <span class="string">'https://api.twitter.com/oauth/access_token'</span>,
-  authenticate_url: <span class="string">'https://api.twitter.com/oauth/authenticate'</span>,
-  authenticate_application_url: <span class="string">'https://api.twitter.com/oauth2/token'</span>,
-  authorize_url: <span class="string">'https://api.twitter.com/oauth/authorize'</span>,
-  rest_base: <span class="string">'https://api.twitter.com/1.1'</span>,
-  search_base: <span class="string">'https://api.twitter.com/1.1'</span>,
-  stream_base: <span class="string">'https://stream.twitter.com/1.1'</span>,
-  user_stream_base: <span class="string">'https://userstream.twitter.com/1.1'</span>,
-  site_stream_base: <span class="string">'https://sitestream.twitter.com/1.1'</span>
-};
-
 exports.options = {
   consumer_key: <span class="literal">null</span>,
   consumer_secret: <span class="literal">null</span>,
@@ -129,7 +106,12 @@ exports.options = {
   secure: <span class="literal">false</span>,
   cookie: <span class="string">'twauth'</span>,
   cookie_options: {},
-  cookie_secret: <span class="literal">null</span>
+  cookie_secret: <span class="literal">null</span>,
+
+  urls: {
+    appAuth: <span class="string">'https://api.twitter.com/oauth2/token'</span>,
+    restBase: <span class="string">'https://api.twitter.com/1.1'</span>
+  }
 };</pre></div></div>
             
         </li>
