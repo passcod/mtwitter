@@ -9,8 +9,8 @@ Quick summary:
  - There are various ways to [get help][q4].
 
 [q1]: #topical-branches
-[q2]: #copyright-release
-[q3]: #style-tests
+[q2]: #copyright--release
+[q3]: #style--tests
 [q4]: #support
 
 

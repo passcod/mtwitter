@@ -9,7 +9,7 @@ Twitter API for Node.JS
 [NPM][i2] & Versioning
 ----------------------
 
-_Latest stable: 1.4.4_
+_Latest stable: 1.4.5_
 
 Use a [package.json][i1]. Yes, even if you're not making a redistributable
 yourself. It's just good practice. Specify the version number exactly or to
@@ -129,7 +129,7 @@ and their attempts at making it better. Old (pre-rewrite)
 contributors can be found in `HISTORICAL`. Contributors to
 the present iteration can be found in the [`package.json`][c2].
 
-License: Public Domain or [CC0][c0].
+License: Public Domain or [CC0][c0].  
 Style guide: [passcod/node-style-guide][c3].  
 IRC Channel: __#mtwitter__ on [Freenode][c4].
 

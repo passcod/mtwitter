@@ -1,6 +1,6 @@
 {
   "name": "mtwitter",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "description": "Twitter API for Node.JS",
   "keywords": ["twitter", "streaming", "oauth"],
   "homepage": "https://npmjs.org/package/mtwitter",
@@ -34,7 +34,7 @@
   "engines": {
     "node": ">=0.6.0"
   },
-  "main": "./lib/twitter",
+  "main": "./index",
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec",
     "lint": "./node_modules/.bin/jshint --config=./jshint.json lib test",
