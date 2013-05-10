@@ -9,7 +9,7 @@ Twitter API for Node.JS
 [NPM][i2] & Versioning
 ----------------------
 
-_Latest stable: 1.4.3_
+_Latest stable: 1.4.4_
 
 Use a [package.json][i1]. Yes, even if you're not making a redistributable
 yourself. It's just good practice. Specify the version number exactly or to
@@ -123,18 +123,22 @@ twit.post('statuses/update', content, function(err, item) {
 Community & Contributions
 -------------------------
 
-Forked from @AvianFlu's [inactive repo][c1], with various long-standing
-contributions merged in.
+Originally forked from @AvianFlu's [inactive repo][c1],
+but reworked heavily, taking inspiration from many people
+and their attempts at making it better. Old (pre-rewrite)
+contributors can be found in `HISTORICAL`. Contributors to
+the present iteration can be found in the [`package.json`][c2].
 
-All contributors are listed in the [`package.json`][c2].
+License: Public Domain or [CC0][c0].
+Style guide: [passcod/node-style-guide][c3].  
+IRC Channel: __#mtwitter__ on [Freenode][c4].
 
-Style guide: [passcod/node-style-guide][c3].
+### Contributing
 
-IRC Channel: #mtwitter on Freenode
-
-### Pull requests
+_See `CONTRIBUTING.md` for details_
 
  - Topical branches and standard PR etiquette is preferred.
+ - You need to formally agree to release your contribution.
  - Both linting and testing should pass (the Travis build will fail
    a PR if there are linting errors):
 
@@ -143,6 +147,8 @@ IRC Channel: #mtwitter on Freenode
    $ npm run-script lint
    ```
 
+[c0]: https://creativecommons.org/publicdomain/zero/1.0
 [c1]: https://github.com/AvianFlu/ntwitter
 [c2]: https://github.com/passcod/mtwitter/blob/master/package.json
 [c3]: https://github.com/passcod/node-style-guide
+[c4]: https://freenode.net
