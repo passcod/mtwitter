@@ -4,7 +4,7 @@
 // - Travis CI: https://travis-ci.org/passcod/mtwitter
 // - This document: https://passcod.name/mtwitter
 
-module.exports = require('./lib/twitter');
+module.exports = require('./lib/mtwitter');
 
 // ## mtwitter source documentation
 //
