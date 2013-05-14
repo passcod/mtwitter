@@ -20,16 +20,17 @@
     "url": "https://github.com/passcod/mtwitter.git"
   },
   "dependencies": {
-    "jape":       "0.0.x",
-    "fantail":    "0.2.x",
-    "pkginfo":    "0.3.x",
-    "request":    "2.21.x",
-    "underscore": "1.4.x"
+    "jape":             "0.0.x",
+    "fantail":          "0.2.x",
+    "readable-stream":  "1.0.x",
+    "pkginfo":          "0.3.x",
+    "request":          "2.21.x",
+    "underscore":       "1.4.x"
   },
   "devDependencies": {
+    "docco":  "0.6.x",
     "jshint": "2.0.x",
-    "mocha": "1.9.x",
-    "docco": "0.6.x"
+    "mocha":  "1.9.x"
   },
   "engines": {
     "node": ">=0.6.0"
