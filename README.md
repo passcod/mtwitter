@@ -5,34 +5,7 @@ Twitter API for Node.JS
 [![NPM version](https://badge.fury.io/js/mtwitter.png)](http://npmjs.org/package/mtwitter)
 [![Dependency Status](https://gemnasium.com/passcod/mtwitter.png)](https://gemnasium.com/passcod/mtwitter)
 
-
-[NPM][i2] & Versioning
-----------------------
-
-_Latest stable: 1.4.6_
-
-Use a [package.json][i1]. Yes, even if you're not making a redistributable
-yourself. It's just good practice. Specify the version number exactly or to
-`1.N.x` where `N` is an _even_ number. 
-
-[i1]: http://package.json.nodejitsu.com/
-[i2]: http://npmjs.org/package/mtwitter
-
-__mtwitter__ uses a version numbering scheme similar to that of Node: the major
-version number unchanging unless something big happens, and the minor number
-defining the version. Also, _odd_ minors are _unstable_, meaning that the API
-can change betweeen patch levels, and _even_ minors are _stable_, meaning that
-the API will not change until the next minor (i.e. patch levels are bug and
-performance fixes only). Examples:
-
- - 1.0.3 == _Stable_ release, 3rd bugfix.
- - 1.3.0 == _Unstable_ release.
- - 1.3.5 == _Unstable_ release, may have breakage.
- - 1.4.0 == _Stable_ release.
-
-The latest (often unstable) version can always be found at
-the [NPM page for the package][i2]. The latest stable is found above.
-
+<sub><sup>_Versioning_: Back to [semver](http://semver.org)!</sup></sub>
 
 Instantiation & Keys
 --------------------
@@ -117,6 +90,24 @@ var content = {status: 'Maybe he\'ll finally find his keys. /@peterfalk'};
 twit.post('statuses/update', content, function(err, item) {
   console.log(err, item);
 });
+```
+
+Streaming
+---------
+
+For the moment, only "raw" access is available:
+
+```javascript
+twit.stream.raw(
+  'GET',
+  'https://stream.twitter.com/1.1/statuses/sample.json',
+  {delimited: 'length'},
+  # The above arguments are as for .rest.queueRequest()
+  # i.e. the third argument has to be a {content: ...}
+  # for POST. The URL has to include https://...
+
+  process.stdout # Provide a stream to pipe to, here STDOUT
+);
 ```
 
 

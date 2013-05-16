@@ -52,7 +52,7 @@ due to timeouts being too low could be named `fix-tests-timeouts` or
 
 Tags should only be used for versions, which follow the `vN.N.N` model.
 Tags should correspond with the code as is available in [npm][se2] for
-that release. They are set by maintainers only.
+that release. They are set by maintainers only. They follow [semver][se5].
 
 ### Commits
 
@@ -123,7 +123,7 @@ Standard internet etiquette (spelling, grammar, be courteous). Also:
 [se2]: https://npmjs.org/package/mtwitter
 [se3]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
 [se4]: https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments
-
+[se5]: http://semver.org
 
 Copyright & Release
 -------------------

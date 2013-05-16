@@ -3,7 +3,7 @@
   "version": "1.4.6",
   "description": "Twitter API for Node.JS",
   "keywords": ["twitter", "streaming", "oauth"],
-  "homepage": "https://npmjs.org/package/mtwitter",
+  "homepage": "https://passcod.name/mtwitter",
   "author": "Félix Saparelli <https://passcod.name>",
   "contributors": [
     {"name": "Masih Yeganeh", "email": "goodboy.php@gmail.com"},

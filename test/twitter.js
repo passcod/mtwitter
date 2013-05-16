@@ -19,6 +19,28 @@ describe('Twitter', function() {
 describe('An instance of Twitter', function() {
   var t = new Twitter(config);
 
+  it('should have .rest', function() {
+    assert.equal(typeof t.rest, 'object');
+  });
+
+  describe('.rest', function() {
+    it('should have .queueRequest', function() {
+      assert.equal(typeof t.rest.queueRequest, 'function');
+    });
+
+    it('should have .queue', function() {
+      assert.equal(typeof t.rest.queue, 'object');
+    });
+
+    it('should have .limits', function() {
+      assert.equal(typeof t.rest.limits, 'object');
+    });
+
+    it('should have .config', function() {
+      assert.equal(typeof t.rest.config, 'object');
+    });
+  });
+
   it('should have .get', function() {
     assert.equal(typeof t.get, 'function');
   });
@@ -27,11 +49,19 @@ describe('An instance of Twitter', function() {
     assert.equal(typeof t.post, 'function');
   });
 
-  it('should have .rest', function() {
-    assert.equal(typeof t.rest, 'object');
+
+  it('should have .stream', function() {
+    assert.equal(typeof t.stream, 'object');
   });
 
+  describe('.stream', function() {
+    it('should have .raw', function() {
+      assert.equal(typeof t.stream.raw, 'function');
+    });
+  });
+
+
   it('should have .options', function() {
-    assert.equal(typeof t.rest, 'object');
+    assert.equal(typeof t.options, 'object');
   });
 });
