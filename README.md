@@ -102,11 +102,11 @@ twit.stream.raw(
   'GET',
   'https://stream.twitter.com/1.1/statuses/sample.json',
   {delimited: 'length'},
-  # The above arguments are as for .rest.queueRequest()
-  # i.e. the third argument has to be a {content: ...}
-  # for POST. The URL has to include https://...
+  // The above arguments are as for .rest.queueRequest()
+  // i.e. the third argument has to be a {content: ...}
+  // for POST. The URL has to include https://...
 
-  process.stdout # Provide a stream to pipe to, here STDOUT
+  process.stdout // Provide a stream to pipe to, here STDOUT
 );
 ```
 
