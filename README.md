@@ -1,5 +1,5 @@
-Twitter API for Node.JS
-========================
+Node.js Twitter API
+===================
 
 [![Build Status](https://travis-ci.org/passcod/mtwitter.png)](https://travis-ci.org/passcod/mtwitter)
 [![NPM version](https://badge.fury.io/js/mtwitter.png)](http://npmjs.org/package/mtwitter)
