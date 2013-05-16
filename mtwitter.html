@@ -43,6 +43,11 @@
                 rest.js
               </a>
             
+              
+              <a class="source" href="stream.html">
+                stream.js
+              </a>
+            
           </div>
         </li>
       </ul>
@@ -166,7 +171,23 @@ value to pick the default: (<code>application/x-www-form-urlencoded</code>)</p>
       content: content,
       contentType: contentType
     }, callback);
-  };
+  };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Initialise the Stream API. See <a href="stream.html">stream.js</a>.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> stream = <span class="keyword">new</span> (require(<span class="string">'./stream'</span>))(<span class="keyword">this</span>.rest, <span class="keyword">this</span>.options);
+  <span class="keyword">this</span>.stream = stream;
 };</pre></div></div>
             
         </li>

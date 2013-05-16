@@ -43,6 +43,11 @@
                 rest.js
               </a>
             
+              
+              <a class="source" href="stream.html">
+                stream.js
+              </a>
+            
           </div>
         </li>
       </ul>
@@ -233,8 +238,9 @@ pretty much self-explanatory.</p>
     }
 
     opts = _.defaults(opts ? opts : {}, {
+      headers: {},
       skipQueue: <span class="literal">false</span>,
-      headers: {}
+      stream: <span class="literal">false</span>
     });
 
     <span class="keyword">if</span> (post) {
@@ -255,7 +261,7 @@ pretty much self-explanatory.</p>
       }
     }
 
-    <span class="keyword">if</span> (<span class="keyword">typeof</span> callback !== <span class="string">'function'</span>) {
+    <span class="keyword">if</span> (<span class="keyword">typeof</span> callback !== <span class="string">'function'</span> &amp;&amp; !opts.stream) {
       <span class="keyword">throw</span> <span class="keyword">new</span> errors.NoCallbackError();
     }
 
@@ -424,7 +430,11 @@ used to create a completely different request.</p>
       req.options.headers
     );
 
-    method(reqOptions, handleResponse);
+    <span class="keyword">if</span> (req.options.stream) {
+      method(reqOptions).pipe(req.options.stream);
+    } <span class="keyword">else</span> {
+      method(reqOptions, handleResponse);
+    }
   };</pre></div></div>
             
         </li>

@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>defaults.js</title>
+  <title>stream.js</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="docco.css" />
@@ -56,7 +56,7 @@
         
           <li id="title">
               <div class="annotation">
-                  <h1>defaults.js</h1>
+                  <h1>stream.js</h1>
               </div>
           </li>
         
@@ -71,7 +71,11 @@
               
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="string">'use strict'</span>;</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="string">'use strict'</span>;
+
+<span class="keyword">var</span> _ = require(<span class="string">'underscore'</span>);
+
+module.exports = <span class="function"><span class="keyword">function</span> <span class="title">TwitterStream</span><span class="params">(rest, options)</span> {</span></pre></div></div>
             
         </li>
         
@@ -79,44 +83,24 @@
         <li id="section-2">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h3">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p><code>pkginfo</code> exports all values straight out by default.
-We want them namespaced.</p>
+              <h3>&quot;Raw&quot; stream</h3>
+<p>Provides a normalised way to use the REST api to connect
+to any endpoint and streaming the response. Skips the queue
+by default as rate-limiting and reconnection is handled here.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> pkginfo = {exports: []};
-<span class="keyword">try</span> {
-  require(<span class="string">'pkginfo'</span>)(pkginfo);
-} <span class="keyword">catch</span> (e) {
-  pkginfo.exports = {name: <span class="string">'mtwitter'</span>, version: <span class="string">'0.0.0'</span>};
-}
-exports.pkginfo = pkginfo.exports;
+            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> rawStream = <span class="keyword">function</span>(method, url, params, pipe, opts) {
+    <span class="keyword">return</span> rest.queueRequest(method, url, params, <span class="literal">null</span>, _.extend({
+      skipQueue: <span class="literal">true</span>,
+      stream: pipe
+    }, options.restOpts, opts));
+  };
 
-exports.options = {
-  consumer_key: <span class="literal">null</span>,
-  consumer_secret: <span class="literal">null</span>,
-  access_token_key: <span class="literal">null</span>,
-  access_token_secret: <span class="literal">null</span>,
-  application_only: <span class="literal">false</span>,
-
-  headers: {
-    <span class="string">'Accept'</span>: <span class="string">'*/*'</span>,
-    <span class="string">'Connection'</span>: <span class="string">'close'</span>,
-    <span class="string">'User-Agent'</span>: exports.pkginfo.name + <span class="string">'/'</span> + exports.pkginfo.version
-  },
-
-  secure: <span class="literal">false</span>,
-  cookie: <span class="string">'twauth'</span>,
-  cookie_options: {},
-  cookie_secret: <span class="literal">null</span>,
-
-  urls: {
-    appAuth: <span class="string">'https://api.twitter.com/oauth2/token'</span>,
-    restBase: <span class="string">'https://api.twitter.com/1.1'</span>
-  }
+  <span class="keyword">this</span>.raw = rawStream;
 };</pre></div></div>
             
         </li>
