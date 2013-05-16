@@ -21,3 +21,7 @@ module.exports = require('./lib/mtwitter');
 // - [rest.js](rest.html) — the REST API. Handles request scheduling
 //   and rate limiting transparently, as well as taking care of making
 //   Twitter's configuration (URL lengths and media sizes) available.
+//
+// - [stream.js](stream.html) — the Stream API. Currently only provides
+//   simple "raw" stream access, but should soon handle reconnections
+//   and back-off times as per recommendations.
