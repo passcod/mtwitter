@@ -1,4 +1,3 @@
----
 language: node_js
 node_js:
 - '0.10'
@@ -8,15 +7,11 @@ before_script: npm run-script lint
 script: npm test
 env:
   global:
-    - TWITTER_CONSUMER_KEY=iH1IEdfBe1hwhXzQC7uQUw
-    # TWITTER_CONSUMER_SECRET
-    - secure: ! 'hvR2rBaentefSvnxWntf71LV++n+gSib8LyGBN7CxieEyp9Ab3SqptK48skA
-      qltr/19KraOPndApFkWmsmmKdSz8gNZIszUzb+1AHa71wzc1EdF9UnY9Zvo9
-      hGBguB6PNLk9KKE7A5J/yWlzJbOu+MIB/dOm38t7GuDbmhSTHwQ='
-    - TWITTER_ACCESS_TOKEN_KEY=92200252-ojVm5ZqUI5X9rWQaTxhEy7OYg5bF35at31ZKRJkqk
-    # TWITTER_ACCESS_TOKEN_SECRET
-    - secure: ! 'WyXxiOGmx+Fvt1Gr7o5V5DCfDhvU/hXIb8ziABX43dNoaxq8HxnsOtG9rQA/
-      qJ6St5eL+RB8AlWvwrhJQHvJjzuoNnG6Y8nBWeKxAzwKafBrtFyGhRUVizaB
-      Rrw81FOpxsCEtHJtAKooAh/GiFLgM41IVJ22X6XLe3VlnwVniEc='
+  - TWITTER_CONSUMER_KEY=0Wgt5tSP6Ws7SU1RS0GigFpIe
+  - TWITTER_ACCESS_TOKEN_KEY=92200252-LOVfiifiP7KEsXI5gI7Xa6b2UGiNSiSMWpZqLu3r8
+  # CONSUMER_SECRET
+  - secure: m/v2p7njZy/usAKkQ7tA91Zbf5OXySUih1T+l+OuzW9KZiXv/Pbvu+LxBJHIoaDFvt9Hr3Ohw/aqJqLejMOkP11ODduB78gSk4wy5lM0WJs9R25zCWo8bcucG6QaB9w/5piUiy4pfqpecx0SJRL/vssqIpQAwVTrDe9rF0WNzO4=
+  # TOKEN_SECRET
+  - secure: Lc6u54K9WikhVXwPFZRF0EwH9Zfct5uHBD7HggvfWmaNmPeG1TMYcavMVV3bQJ5ih/0c0Mt5/Q/e2OfmAlRhQzhoT76BnKn0du032Rpr/pdsjFSDPpxUMBW3GxGvtr9iDMPr5aZHOHW272gEVmA8W9+gdkGLYa9k/vIo2lBBUHY=
 notifications:
-  irc: "irc.freenode.net#mtwitter"
+  irc: irc.freenode.net#mtwitter
