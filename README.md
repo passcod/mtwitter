@@ -5,7 +5,7 @@ Node.js Twitter API
 [![NPM version](https://badge.fury.io/js/mtwitter.png)](http://npmjs.org/package/mtwitter)
 [![Dependency Status](https://gemnasium.com/passcod/mtwitter.png)](https://gemnasium.com/passcod/mtwitter)
 
-<sub><sup>_Versioning_: Back to [semver](http://semver.org)!</sup></sub>
+__Not currently maintained, but PR/issues/questions welcome.__
 
 Instantiation & Keys
 --------------------
