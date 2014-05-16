@@ -1,17 +1,15 @@
 language: node_js
 node_js:
-- '0.10'
-- '0.8'
-- '0.6'
-before_script: npm run-script lint
+  - '0.11'
+  - '0.10'
+  - '0.8'
+before_script: npm run lint
 script: npm test
 env:
   global:
-  - TWITTER_CONSUMER_KEY=0Wgt5tSP6Ws7SU1RS0GigFpIe
-  - TWITTER_ACCESS_TOKEN_KEY=92200252-LOVfiifiP7KEsXI5gI7Xa6b2UGiNSiSMWpZqLu3r8
+    - TWITTER_CONSUMER_KEY=0Wgt5tSP6Ws7SU1RS0GigFpIe
+    - TWITTER_ACCESS_TOKEN_KEY=92200252-LOVfiifiP7KEsXI5gI7Xa6b2UGiNSiSMWpZqLu3r8
   # CONSUMER_SECRET
-  - secure: m/v2p7njZy/usAKkQ7tA91Zbf5OXySUih1T+l+OuzW9KZiXv/Pbvu+LxBJHIoaDFvt9Hr3Ohw/aqJqLejMOkP11ODduB78gSk4wy5lM0WJs9R25zCWo8bcucG6QaB9w/5piUiy4pfqpecx0SJRL/vssqIpQAwVTrDe9rF0WNzO4=
+    - secure: m/v2p7njZy/usAKkQ7tA91Zbf5OXySUih1T+l+OuzW9KZiXv/Pbvu+LxBJHIoaDFvt9Hr3Ohw/aqJqLejMOkP11ODduB78gSk4wy5lM0WJs9R25zCWo8bcucG6QaB9w/5piUiy4pfqpecx0SJRL/vssqIpQAwVTrDe9rF0WNzO4=
   # TOKEN_SECRET
-  - secure: Lc6u54K9WikhVXwPFZRF0EwH9Zfct5uHBD7HggvfWmaNmPeG1TMYcavMVV3bQJ5ih/0c0Mt5/Q/e2OfmAlRhQzhoT76BnKn0du032Rpr/pdsjFSDPpxUMBW3GxGvtr9iDMPr5aZHOHW272gEVmA8W9+gdkGLYa9k/vIo2lBBUHY=
-notifications:
-  irc: irc.freenode.net#mtwitter
+    - secure: Lc6u54K9WikhVXwPFZRF0EwH9Zfct5uHBD7HggvfWmaNmPeG1TMYcavMVV3bQJ5ih/0c0Mt5/Q/e2OfmAlRhQzhoT76BnKn0du032Rpr/pdsjFSDPpxUMBW3GxGvtr9iDMPr5aZHOHW272gEVmA8W9+gdkGLYa9k/vIo2lBBUHY=

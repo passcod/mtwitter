@@ -1,15 +1,35 @@
 {
   "name": "mtwitter",
-  "version": "1.5.3",
+  "version": "1.6.0",
   "description": "Node.js Twitter API",
-  "keywords": ["twitter", "streaming", "oauth"],
+  "keywords": [
+    "twitter",
+    "streaming",
+    "oauth"
+  ],
   "homepage": "https://passcod.name/mtwitter",
   "author": "Félix Saparelli <https://passcod.name>",
   "contributors": [
-    {"name": "Masih Yeganeh", "email": "goodboy.php@gmail.com"},
-    {"name": "Matthew Palmer", "email": "matt@palmer.im"},
-    {"name": "Francisco F Reynolds", "email": "francisco@iamat.com"},
-    {"name": "Félix Saparelli", "email": "me@passcod.name"}
+    {
+      "name": "Masih Yeganeh",
+      "email": "goodboy.php@gmail.com"
+    },
+    {
+      "name": "Matthew Palmer",
+      "email": "matt@palmer.im"
+    },
+    {
+      "name": "Francisco F Reynolds",
+      "email": "francisco@iamat.com"
+    },
+    {
+      "name": "Félix Saparelli",
+      "email": "me@passcod.name"
+    },
+    {
+      "name": "Pierre Bertet",
+      "email": "bonjour@pierrebertet.net"
+    }
   ],
   "licenses": {
     "type": "Public Domain",
@@ -20,20 +40,20 @@
     "url": "https://github.com/passcod/mtwitter.git"
   },
   "dependencies": {
-    "jape":             "0.0.x",
-    "fantail":          "0.2.x",
-    "readable-stream":  "1.0.x",
-    "pkginfo":          "0.3.x",
-    "request":          "2.34.x",
-    "underscore":       "1.6.x"
+    "jape": "^0.0.1",
+    "fantail": "^0.2.0",
+    "readable-stream": "^1.0.27-1",
+    "pkginfo": "^0.3.0",
+    "request": "^2.34.0",
+    "underscore": "^1.6.0"
   },
   "devDependencies": {
-    "docco":  "0.6.x",
-    "jshint": "2.5.x",
-    "mocha":  "1.18.x"
+    "docco": "^0.6.0",
+    "jshint": "^2.5.0",
+    "mocha": "^1.18.0"
   },
   "engines": {
-    "node": ">=0.6.0"
+    "node": ">=0.8.0"
   },
   "main": "./index",
   "scripts": {
