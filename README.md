@@ -46,10 +46,10 @@ var twitter = new Twitter({
 REST Interface
 --------------
 
-The REST interface is fully managed, which means it (will) transparently handles
-rate-limiting (in a more intelligent fashion than just waiting 15 minutes
-when an HTTP 429 is hit), and also takes care of fetching and refreshing
-configuration data as recommended by Twitter.
+The REST interface is managed, which means it transparently handles
+rate-limiting (it retries requests and doesn't bombard the APIs),
+and also takes care of fetching and refreshing configuration data as
+recommended by Twitter.
 
 ### Synopsis
 
@@ -120,9 +120,8 @@ and their attempts at making it better. Old (pre-rewrite)
 contributors can be found in `HISTORICAL`. Contributors to
 the present iteration can be found in the [`package.json`][c2].
 
-License: Public Domain or [CC0][c0].  
+License: [Public Domain][c0].  
 Style guide: [passcod/node-style-guide][c3].  
-IRC Channel: __#mtwitter__ on [Freenode][c4].
 
 ### Contributing
 
@@ -138,7 +137,7 @@ _See `CONTRIBUTING.md` for details_
    $ npm run-script lint
    ```
 
-[c0]: https://creativecommons.org/publicdomain/zero/1.0
+[c0]: https://passcod.name/PUBLIC.txt
 [c1]: https://github.com/AvianFlu/ntwitter
 [c2]: https://github.com/passcod/mtwitter/blob/master/package.json
 [c3]: https://github.com/passcod/node-style-guide
