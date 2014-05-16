@@ -1,9 +1,9 @@
 Node.js Twitter API
 ===================
 
-[![Build Status](https://travis-ci.org/passcod/mtwitter.png)](https://travis-ci.org/passcod/mtwitter)
-[![NPM version](https://badge.fury.io/js/mtwitter.png)](http://npmjs.org/package/mtwitter)
-[![Dependency Status](https://gemnasium.com/passcod/mtwitter.png)](https://gemnasium.com/passcod/mtwitter)
+[![Build Status](https://travis-ci.org/passcod/mtwitter.svg)](https://travis-ci.org/passcod/mtwitter)
+[![NPM version](https://badge.fury.io/js/mtwitter.svg)](http://npmjs.org/package/mtwitter)
+[![Dependency Status](https://gemnasium.com/passcod/mtwitter.svg)](https://gemnasium.com/passcod/mtwitter)
 
 __Not currently maintained, but PR/issues/questions welcome.__
 
