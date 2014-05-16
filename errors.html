@@ -71,61 +71,61 @@
               
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="string">'use strict'</span>;
+            <div class="content"><div class='highlight'><pre><span class="hljs-pi">'use strict'</span>;
 
-<span class="keyword">var</span> _     = require(<span class="string">'underscore'</span>);
-<span class="keyword">var</span> http  = require(<span class="string">'http'</span>);
+<span class="hljs-keyword">var</span> _     = <span class="hljs-built_in">require</span>(<span class="hljs-string">'underscore'</span>);
+<span class="hljs-keyword">var</span> http  = <span class="hljs-built_in">require</span>(<span class="hljs-string">'http'</span>);
 
-<span class="function"><span class="keyword">function</span> <span class="title">HTTPError</span><span class="params">(error)</span> {</span>
-  <span class="keyword">this</span>.name = <span class="string">'HTTPError'</span>;
-  <span class="keyword">this</span>.statusCode = error.statusCode;
-  <span class="keyword">this</span>.data = error.data;
-  <span class="keyword">this</span>.originalError = error;
-  <span class="keyword">this</span>.message = <span class="keyword">this</span>.statusCode + <span class="string">': '</span> + http.STATUS_CODES[<span class="keyword">this</span>.statusCode];
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">HTTPError</span><span class="hljs-params">(error)</span> {</span>
+  <span class="hljs-keyword">this</span>.name = <span class="hljs-string">'HTTPError'</span>;
+  <span class="hljs-keyword">this</span>.statusCode = error.statusCode;
+  <span class="hljs-keyword">this</span>.data = error.data;
+  <span class="hljs-keyword">this</span>.originalError = error;
+  <span class="hljs-keyword">this</span>.message = <span class="hljs-keyword">this</span>.statusCode + <span class="hljs-string">': '</span> + http.STATUS_CODES[<span class="hljs-keyword">this</span>.statusCode];
 }
-HTTPError.prototype = <span class="keyword">new</span> Error();
+HTTPError.prototype = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>();
 exports.HTTPError = HTTPError;
 
-<span class="function"><span class="keyword">function</span> <span class="title">NoCallbackError</span><span class="params">()</span> {</span>
-  <span class="keyword">this</span>.name = <span class="string">'NoCallbackError'</span>;
-  <span class="keyword">this</span>.message = <span class="string">'No callback provided'</span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">NoCallbackError</span><span class="hljs-params">()</span> {</span>
+  <span class="hljs-keyword">this</span>.name = <span class="hljs-string">'NoCallbackError'</span>;
+  <span class="hljs-keyword">this</span>.message = <span class="hljs-string">'No callback provided'</span>;
 }
-NoCallbackError.prototype = <span class="keyword">new</span> Error();
+NoCallbackError.prototype = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>();
 exports.NoCallbackError = NoCallbackError;
 
-<span class="function"><span class="keyword">function</span> <span class="title">ArgumentError</span><span class="params">(arg, message)</span> {</span>
-  <span class="keyword">this</span>.name = <span class="string">'ArgumentError'</span>;
-  <span class="keyword">this</span>.message = <span class="string">'The argument '</span> + arg + <span class="string">' '</span> + message;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ArgumentError</span><span class="hljs-params">(arg, message)</span> {</span>
+  <span class="hljs-keyword">this</span>.name = <span class="hljs-string">'ArgumentError'</span>;
+  <span class="hljs-keyword">this</span>.message = <span class="hljs-string">'The argument '</span> + arg + <span class="hljs-string">' '</span> + message;
 }
-ArgumentError.prototype = <span class="keyword">new</span> Error();
+ArgumentError.prototype = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>();
 exports.ArgumentError = ArgumentError;
 
-<span class="function"><span class="keyword">function</span> <span class="title">ArgumentRequiredError</span><span class="params">(arg, message)</span> {</span>
-  <span class="keyword">this</span>.name = <span class="string">'ArgumentRequiredError'</span>;
-  <span class="keyword">this</span>.message = <span class="string">'The argument '</span> + arg + <span class="string">' is required'</span>;
-  <span class="keyword">if</span> (message) {
-    <span class="keyword">this</span>.message += <span class="string">' '</span> + message;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ArgumentRequiredError</span><span class="hljs-params">(arg, message)</span> {</span>
+  <span class="hljs-keyword">this</span>.name = <span class="hljs-string">'ArgumentRequiredError'</span>;
+  <span class="hljs-keyword">this</span>.message = <span class="hljs-string">'The argument '</span> + arg + <span class="hljs-string">' is required'</span>;
+  <span class="hljs-keyword">if</span> (message) {
+    <span class="hljs-keyword">this</span>.message += <span class="hljs-string">' '</span> + message;
   }
-  console.log(<span class="keyword">this</span>.message);
+  console.log(<span class="hljs-keyword">this</span>.message);
 }
-ArgumentRequiredError.prototype = <span class="keyword">new</span> Error();
+ArgumentRequiredError.prototype = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>();
 exports.ArgumentRequiredError = ArgumentRequiredError;
 
-<span class="function"><span class="keyword">function</span> <span class="title">TwitterError</span><span class="params">(errors)</span> {</span>
-  <span class="keyword">this</span>.errors = errors;
-  <span class="keyword">this</span>.name = <span class="string">'TwitterError'</span>;
-  <span class="keyword">this</span>.message = _.pluck(errors, <span class="string">'message'</span>).join(<span class="string">', '</span>);
-  <span class="keyword">this</span>.codes = _.pluck(errors, <span class="string">'code'</span>);
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">TwitterError</span><span class="hljs-params">(errors)</span> {</span>
+  <span class="hljs-keyword">this</span>.errors = errors;
+  <span class="hljs-keyword">this</span>.name = <span class="hljs-string">'TwitterError'</span>;
+  <span class="hljs-keyword">this</span>.message = _.pluck(errors, <span class="hljs-string">'message'</span>).join(<span class="hljs-string">', '</span>);
+  <span class="hljs-keyword">this</span>.codes = _.pluck(errors, <span class="hljs-string">'code'</span>);
 }
-TwitterError.prototype = <span class="keyword">new</span> Error();
+TwitterError.prototype = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>();
 exports.TwitterError = TwitterError;
 
-<span class="function"><span class="keyword">function</span> <span class="title">BearerTokenError</span><span class="params">(error, message)</span> {</span>
-  <span class="keyword">this</span>.originalError = error;
-  <span class="keyword">this</span>.name = <span class="string">'BearerTokenError'</span>;
-  <span class="keyword">this</span>.message = message;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">BearerTokenError</span><span class="hljs-params">(error, message)</span> {</span>
+  <span class="hljs-keyword">this</span>.originalError = error;
+  <span class="hljs-keyword">this</span>.name = <span class="hljs-string">'BearerTokenError'</span>;
+  <span class="hljs-keyword">this</span>.message = message;
 }
-BearerTokenError.prototype = <span class="keyword">new</span> Error();
+BearerTokenError.prototype = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>();
 exports.BearerTokenError = BearerTokenError;</pre></div></div>
             
         </li>

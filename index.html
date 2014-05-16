@@ -65,10 +65,10 @@
         <li id="section-1">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <h2>Twitter API for Node.JS</h2>
+              <h2 id="twitter-api-for-node-js">Twitter API for Node.JS</h2>
 <ul>
 <li>GitHub: <a href="https://github.com/passcod/mtwitter">https://github.com/passcod/mtwitter</a></li>
 <li>NPM: <a href="http://npmjs.org/package/mtwitter">http://npmjs.org/package/mtwitter</a></li>
@@ -78,7 +78,8 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>module.exports = require(<span class="string">'./lib/mtwitter'</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>
+module.exports = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./lib/mtwitter'</span>);</pre></div></div>
             
         </li>
         
@@ -86,16 +87,16 @@
         <li id="section-2">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <h2>mtwitter source documentation</h2>
+              <h2 id="mtwitter-source-documentation">mtwitter source documentation</h2>
 <ul>
 <li><p><a href="mtwitter.html">mtwitter.js</a> — the main file, does nothing more
 than handle options, initialise the main object, and bring
 everything together.</p>
 </li>
-<li><p><a href="defaults.html">defaults.js</a> — has both the options&#39; defaults
+<li><p><a href="defaults.html">defaults.js</a> — has both the options’ defaults
 and the endpoint URLs. Also parses the <code>package.json</code> and
 provides version and package metadata.</p>
 </li>
@@ -103,10 +104,10 @@ provides version and package metadata.</p>
 </li>
 <li><p><a href="rest.html">rest.js</a> — the REST API. Handles request scheduling
 and rate limiting transparently, as well as taking care of making
-Twitter&#39;s configuration (URL lengths and media sizes) available.</p>
+Twitter’s configuration (URL lengths and media sizes) available.</p>
 </li>
 <li><p><a href="stream.html">stream.js</a> — the Stream API. Currently only provides
-simple &quot;raw&quot; stream access, but should soon handle reconnections
+simple “raw” stream access, but should soon handle reconnections
 and back-off times as per recommendations.</p>
 </li>
 </ul>

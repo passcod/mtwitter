@@ -71,15 +71,15 @@
               
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="string">'use strict'</span>;
+            <div class="content"><div class='highlight'><pre><span class="hljs-pi">'use strict'</span>;
 
-<span class="keyword">var</span> _       = require(<span class="string">'underscore'</span>);
-<span class="keyword">var</span> errors  = require(<span class="string">'./errors'</span>);
-<span class="keyword">var</span> Fantail = require(<span class="string">'fantail'</span>);
-<span class="keyword">var</span> jape    = require(<span class="string">'jape'</span>);
-<span class="keyword">var</span> request = require(<span class="string">'request'</span>);
+<span class="hljs-keyword">var</span> _       = <span class="hljs-built_in">require</span>(<span class="hljs-string">'underscore'</span>);
+<span class="hljs-keyword">var</span> errors  = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./errors'</span>);
+<span class="hljs-keyword">var</span> Fantail = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fantail'</span>);
+<span class="hljs-keyword">var</span> jape    = <span class="hljs-built_in">require</span>(<span class="hljs-string">'jape'</span>);
+<span class="hljs-keyword">var</span> request = <span class="hljs-built_in">require</span>(<span class="hljs-string">'request'</span>);
 
-module.exports = <span class="function"><span class="keyword">function</span> <span class="title">TwitterRest</span><span class="params">(options)</span> {</span></pre></div></div>
+module.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">TwitterRest</span><span class="hljs-params">(options)</span> {</span></pre></div></div>
             
         </li>
         
@@ -87,15 +87,15 @@ module.exports = <span class="function"><span class="keyword">function</span> <s
         <li id="section-2">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <h3>Queue</h3>
+              <h3 id="queue">Queue</h3>
 <p>See <a href="https://passcod.name/fantail">https://passcod.name/fantail</a></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> queue = <span class="keyword">new</span> Fantail();</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> queue = <span class="hljs-keyword">new</span> Fantail();</pre></div></div>
             
         </li>
         
@@ -103,15 +103,15 @@ module.exports = <span class="function"><span class="keyword">function</span> <s
         <li id="section-3">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <h3>Rate limiting</h3>
+              <h3 id="rate-limiting">Rate limiting</h3>
 <p>Rate limits are kept up-to-date dynamically here.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> rateLimits = {};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> rateLimits = {};</pre></div></div>
             
         </li>
         
@@ -119,17 +119,17 @@ module.exports = <span class="function"><span class="keyword">function</span> <s
         <li id="section-4">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <h3>Twitter configuration</h3>
+              <h3 id="twitter-configuration">Twitter configuration</h3>
 <p>Contains the information found at <code>/help/configuration</code>.
 This is requested at startup and every 24 hours
 after this.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> upstreamConfig = {};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> upstreamConfig = {};</pre></div></div>
             
         </li>
         
@@ -137,33 +137,12 @@ after this.</p>
         <li id="section-5">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <h2>Utilities</h2>
-<p>Convert a URL such as <code>/favorites/create.json</code>
-to <code>POST favorites/create</code>, by looking it up
-in the resource list (see near the bottom).</p>
+              <h2 id="utilities">Utilities</h2>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> resourceFromUrl = <span class="keyword">function</span>(url, post) {
-    post = !!post;
-
-    <span class="keyword">var</span> result;
-    Object.keys(module.exports.resources).forEach(<span class="keyword">function</span>(resource) {
-      resource = resource.split(<span class="string">' '</span>);
-      <span class="keyword">if</span> (result || (post &amp;&amp; resource[<span class="number">0</span>] !== <span class="string">'POST'</span>)) {
-        <span class="keyword">return</span>;
-      }
-
-      <span class="keyword">var</span> pattern = <span class="keyword">new</span> RegExp(resource[<span class="number">1</span>].replace(<span class="regexp">/\/\//g</span>, <span class="string">'/([^/])/'</span>), <span class="string">'i'</span>);
-      <span class="keyword">if</span> (pattern.test(url)) {
-        result = resource.join(<span class="string">' '</span>);
-      }
-    });
-    <span class="keyword">return</span> result;
-  };</pre></div></div>
             
         </li>
         
@@ -174,26 +153,28 @@ in the resource list (see near the bottom).</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <p>Valid URLs that are passed in match the regex
-<code>^/?[a-zA-Z0-9/_]+(\.json)?$</code>. We want to have
-them all in full absolute format, ready to be
-used in a request.</p>
+              <p>Convert a URL such as <code>/favorites/create.json</code>
+to <code>POST favorites/create</code>, by looking it up
+in the resource list (see near the bottom).</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> canonizeUrl = <span class="keyword">function</span>(url) {
-    <span class="keyword">if</span> (url.charAt(<span class="number">0</span>) !== <span class="string">'/'</span>) {
-      <span class="keyword">if</span> (<span class="regexp">/http/i</span>.test(url)) {
-        <span class="keyword">return</span> url;
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> resourceFromUrl = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(url, post)</span> {</span>
+    post = !!post;
+
+    <span class="hljs-keyword">var</span> result;
+    <span class="hljs-built_in">Object</span>.keys(module.exports.resources).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(resource)</span> {</span>
+      resource = resource.split(<span class="hljs-string">' '</span>);
+      <span class="hljs-keyword">if</span> (result || (post &amp;&amp; resource[<span class="hljs-number">0</span>] !== <span class="hljs-string">'POST'</span>)) {
+        <span class="hljs-keyword">return</span>;
       }
-      url = <span class="string">'/'</span> + url;
-    }
 
-    <span class="keyword">if</span> (!<span class="regexp">/\.json$/i</span>.test(url)) {
-      url += <span class="string">'.json'</span>;
-    }
-
-    <span class="keyword">return</span> options.urls.restBase + url;
+      <span class="hljs-keyword">var</span> pattern = <span class="hljs-keyword">new</span> <span class="hljs-built_in">RegExp</span>(resource[<span class="hljs-number">1</span>].replace(<span class="hljs-regexp">/\/\//g</span>, <span class="hljs-string">'/([^/])/'</span>), <span class="hljs-string">'i'</span>);
+      <span class="hljs-keyword">if</span> (pattern.test(url)) {
+        result = resource.join(<span class="hljs-string">' '</span>);
+      }
+    });
+    <span class="hljs-keyword">return</span> result;
   };</pre></div></div>
             
         </li>
@@ -202,19 +183,30 @@ used in a request.</p>
         <li id="section-7">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
-              <h2>Queue a request</h2>
-<p>This is mostly a matter of filtering the input
-to make sure everything is as expected, and to
-arrange what input we do let through exactly as
-we want it.</p>
+              <p>Valid URLs that are passed in match the regex
+<code>^/?[a-zA-Z0-9/_]+(\.json)?$</code>. We want to have
+them all in full absolute format, ready to be
+used in a request.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> queueRequest = <span class="keyword">function</span>(method, url, params, callback, opts) {
-    <span class="keyword">var</span> post = <span class="regexp">/post/i</span>.test(method);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> canonizeUrl = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(url)</span> {</span>
+    <span class="hljs-keyword">if</span> (url.charAt(<span class="hljs-number">0</span>) !== <span class="hljs-string">'/'</span>) {
+      <span class="hljs-keyword">if</span> (<span class="hljs-regexp">/http/i</span>.test(url)) {
+        <span class="hljs-keyword">return</span> url;
+      }
+      url = <span class="hljs-string">'/'</span> + url;
+    }
+
+    <span class="hljs-keyword">if</span> (!<span class="hljs-regexp">/\.json$/i</span>.test(url)) {
+      url += <span class="hljs-string">'.json'</span>;
+    }
+
+    <span class="hljs-keyword">return</span> options.urls.restBase + url;
+  };</pre></div></div>
             
         </li>
         
@@ -225,56 +217,16 @@ we want it.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
-              <p>The <code>params</code> and <code>opts</code> arguments are optional,
-everything else is required. The code below is
-pretty much self-explanatory.</p>
+              <h2 id="queue-a-request">Queue a request</h2>
+<p>This is mostly a matter of filtering the input
+to make sure everything is as expected, and to
+arrange what input we do let through exactly as
+we want it.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="keyword">if</span> (<span class="keyword">typeof</span> params === <span class="string">'function'</span>) {
-      opts = callback;
-      callback = params;
-      params = <span class="literal">null</span>;
-    }
-
-    opts = _.defaults(opts ? opts : {}, {
-      headers: {},
-      skipQueue: <span class="literal">false</span>,
-      stream: <span class="literal">false</span>
-    });
-
-    <span class="keyword">if</span> (post) {
-      <span class="keyword">if</span> (!params) {
-        <span class="keyword">throw</span> <span class="keyword">new</span> errors.ArgumentRequiredError(<span class="string">'params'</span>, <span class="string">'for POST'</span>);
-      }
-
-      <span class="keyword">if</span> (!params.content) {
-        <span class="keyword">throw</span> <span class="keyword">new</span> errors.ArgumentRequiredError(<span class="string">'params.content'</span>, <span class="string">'for POST'</span>);
-      }
-
-      <span class="keyword">if</span> (<span class="keyword">typeof</span> params.content !== <span class="string">'string'</span>) {
-        params.content = jape(params.content);
-      }
-
-      <span class="keyword">if</span> (!params.contentType) {
-        params.contentType = <span class="string">'application/x-www-form-urlencoded'</span>;
-      }
-    }
-
-    <span class="keyword">if</span> (<span class="keyword">typeof</span> callback !== <span class="string">'function'</span> &amp;&amp; !opts.stream) {
-      <span class="keyword">throw</span> <span class="keyword">new</span> errors.NoCallbackError();
-    }
-
-    <span class="keyword">var</span> req = {
-      post: post,
-      url: canonizeUrl(url),
-      resource: resourceFromUrl(url, post),
-      params: params,
-      callback: callback,
-      options: opts
-    };
-
-    <span class="keyword">if</span> (opts.skipQueue) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> queueRequest = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(method, url, params, callback, opts)</span> {</span>
+    <span class="hljs-keyword">var</span> post = <span class="hljs-regexp">/post/i</span>.test(method);</pre></div></div>
             
         </li>
         
@@ -285,16 +237,56 @@ pretty much self-explanatory.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
-              <p>For those requests that shouldn&#39;t go through
-the queue (mostly internals).</p>
+              <p>The <code>params</code> and <code>opts</code> arguments are optional,
+everything else is required. The code below is
+pretty much self-explanatory.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      processRequest(req);
-    } <span class="keyword">else</span> {
-      queue.push(req);
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> params === <span class="hljs-string">'function'</span>) {
+      opts = callback;
+      callback = params;
+      params = <span class="hljs-literal">null</span>;
     }
-  };</pre></div></div>
+
+    opts = _.defaults(opts ? opts : {}, {
+      headers: {},
+      skipQueue: !!options.skipQueue,
+      stream: <span class="hljs-literal">false</span>
+    });
+
+    <span class="hljs-keyword">if</span> (post) {
+      <span class="hljs-keyword">if</span> (!params) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> errors.ArgumentRequiredError(<span class="hljs-string">'params'</span>, <span class="hljs-string">'for POST'</span>);
+      }
+
+      <span class="hljs-keyword">if</span> (!params.content) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> errors.ArgumentRequiredError(<span class="hljs-string">'params.content'</span>, <span class="hljs-string">'for POST'</span>);
+      }
+
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> params.content !== <span class="hljs-string">'string'</span>) {
+        params.content = jape(params.content);
+      }
+
+      <span class="hljs-keyword">if</span> (!params.contentType) {
+        params.contentType = <span class="hljs-string">'application/x-www-form-urlencoded'</span>;
+      }
+    }
+
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> callback !== <span class="hljs-string">'function'</span> &amp;&amp; !opts.stream) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> errors.NoCallbackError();
+    }
+
+    <span class="hljs-keyword">var</span> req = {
+      post: post,
+      url: canonizeUrl(url),
+      resource: resourceFromUrl(url, post),
+      params: params,
+      callback: callback,
+      options: opts
+    };
+
+    <span class="hljs-keyword">if</span> (opts.skipQueue) {</pre></div></div>
             
         </li>
         
@@ -302,18 +294,18 @@ the queue (mostly internals).</p>
         <li id="section-10">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
-              <h2>Requeue a request</h2>
-<p>If we&#39;ve hit the rate limit, requeue the
-request and schedule a targeted drain.</p>
+              <p>For those requests that shouldn’t go through
+the queue (mostly internals).</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> requeueRequest = <span class="keyword">function</span>(req) {
-    console.log(<span class="string">'Hit rate limit, requeuing.'</span>);
-    queue.push(req);
+            <div class="content"><div class='highlight'><pre>      processRequest(req);
+    } <span class="hljs-keyword">else</span> {
+      queue.push(req);
+    }
   };</pre></div></div>
             
         </li>
@@ -322,62 +314,19 @@ request and schedule a targeted drain.</p>
         <li id="section-11">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
-              <h2>Process a request</h2>
-<p>This is done in three parts: first, the request
-options are prepared, including any special
-requirements for authentication and POST;
-second, the request is checked for rate limiting;
-and finally, the request is sent and its response
-is parsed and triaged.</p>
+              <h2 id="requeue-a-request">Requeue a request</h2>
+<p>If we’ve hit the rate limit, requeue the
+request and schedule a targeted drain.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> processRequest = <span class="keyword">function</span>(req) {
-    <span class="keyword">var</span> handleResponse = <span class="keyword">function</span>(error, response) {
-      <span class="keyword">if</span> (!error) {
-        <span class="keyword">try</span> {
-          <span class="keyword">var</span> json = JSON.parse(response.body);
-          <span class="keyword">if</span> (json.errors) {
-            <span class="keyword">throw</span> <span class="keyword">new</span> errors.TwitterError(json.errors);
-          }
-
-          <span class="keyword">return</span> req.callback(<span class="literal">null</span>, json, response);
-        } <span class="keyword">catch</span> (err) {
-          error = err;
-        }
-      } <span class="keyword">else</span> <span class="keyword">if</span> (error.statusCode) {
-        <span class="keyword">if</span> (error.statusCode === <span class="number">429</span>) {
-          <span class="keyword">return</span> requeueRequest(req, response);
-        }
-
-        error.response = response;
-        error = <span class="keyword">new</span> errors.HTTPError(error);
-      }
-      req.callback(error, <span class="literal">null</span>, response);
-    };
-
-    <span class="keyword">var</span> method = request.post;
-    <span class="keyword">var</span> headers = {};
-    <span class="keyword">var</span> reqOptions = {
-      url: req.url,
-      followAllRedirects: <span class="literal">true</span>
-    };
-
-    <span class="keyword">if</span> (options.application_only) {
-      headers.Authorization = <span class="string">'Bearer '</span> + options.bearer_token;
-    } <span class="keyword">else</span> {
-      reqOptions.oauth = {
-        consumer_key:     options.consumer_key,
-        consumer_secret:  options.consumer_secret,
-        token:            options.access_token_key,
-        token_secret:     options.access_token_secret
-      };
-    }
-
-    <span class="keyword">if</span> (req.post) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> requeueRequest = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(req)</span> {</span>
+    console.log(<span class="hljs-string">'Hit rate limit, requeuing.'</span>);
+    queue.push(req);
+  };</pre></div></div>
             
         </li>
         
@@ -388,25 +337,59 @@ is parsed and triaged.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
-              <p>This header&#39;s case is important due to how <code>request</code>
-is coded (badly!) (see mikeal/request#499)</p>
+              <h2 id="process-a-request">Process a request</h2>
+<p>This is done in three parts: first, the request
+options are prepared, including any special
+requirements for authentication and POST;
+second, the request is checked for rate limiting;
+and finally, the request is sent and its response
+is parsed and triaged.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      headers[<span class="string">'content-type'</span>] = req.params.contentType;
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> processRequest = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(req)</span> {</span>
+    <span class="hljs-keyword">var</span> handleResponse = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(error, response)</span> {</span>
+      <span class="hljs-keyword">if</span> (!error) {
+        <span class="hljs-keyword">try</span> {
+          <span class="hljs-keyword">var</span> json = <span class="hljs-built_in">JSON</span>.parse(response.body);
+          <span class="hljs-keyword">if</span> (json.errors) {
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> errors.TwitterError(json.errors);
+          }
 
-      <span class="keyword">var</span> isMultipart = req.params.contentType &amp;&amp;
-        req.params.contentType.toLowerCase() === <span class="string">'multipart/form-data'</span>;
+          <span class="hljs-keyword">return</span> req.callback(<span class="hljs-literal">null</span>, json, response);
+        } <span class="hljs-keyword">catch</span> (err) {
+          error = err;
+        }
+      } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (error.statusCode) {
+        <span class="hljs-keyword">if</span> (error.statusCode === <span class="hljs-number">429</span>) {
+          <span class="hljs-keyword">return</span> requeueRequest(req, response);
+        }
 
-      <span class="keyword">if</span> (isMultipart) {
-        reqOptions.multipart = req.params.content;
-      } <span class="keyword">else</span> {
-        reqOptions.body = req.params.content;
+        error.response = response;
+        error = <span class="hljs-keyword">new</span> errors.HTTPError(error);
       }
-    } <span class="keyword">else</span> {
-      method = request.get;
-      reqOptions.qs = req.params;
-    }</pre></div></div>
+      req.callback(error, <span class="hljs-literal">null</span>, response);
+    };
+
+    <span class="hljs-keyword">var</span> method = request.post;
+    <span class="hljs-keyword">var</span> headers = {};
+    <span class="hljs-keyword">var</span> reqOptions = {
+      url: req.url,
+      followAllRedirects: <span class="hljs-literal">true</span>
+    };
+
+    <span class="hljs-keyword">if</span> (options.application_only) {
+      headers.Authorization = <span class="hljs-string">'Bearer '</span> + options.bearer_token;
+    } <span class="hljs-keyword">else</span> {
+      reqOptions.oauth = {
+        consumer_key:     options.consumer_key,
+        consumer_secret:  options.consumer_secret,
+        token:            options.access_token_key,
+        token_secret:     options.access_token_secret
+      };
+    }
+
+    <span class="hljs-keyword">if</span> (req.post) {</pre></div></div>
             
         </li>
         
@@ -416,6 +399,35 @@ is coded (badly!) (see mikeal/request#499)</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>This header’s case is important due to how <code>request</code>
+is coded (badly!) (see mikeal/request#499)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      headers[<span class="hljs-string">'content-type'</span>] = req.params.contentType;
+
+      <span class="hljs-keyword">var</span> isMultipart = req.params.contentType &amp;&amp;
+        req.params.contentType.toLowerCase() === <span class="hljs-string">'multipart/form-data'</span>;
+
+      <span class="hljs-keyword">if</span> (isMultipart) {
+        reqOptions.multipart = req.params.content;
+      } <span class="hljs-keyword">else</span> {
+        reqOptions.body = req.params.content;
+      }
+    } <span class="hljs-keyword">else</span> {
+      method = request.get;
+      reqOptions.qs = req.params;
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
               <p>Headers are overwritten by each subsequent
 object. The req.options.headers field together
@@ -430,45 +442,11 @@ used to create a completely different request.</p>
       req.options.headers
     );
 
-    <span class="keyword">if</span> (req.options.stream) {
+    <span class="hljs-keyword">if</span> (req.options.stream) {
       method(reqOptions).pipe(req.options.stream);
-    } <span class="keyword">else</span> {
+    } <span class="hljs-keyword">else</span> {
       method(reqOptions, handleResponse);
     }
-  };</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-14">
-            <div class="annotation">
-              
-              <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-14">&#182;</a>
-              </div>
-              <h2>Prerequisites</h2>
-<h3>Twitter configuration</h3>
-<p>Get the config from /help/configuration. This should
-be run at startup and every 24 hours after that.</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> getConfig = <span class="keyword">function</span>(callback) {
-    <span class="keyword">var</span> setConfig = <span class="keyword">function</span>(error, data) {
-      <span class="keyword">if</span> (!error) {
-        upstreamConfig = data;
-      }
-      <span class="keyword">if</span> (callback) {
-        callback();
-      }
-    };
-    queueRequest(
-      <span class="string">'GET'</span>,
-      <span class="string">'/help/configuration'</span>,
-      setConfig,
-      {skipQueue: !queue.started}
-    );
-    setTimeout(getConfig, <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">1000</span>);
   };</pre></div></div>
             
         </li>
@@ -477,17 +455,12 @@ be run at startup and every 24 hours after that.</p>
         <li id="section-15">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
-              <h3>Rate limits</h3>
-<p>Get the latest global rate-limit information.</p>
+              <h2 id="prerequisites">Prerequisites</h2>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> getLimits = <span class="keyword">function</span>(callback) {
-    <span class="keyword">var</span> setLimits = <span class="keyword">function</span>(error, data) {
-      <span class="keyword">if</span> (!error) {</pre></div></div>
             
         </li>
         
@@ -498,29 +471,28 @@ be run at startup and every 24 hours after that.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
-              <p>The twitter response is divided accross &quot;families&quot; of
-requests. We don&#39;t really care for all that.</p>
+              <h3 id="twitter-configuration">Twitter configuration</h3>
+<p>Get the config from /help/configuration. This should
+be run at startup and every 24 hours after that.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        _.each(data.resources, <span class="function"><span class="keyword">function</span> <span class="title">eachFamily</span><span class="params">(family)</span> {</span>
-          _.each(family, <span class="function"><span class="keyword">function</span> <span class="title">eachResource</span><span class="params">(resource, limits)</span> {</span>
-            resource = resourceFromUrl(resource);
-            rateLimits[resource] = limits;
-          });
-        });
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> getConfig = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(callback)</span> {</span>
+    <span class="hljs-keyword">var</span> setConfig = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(error, data)</span> {</span>
+      <span class="hljs-keyword">if</span> (!error) {
+        upstreamConfig = data;
       }
-      <span class="keyword">if</span> (callback) {
+      <span class="hljs-keyword">if</span> (callback) {
         callback();
       }
     };
     queueRequest(
-      <span class="string">'GET'</span>,
-      <span class="string">'/application/rate_limit_status'</span>,
-      setLimits,
+      <span class="hljs-string">'GET'</span>,
+      <span class="hljs-string">'/help/configuration'</span>,
+      setConfig,
       {skipQueue: !queue.started}
     );
-    setTimeout(getLimits, <span class="number">15</span> * <span class="number">60</span> * <span class="number">1000</span>);
+    setTimeout(getConfig, <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>);
   };</pre></div></div>
             
         </li>
@@ -529,42 +501,17 @@ requests. We don&#39;t really care for all that.</p>
         <li id="section-17">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
-              <h3>Bearer token</h3>
-<p>Get the application-only bearer token if one
-isn&#39;t provided already.</p>
+              <h3 id="rate-limits">Rate limits</h3>
+<p>Get the latest global rate-limit information.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> getAppOnlyToken = <span class="keyword">function</span>(callback) {
-    <span class="keyword">var</span> setToken = <span class="keyword">function</span>(error, data) {
-      <span class="keyword">if</span> (error || !data.token_type || data.token_type !== <span class="string">'bearer'</span>) {
-        <span class="keyword">throw</span> <span class="keyword">new</span> errors.BearerTokenError(error,
-          <span class="string">'Couldn\'t fetch the bearer token'</span>);
-      }
-
-      options.bearer_token = data.access_token;
-
-      <span class="keyword">if</span> (callback) {
-        callback();
-      }
-    };
-
-    <span class="keyword">var</span> auth = [options.consumer_key,options.consumer_secret].join(<span class="string">':'</span>);
-    auth = <span class="string">'Basic '</span> + <span class="keyword">new</span> Buffer(auth).toString(<span class="string">'base64'</span>);
-
-    queueRequest(
-      <span class="string">'POST'</span>,
-      options.urls.appAuth,
-      {content: <span class="string">'grant_type=client_credentials'</span>},
-      setToken,
-      {skipQueue: <span class="literal">true</span>, headers: {Authorization: auth}}
-    );
-  };
-
-  queue.addHandler(<span class="string">'process'</span>, processRequest);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> getLimits = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(callback)</span> {</span>
+    <span class="hljs-keyword">var</span> setLimits = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(error, data)</span> {</span>
+      <span class="hljs-keyword">if</span> (!error) {</pre></div></div>
             
         </li>
         
@@ -572,23 +519,33 @@ isn&#39;t provided already.</p>
         <li id="section-18">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
-              <h2>Drains</h2>
-<p>Drains schedule requests to be processed.
-By default we run 5 GET/s and 10 POST/s.</p>
-<h3>POST drain</h3>
-<p>Post requests don&#39;t have explicit rate limits,
-so run them all as they come.</p>
+              <p>The twitter response is divided accross “families” of
+requests. We don’t really care for all that.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  queue.addPicker(<span class="function"><span class="keyword">function</span> <span class="title">postDrain</span><span class="params">(req)</span> {</span>
-    <span class="keyword">if</span> (req.post) {
-      <span class="keyword">this</span>.handle(<span class="string">'process'</span>);
-    }
-  }, <span class="number">1000</span>, <span class="number">10</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>        _.each(data.resources, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">eachFamily</span><span class="hljs-params">(family)</span> {</span>
+          _.each(family, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">eachResource</span><span class="hljs-params">(resource, limits)</span> {</span>
+            resource = resourceFromUrl(resource);
+            rateLimits[resource] = limits;
+          });
+        });
+      }
+      <span class="hljs-keyword">if</span> (callback) {
+        callback();
+      }
+    };
+    queueRequest(
+      <span class="hljs-string">'GET'</span>,
+      <span class="hljs-string">'/application/rate_limit_status'</span>,
+      setLimits,
+      {skipQueue: !queue.started}
+    );
+    setTimeout(getLimits, <span class="hljs-number">15</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>);
+  };</pre></div></div>
             
         </li>
         
@@ -596,15 +553,42 @@ so run them all as they come.</p>
         <li id="section-19">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
-              <h3>GET drain</h3>
+              <h3 id="bearer-token">Bearer token</h3>
+<p>Get the application-only bearer token if one
+isn’t provided already.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  queue.addPicker(<span class="function"><span class="keyword">function</span> <span class="title">getDrain</span><span class="params">(req)</span> {</span>
-    <span class="keyword">if</span> (!req.post) {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> getAppOnlyToken = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(callback)</span> {</span>
+    <span class="hljs-keyword">var</span> setToken = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(error, data)</span> {</span>
+      <span class="hljs-keyword">if</span> (error || !data.token_type || data.token_type !== <span class="hljs-string">'bearer'</span>) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> errors.BearerTokenError(error,
+          <span class="hljs-string">'Couldn\'t fetch the bearer token'</span>);
+      }
+
+      options.bearer_token = data.access_token;
+
+      <span class="hljs-keyword">if</span> (callback) {
+        callback();
+      }
+    };
+
+    <span class="hljs-keyword">var</span> auth = [options.consumer_key,options.consumer_secret].join(<span class="hljs-string">':'</span>);
+    auth = <span class="hljs-string">'Basic '</span> + <span class="hljs-keyword">new</span> Buffer(auth).toString(<span class="hljs-string">'base64'</span>);
+
+    queueRequest(
+      <span class="hljs-string">'POST'</span>,
+      options.urls.appAuth,
+      {content: <span class="hljs-string">'grant_type=client_credentials'</span>},
+      setToken,
+      {skipQueue: <span class="hljs-literal">true</span>, headers: {Authorization: auth}}
+    );
+  };
+
+  queue.addHandler(<span class="hljs-string">'process'</span>, processRequest);</pre></div></div>
             
         </li>
         
@@ -615,41 +599,11 @@ so run them all as they come.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
-              <p>Rate limit screening</p>
+              <h2 id="drains">Drains</h2>
+<p>Drains schedule requests to be processed.
+By default we run 5 GET/s and 10 POST/s.</p>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre>      <span class="keyword">this</span>.handle(<span class="string">'process'</span>);
-    }
-  }, <span class="number">1000</span>, <span class="number">5</span>);
-
-
-  <span class="keyword">var</span> start = <span class="keyword">function</span>() {
-    getConfig(<span class="keyword">function</span>() {
-      <span class="keyword">if</span> (Object.keys(rateLimits).length &gt; <span class="number">0</span>) {
-        queue.start();
-      }
-    });
-    getLimits(<span class="keyword">function</span>() {
-      <span class="keyword">if</span> (Object.keys(upstreamConfig).length &gt; <span class="number">0</span>) {
-        queue.start();
-      }
-    });
-  };
-
-  <span class="keyword">if</span> (options.application_only &amp;&amp; !options.bearer_token) {
-    getAppOnlyToken(<span class="keyword">function</span>() {
-      start();
-    });
-  } <span class="keyword">else</span> {
-    start();
-  }
-
-  <span class="keyword">this</span>.queueRequest = queueRequest;
-  <span class="keyword">this</span>.queue = queue;
-  <span class="keyword">this</span>.limits = rateLimits;
-  <span class="keyword">this</span>.config = upstreamConfig;
-};</pre></div></div>
             
         </li>
         
@@ -657,10 +611,92 @@ so run them all as they come.</p>
         <li id="section-21">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
-              <h2>List of all resources</h2>
+              <h3 id="post-drain">POST drain</h3>
+<p>Post requests don’t have explicit rate limits,
+so run them all as they come.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  queue.addPicker(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">postDrain</span><span class="hljs-params">(req)</span> {</span>
+    <span class="hljs-keyword">if</span> (req.post) {
+      <span class="hljs-keyword">this</span>.handle(<span class="hljs-string">'process'</span>);
+    }
+  }, <span class="hljs-number">1000</span>, <span class="hljs-number">10</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <h3 id="get-drain">GET drain</h3>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  queue.addPicker(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getDrain</span><span class="hljs-params">(req)</span> {</span>
+    <span class="hljs-keyword">if</span> (!req.post) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <p>Rate limit screening</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">this</span>.handle(<span class="hljs-string">'process'</span>);
+    }
+  }, <span class="hljs-number">1000</span>, <span class="hljs-number">5</span>);
+
+
+  <span class="hljs-keyword">var</span> start = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+    getConfig(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Object</span>.keys(rateLimits).length &gt; <span class="hljs-number">0</span>) {
+        queue.start();
+      }
+    });
+    getLimits(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+      <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Object</span>.keys(upstreamConfig).length &gt; <span class="hljs-number">0</span>) {
+        queue.start();
+      }
+    });
+  };
+
+  <span class="hljs-keyword">if</span> (options.application_only &amp;&amp; !options.bearer_token) {
+    getAppOnlyToken(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+      start();
+    });
+  } <span class="hljs-keyword">else</span> {
+    start();
+  }
+
+  <span class="hljs-keyword">this</span>.queueRequest = queueRequest;
+  <span class="hljs-keyword">this</span>.queue = queue;
+  <span class="hljs-keyword">this</span>.limits = rateLimits;
+  <span class="hljs-keyword">this</span>.config = upstreamConfig;
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <h2 id="list-of-all-resources">List of all resources</h2>
 <p><em>Does not include Stream API resources.</em></p>
 <p>See <a href="https://dev.twitter.com/docs/api/1.1">https://dev.twitter.com/docs/api/1.1</a></p>
 
@@ -671,144 +707,48 @@ so run them all as they come.</p>
         </li>
         
         
-        <li id="section-22">
-            <div class="annotation">
-              
-              <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-22">&#182;</a>
-              </div>
-              <h3>Statuses</h3>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  <span class="string">'GET statuses/mentions_timeline'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
-  },
-  <span class="string">'GET statuses/user_timeline'</span>: {
-    rateLimits: {user: <span class="number">180</span>, app: <span class="number">300</span>}
-  },
-  <span class="string">'GET statuses/home_timeline'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
-  },
-  <span class="string">'GET statuses/retweets_of_me'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
-  },
-  <span class="string">'GET statuses/retweets/'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">60</span>}
-  },
-  <span class="string">'GET statuses/show/'</span>: {
-    rateLimits: {user: <span class="number">180</span>, app: <span class="number">180</span>}
-  },
-  <span class="string">'POST statuses/destroy/'</span>: {
-    rateLimits: <span class="literal">false</span>
-  },
-  <span class="string">'POST statuses/update'</span>: {
-    rateLimits: <span class="literal">false</span>
-  },
-  <span class="string">'POST statuses/retweet/'</span>: {
-    rateLimits: <span class="literal">false</span>
-  },
-  <span class="string">'POST statuses/update_with_media'</span>: {
-    rateLimits: <span class="literal">false</span>
-  },
-  <span class="string">'GET statuses/oembed'</span>: {
-    rateLimits: {user: <span class="number">180</span>, app: <span class="number">180</span>}
-  },</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-23">
-            <div class="annotation">
-              
-              <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-23">&#182;</a>
-              </div>
-              <h3>Search</h3>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  <span class="string">'GET search/tweets'</span>: {
-    rateLimits: {user: <span class="number">180</span>, app: <span class="number">450</span>}
-  },</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-24">
-            <div class="annotation">
-              
-              <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-24">&#182;</a>
-              </div>
-              <h3>Direct Messages</h3>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>  <span class="string">'GET direct_messages'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
-  },
-  <span class="string">'GET direct_messages/sent'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
-  },
-  <span class="string">'GET direct_messages/show'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
-  },
-  <span class="string">'POST direct_messages/destroy'</span>: {
-    rateLimits: <span class="literal">false</span>
-  },
-  <span class="string">'POST direct_messages/new'</span>: {
-    rateLimits: <span class="literal">false</span>
-  },</pre></div></div>
-            
-        </li>
-        
-        
         <li id="section-25">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
-              <h3>Friendships (followers / following)</h3>
+              <h3 id="statuses">Statuses</h3>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="string">'GET friendships/no_retweets/ids'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-string">'GET statuses/mentions_timeline'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">0</span>}
   },
-  <span class="string">'GET friends/ids'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+  <span class="hljs-string">'GET statuses/user_timeline'</span>: {
+    rateLimits: {user: <span class="hljs-number">180</span>, app: <span class="hljs-number">300</span>}
   },
-  <span class="string">'GET followers/ids'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+  <span class="hljs-string">'GET statuses/home_timeline'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">0</span>}
   },
-  <span class="string">'GET friendships/lookup'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  <span class="hljs-string">'GET statuses/retweets_of_me'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">0</span>}
   },
-  <span class="string">'GET friendships/incoming'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  <span class="hljs-string">'GET statuses/retweets/'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">60</span>}
   },
-  <span class="string">'GET friendships/outgoing'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  <span class="hljs-string">'GET statuses/show/'</span>: {
+    rateLimits: {user: <span class="hljs-number">180</span>, app: <span class="hljs-number">180</span>}
   },
-  <span class="string">'POST friendships/create'</span>: {
-    rateLimits: <span class="literal">false</span>
+  <span class="hljs-string">'POST statuses/destroy/'</span>: {
+    rateLimits: <span class="hljs-literal">false</span>
   },
-  <span class="string">'POST friendships/destroy'</span>: {
-    rateLimits: <span class="literal">false</span>
+  <span class="hljs-string">'POST statuses/update'</span>: {
+    rateLimits: <span class="hljs-literal">false</span>
   },
-  <span class="string">'POST friendships/update'</span>: {
-    rateLimits: <span class="literal">false</span>
+  <span class="hljs-string">'POST statuses/retweet/'</span>: {
+    rateLimits: <span class="hljs-literal">false</span>
   },
-  <span class="string">'GET friendships/show'</span>: {
-    rateLimits: {user: <span class="number">180</span>, app: <span class="number">15</span>}
+  <span class="hljs-string">'POST statuses/update_with_media'</span>: {
+    rateLimits: <span class="hljs-literal">false</span>
   },
-  <span class="string">'GET friends/list'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">30</span>}
-  },
-  <span class="string">'GET followers/list'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">30</span>}
+  <span class="hljs-string">'GET statuses/oembed'</span>: {
+    rateLimits: {user: <span class="hljs-number">180</span>, app: <span class="hljs-number">180</span>}
   },</pre></div></div>
             
         </li>
@@ -817,36 +757,15 @@ so run them all as they come.</p>
         <li id="section-26">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
-              <h3>Account settings</h3>
+              <h3 id="search">Search</h3>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="string">'GET account/settings'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
-  },
-  <span class="string">'GET account/verify_credentials'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
-  },
-  <span class="string">'POST account/settings'</span>: {
-    rateLimits: <span class="literal">false</span>
-  },
-  <span class="string">'POST account/update_delivery_device'</span>: {
-    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
-  },
-  <span class="string">'POST account/update_profile'</span>: {
-    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
-  },
-  <span class="string">'POST account/update_profile_background_image'</span>: {
-    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
-  },
-  <span class="string">'POST account/update_profile_colors'</span>: {
-    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
-  },
-  <span class="string">'POST account/update_profile_image'</span>: {
-    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-string">'GET search/tweets'</span>: {
+    rateLimits: {user: <span class="hljs-number">180</span>, app: <span class="hljs-number">450</span>}
   },</pre></div></div>
             
         </li>
@@ -855,24 +774,27 @@ so run them all as they come.</p>
         <li id="section-27">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
-              <h3>Blocks (ban, ignore)</h3>
+              <h3 id="direct-messages">Direct Messages</h3>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="string">'GET blocks/list'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-string">'GET direct_messages'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">0</span>}
   },
-  <span class="string">'GET blocks/ids'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  <span class="hljs-string">'GET direct_messages/sent'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">0</span>}
   },
-  <span class="string">'POST blocks/create'</span>: {
-    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+  <span class="hljs-string">'GET direct_messages/show'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">0</span>}
   },
-  <span class="string">'POST blocks/destroy'</span>: {
-    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+  <span class="hljs-string">'POST direct_messages/destroy'</span>: {
+    rateLimits: <span class="hljs-literal">false</span>
+  },
+  <span class="hljs-string">'POST direct_messages/new'</span>: {
+    rateLimits: <span class="hljs-literal">false</span>
   },</pre></div></div>
             
         </li>
@@ -881,18 +803,48 @@ so run them all as they come.</p>
         <li id="section-28">
             <div class="annotation">
               
-              <div class="pilwrap for-h4">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-28">&#182;</a>
               </div>
-              <h4>Profile banner</h4>
+              <h3 id="friendships-followers-following-">Friendships (followers / following)</h3>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="string">'POST account/remove_profile_banner'</span>: {
-    rateLimits: <span class="literal">false</span>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-string">'GET friendships/no_retweets/ids'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">0</span>}
   },
-  <span class="string">'POST account/update_profile_banner'</span>: {
-    rateLimits: <span class="literal">false</span>
+  <span class="hljs-string">'GET friends/ids'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">15</span>}
+  },
+  <span class="hljs-string">'GET followers/ids'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">15</span>}
+  },
+  <span class="hljs-string">'GET friendships/lookup'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">0</span>}
+  },
+  <span class="hljs-string">'GET friendships/incoming'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">0</span>}
+  },
+  <span class="hljs-string">'GET friendships/outgoing'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">0</span>}
+  },
+  <span class="hljs-string">'POST friendships/create'</span>: {
+    rateLimits: <span class="hljs-literal">false</span>
+  },
+  <span class="hljs-string">'POST friendships/destroy'</span>: {
+    rateLimits: <span class="hljs-literal">false</span>
+  },
+  <span class="hljs-string">'POST friendships/update'</span>: {
+    rateLimits: <span class="hljs-literal">false</span>
+  },
+  <span class="hljs-string">'GET friendships/show'</span>: {
+    rateLimits: {user: <span class="hljs-number">180</span>, app: <span class="hljs-number">15</span>}
+  },
+  <span class="hljs-string">'GET friends/list'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">30</span>}
+  },
+  <span class="hljs-string">'GET followers/list'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">30</span>}
   },</pre></div></div>
             
         </li>
@@ -901,27 +853,36 @@ so run them all as they come.</p>
         <li id="section-29">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-29">&#182;</a>
               </div>
-              <h3>Users</h3>
+              <h3 id="account-settings">Account settings</h3>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="string">'GET users/lookup'</span>: {
-    rateLimits: {user: <span class="number">180</span>, app: <span class="number">60</span>}
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-string">'GET account/settings'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">0</span>}
   },
-  <span class="string">'GET users/show'</span>: {
-    rateLimits: {user: <span class="number">180</span>, app: <span class="number">180</span>}
+  <span class="hljs-string">'GET account/verify_credentials'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">0</span>}
   },
-  <span class="string">'GET users/search'</span>: {
-    rateLimits: {user: <span class="number">180</span>, app: <span class="number">0</span>}
+  <span class="hljs-string">'POST account/settings'</span>: {
+    rateLimits: <span class="hljs-literal">false</span>
   },
-  <span class="string">'GET users/contributees'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  <span class="hljs-string">'POST account/update_delivery_device'</span>: {
+    rateLimits: {user: <span class="hljs-number">0</span>, app: <span class="hljs-number">0</span>}
   },
-  <span class="string">'GET users/contributors'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  <span class="hljs-string">'POST account/update_profile'</span>: {
+    rateLimits: {user: <span class="hljs-number">0</span>, app: <span class="hljs-number">0</span>}
+  },
+  <span class="hljs-string">'POST account/update_profile_background_image'</span>: {
+    rateLimits: {user: <span class="hljs-number">0</span>, app: <span class="hljs-number">0</span>}
+  },
+  <span class="hljs-string">'POST account/update_profile_colors'</span>: {
+    rateLimits: {user: <span class="hljs-number">0</span>, app: <span class="hljs-number">0</span>}
+  },
+  <span class="hljs-string">'POST account/update_profile_image'</span>: {
+    rateLimits: {user: <span class="hljs-number">0</span>, app: <span class="hljs-number">0</span>}
   },</pre></div></div>
             
         </li>
@@ -930,15 +891,24 @@ so run them all as they come.</p>
         <li id="section-30">
             <div class="annotation">
               
-              <div class="pilwrap for-h4">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-30">&#182;</a>
               </div>
-              <h4>Profile banner</h4>
+              <h3 id="blocks-ban-ignore-">Blocks (ban, ignore)</h3>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="string">'GET users/profile_banner'</span>: {
-    rateLimits: {user: <span class="number">180</span>, app: <span class="number">0</span>}
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-string">'GET blocks/list'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">0</span>}
+  },
+  <span class="hljs-string">'GET blocks/ids'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">0</span>}
+  },
+  <span class="hljs-string">'POST blocks/create'</span>: {
+    rateLimits: {user: <span class="hljs-number">0</span>, app: <span class="hljs-number">0</span>}
+  },
+  <span class="hljs-string">'POST blocks/destroy'</span>: {
+    rateLimits: {user: <span class="hljs-number">0</span>, app: <span class="hljs-number">0</span>}
   },</pre></div></div>
             
         </li>
@@ -947,21 +917,18 @@ so run them all as they come.</p>
         <li id="section-31">
             <div class="annotation">
               
-              <div class="pilwrap for-h4">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-31">&#182;</a>
               </div>
-              <h4>Suggestions</h4>
+              <h4 id="profile-banner">Profile banner</h4>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="string">'GET users/suggestions/'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-string">'POST account/remove_profile_banner'</span>: {
+    rateLimits: <span class="hljs-literal">false</span>
   },
-  <span class="string">'GET users/suggestions'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
-  },
-  <span class="string">'GET users/suggestions//members'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+  <span class="hljs-string">'POST account/update_profile_banner'</span>: {
+    rateLimits: <span class="hljs-literal">false</span>
   },</pre></div></div>
             
         </li>
@@ -970,24 +937,27 @@ so run them all as they come.</p>
         <li id="section-32">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-32">&#182;</a>
               </div>
-              <h3>Favorites</h3>
+              <h3 id="users">Users</h3>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="string">'GET favorites/list'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-string">'GET users/lookup'</span>: {
+    rateLimits: {user: <span class="hljs-number">180</span>, app: <span class="hljs-number">60</span>}
   },
-  <span class="string">'POST favorites/destroy'</span>: {
-    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+  <span class="hljs-string">'GET users/show'</span>: {
+    rateLimits: {user: <span class="hljs-number">180</span>, app: <span class="hljs-number">180</span>}
   },
-  <span class="string">'POST favorites/create'</span>: {
-    rateLimits: <span class="literal">false</span>
+  <span class="hljs-string">'GET users/search'</span>: {
+    rateLimits: {user: <span class="hljs-number">180</span>, app: <span class="hljs-number">0</span>}
   },
-  <span class="string">'GET favorites/'</span>: {
-    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+  <span class="hljs-string">'GET users/contributees'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">0</span>}
+  },
+  <span class="hljs-string">'GET users/contributors'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">0</span>}
   },</pre></div></div>
             
         </li>
@@ -996,66 +966,15 @@ so run them all as they come.</p>
         <li id="section-33">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-33">&#182;</a>
               </div>
-              <h3>Lists</h3>
+              <h4 id="profile-banner">Profile banner</h4>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="string">'GET lists/list'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
-  },
-  <span class="string">'GET lists/statuses'</span>: {
-    rateLimits: {user: <span class="number">180</span>, app: <span class="number">180</span>}
-  },
-  <span class="string">'POST lists/members/destroy'</span>: {
-    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
-  },
-  <span class="string">'GET lists/memberships'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
-  },
-  <span class="string">'GET lists/subscribers'</span>: {
-    rateLimits: {user: <span class="number">180</span>, app: <span class="number">15</span>}
-  },
-  <span class="string">'POST lists/subscribers/create'</span>: {
-    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
-  },
-  <span class="string">'GET lists/subscribers/show'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
-  },
-  <span class="string">'POST lists/subscribers/destroy'</span>: {
-    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
-  },
-  <span class="string">'POST lists/members/create_all'</span>: {
-    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
-  },
-  <span class="string">'GET lists/members/show'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
-  },
-  <span class="string">'GET lists/members'</span>: {
-    rateLimits: {user: <span class="number">180</span>, app: <span class="number">15</span>}
-  },
-  <span class="string">'POST lists/members/create'</span>: {
-    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
-  },
-  <span class="string">'POST lists/destroy'</span>: {
-    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
-  },
-  <span class="string">'POST lists/update'</span>: {
-    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
-  },
-  <span class="string">'POST lists/create'</span>: {
-    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
-  },
-  <span class="string">'GET lists/show'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
-  },
-  <span class="string">'GET lists/subscribtions'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
-  },
-  <span class="string">'GET lists/members/destroy_all'</span>: {
-    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-string">'GET users/profile_banner'</span>: {
+    rateLimits: {user: <span class="hljs-number">180</span>, app: <span class="hljs-number">0</span>}
   },</pre></div></div>
             
         </li>
@@ -1064,24 +983,21 @@ so run them all as they come.</p>
         <li id="section-34">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-34">&#182;</a>
               </div>
-              <h3>Saved searches</h3>
+              <h4 id="suggestions">Suggestions</h4>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="string">'GET saved_searches/list'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-string">'GET users/suggestions/'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">15</span>}
   },
-  <span class="string">'GET saved_searches/show/'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  <span class="hljs-string">'GET users/suggestions'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">15</span>}
   },
-  <span class="string">'POST saved_searches/create'</span>: {
-    rateLimits: <span class="literal">false</span>
-  },
-  <span class="string">'POST saved_searches/destroy/'</span>: {
-    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+  <span class="hljs-string">'GET users/suggestions//members'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">15</span>}
   },</pre></div></div>
             
         </li>
@@ -1090,27 +1006,24 @@ so run them all as they come.</p>
         <li id="section-35">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-35">&#182;</a>
               </div>
-              <h3>Geo-data</h3>
+              <h3 id="favorites">Favorites</h3>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="string">'GET geo/id/'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-string">'GET favorites/list'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">15</span>}
   },
-  <span class="string">'GET geo/reverse_geocode'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  <span class="hljs-string">'POST favorites/destroy'</span>: {
+    rateLimits: {user: <span class="hljs-number">0</span>, app: <span class="hljs-number">0</span>}
   },
-  <span class="string">'GET geo/search'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
+  <span class="hljs-string">'POST favorites/create'</span>: {
+    rateLimits: <span class="hljs-literal">false</span>
   },
-  <span class="string">'GET geo/similar_places'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">0</span>}
-  },
-  <span class="string">'POST geo/place'</span>: {
-    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+  <span class="hljs-string">'GET favorites/'</span>: {
+    rateLimits: {user: <span class="hljs-number">0</span>, app: <span class="hljs-number">0</span>}
   },</pre></div></div>
             
         </li>
@@ -1119,21 +1032,66 @@ so run them all as they come.</p>
         <li id="section-36">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-36">&#182;</a>
               </div>
-              <h3>Trends</h3>
+              <h3 id="lists">Lists</h3>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="string">'GET trends/place'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-string">'GET lists/list'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">15</span>}
   },
-  <span class="string">'GET trends/available'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+  <span class="hljs-string">'GET lists/statuses'</span>: {
+    rateLimits: {user: <span class="hljs-number">180</span>, app: <span class="hljs-number">180</span>}
   },
-  <span class="string">'GET trends/closest'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+  <span class="hljs-string">'POST lists/members/destroy'</span>: {
+    rateLimits: {user: <span class="hljs-number">0</span>, app: <span class="hljs-number">0</span>}
+  },
+  <span class="hljs-string">'GET lists/memberships'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">15</span>}
+  },
+  <span class="hljs-string">'GET lists/subscribers'</span>: {
+    rateLimits: {user: <span class="hljs-number">180</span>, app: <span class="hljs-number">15</span>}
+  },
+  <span class="hljs-string">'POST lists/subscribers/create'</span>: {
+    rateLimits: {user: <span class="hljs-number">0</span>, app: <span class="hljs-number">0</span>}
+  },
+  <span class="hljs-string">'GET lists/subscribers/show'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">15</span>}
+  },
+  <span class="hljs-string">'POST lists/subscribers/destroy'</span>: {
+    rateLimits: {user: <span class="hljs-number">0</span>, app: <span class="hljs-number">0</span>}
+  },
+  <span class="hljs-string">'POST lists/members/create_all'</span>: {
+    rateLimits: {user: <span class="hljs-number">0</span>, app: <span class="hljs-number">0</span>}
+  },
+  <span class="hljs-string">'GET lists/members/show'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">15</span>}
+  },
+  <span class="hljs-string">'GET lists/members'</span>: {
+    rateLimits: {user: <span class="hljs-number">180</span>, app: <span class="hljs-number">15</span>}
+  },
+  <span class="hljs-string">'POST lists/members/create'</span>: {
+    rateLimits: {user: <span class="hljs-number">0</span>, app: <span class="hljs-number">0</span>}
+  },
+  <span class="hljs-string">'POST lists/destroy'</span>: {
+    rateLimits: {user: <span class="hljs-number">0</span>, app: <span class="hljs-number">0</span>}
+  },
+  <span class="hljs-string">'POST lists/update'</span>: {
+    rateLimits: {user: <span class="hljs-number">0</span>, app: <span class="hljs-number">0</span>}
+  },
+  <span class="hljs-string">'POST lists/create'</span>: {
+    rateLimits: {user: <span class="hljs-number">0</span>, app: <span class="hljs-number">0</span>}
+  },
+  <span class="hljs-string">'GET lists/show'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">15</span>}
+  },
+  <span class="hljs-string">'GET lists/subscribtions'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">15</span>}
+  },
+  <span class="hljs-string">'GET lists/members/destroy_all'</span>: {
+    rateLimits: {user: <span class="hljs-number">0</span>, app: <span class="hljs-number">0</span>}
   },</pre></div></div>
             
         </li>
@@ -1142,16 +1100,24 @@ so run them all as they come.</p>
         <li id="section-37">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-37">&#182;</a>
               </div>
-              <h3>Report spam</h3>
-<p>Also adds a block</p>
+              <h3 id="saved-searches">Saved searches</h3>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="string">'POST users/report_spam'</span>: {
-    rateLimits: {user: <span class="number">0</span>, app: <span class="number">0</span>}
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-string">'GET saved_searches/list'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">0</span>}
+  },
+  <span class="hljs-string">'GET saved_searches/show/'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">0</span>}
+  },
+  <span class="hljs-string">'POST saved_searches/create'</span>: {
+    rateLimits: <span class="hljs-literal">false</span>
+  },
+  <span class="hljs-string">'POST saved_searches/destroy/'</span>: {
+    rateLimits: {user: <span class="hljs-number">0</span>, app: <span class="hljs-number">0</span>}
   },</pre></div></div>
             
         </li>
@@ -1160,30 +1126,27 @@ so run them all as they come.</p>
         <li id="section-38">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-38">&#182;</a>
               </div>
-              <h3>Authentication</h3>
+              <h3 id="geo-data">Geo-data</h3>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="string">'GET oauth/authenticate'</span>: {
-    rateLimits: <span class="literal">false</span>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-string">'GET geo/id/'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">0</span>}
   },
-  <span class="string">'GET oauth/authorize'</span>: {
-    rateLimits: <span class="literal">false</span>
+  <span class="hljs-string">'GET geo/reverse_geocode'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">0</span>}
   },
-  <span class="string">'POST oauth/access_token'</span>: {
-    rateLimits: <span class="literal">false</span>
+  <span class="hljs-string">'GET geo/search'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">0</span>}
   },
-  <span class="string">'POST oauth/request_token'</span>: {
-    rateLimits: <span class="literal">false</span>
+  <span class="hljs-string">'GET geo/similar_places'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">0</span>}
   },
-  <span class="string">'POST oauth2/token'</span>: {
-    rateLimits: <span class="literal">false</span>
-  },
-  <span class="string">'POST oauth2/invalidate_token'</span>: {
-    rateLimits: <span class="literal">false</span>
+  <span class="hljs-string">'POST geo/place'</span>: {
+    rateLimits: {user: <span class="hljs-number">0</span>, app: <span class="hljs-number">0</span>}
   },</pre></div></div>
             
         </li>
@@ -1192,24 +1155,21 @@ so run them all as they come.</p>
         <li id="section-39">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-39">&#182;</a>
               </div>
-              <h3>Resources</h3>
+              <h3 id="trends">Trends</h3>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="string">'GET help/configuration'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-string">'GET trends/place'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">15</span>}
   },
-  <span class="string">'GET help/languages'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+  <span class="hljs-string">'GET trends/available'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">15</span>}
   },
-  <span class="string">'GET help/privacy'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
-  },
-  <span class="string">'GET help/tos'</span>: {
-    rateLimits: {user: <span class="number">15</span>, app: <span class="number">15</span>}
+  <span class="hljs-string">'GET trends/closest'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">15</span>}
   },</pre></div></div>
             
         </li>
@@ -1218,15 +1178,91 @@ so run them all as they come.</p>
         <li id="section-40">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-40">&#182;</a>
               </div>
-              <h3>Rate limiting</h3>
+              <h3 id="report-spam">Report spam</h3>
+<p>Also adds a block</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="string">'GET application/rate_limit_status'</span>: {
-    rateLimits: {user: <span class="number">180</span>, app: <span class="number">180</span>}
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-string">'POST users/report_spam'</span>: {
+    rateLimits: {user: <span class="hljs-number">0</span>, app: <span class="hljs-number">0</span>}
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-41">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-41">&#182;</a>
+              </div>
+              <h3 id="authentication">Authentication</h3>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-string">'GET oauth/authenticate'</span>: {
+    rateLimits: <span class="hljs-literal">false</span>
+  },
+  <span class="hljs-string">'GET oauth/authorize'</span>: {
+    rateLimits: <span class="hljs-literal">false</span>
+  },
+  <span class="hljs-string">'POST oauth/access_token'</span>: {
+    rateLimits: <span class="hljs-literal">false</span>
+  },
+  <span class="hljs-string">'POST oauth/request_token'</span>: {
+    rateLimits: <span class="hljs-literal">false</span>
+  },
+  <span class="hljs-string">'POST oauth2/token'</span>: {
+    rateLimits: <span class="hljs-literal">false</span>
+  },
+  <span class="hljs-string">'POST oauth2/invalidate_token'</span>: {
+    rateLimits: <span class="hljs-literal">false</span>
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-42">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-42">&#182;</a>
+              </div>
+              <h3 id="resources">Resources</h3>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-string">'GET help/configuration'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">15</span>}
+  },
+  <span class="hljs-string">'GET help/languages'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">15</span>}
+  },
+  <span class="hljs-string">'GET help/privacy'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">15</span>}
+  },
+  <span class="hljs-string">'GET help/tos'</span>: {
+    rateLimits: {user: <span class="hljs-number">15</span>, app: <span class="hljs-number">15</span>}
+  },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-43">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-43">&#182;</a>
+              </div>
+              <h3 id="rate-limiting">Rate limiting</h3>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-string">'GET application/rate_limit_status'</span>: {
+    rateLimits: {user: <span class="hljs-number">180</span>, app: <span class="hljs-number">180</span>}
   }
 };</pre></div></div>
             

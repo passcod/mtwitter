@@ -71,7 +71,7 @@
               
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="string">'use strict'</span>;</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-pi">'use strict'</span>;</pre></div></div>
             
         </li>
         
@@ -87,35 +87,54 @@ We want them namespaced.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="keyword">var</span> pkginfo = {exports: []};
-<span class="keyword">try</span> {
-  require(<span class="string">'pkginfo'</span>)(pkginfo);
-} <span class="keyword">catch</span> (e) {
-  pkginfo.exports = {name: <span class="string">'mtwitter'</span>, version: <span class="string">'0.0.0'</span>};
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> pkginfo = {exports: []};
+<span class="hljs-keyword">try</span> {
+  <span class="hljs-built_in">require</span>(<span class="hljs-string">'pkginfo'</span>)(pkginfo);
+} <span class="hljs-keyword">catch</span> (e) {
+  pkginfo.exports = {name: <span class="hljs-string">'mtwitter'</span>, version: <span class="hljs-string">'0.0.0'</span>};
 }
 exports.pkginfo = pkginfo.exports;
 
 exports.options = {
-  consumer_key: <span class="literal">null</span>,
-  consumer_secret: <span class="literal">null</span>,
-  access_token_key: <span class="literal">null</span>,
-  access_token_secret: <span class="literal">null</span>,
-  application_only: <span class="literal">false</span>,
+  consumer_key: <span class="hljs-literal">null</span>,
+  consumer_secret: <span class="hljs-literal">null</span>,
+  access_token_key: <span class="hljs-literal">null</span>,
+  access_token_secret: <span class="hljs-literal">null</span>,
+  application_only: <span class="hljs-literal">false</span>,
 
   headers: {
-    <span class="string">'Accept'</span>: <span class="string">'*/*'</span>,
-    <span class="string">'Connection'</span>: <span class="string">'close'</span>,
-    <span class="string">'User-Agent'</span>: exports.pkginfo.name + <span class="string">'/'</span> + exports.pkginfo.version
+    <span class="hljs-string">'Accept'</span>: <span class="hljs-string">'*/*'</span>,
+    <span class="hljs-string">'Connection'</span>: <span class="hljs-string">'close'</span>,
+    <span class="hljs-string">'User-Agent'</span>: exports.pkginfo.name + <span class="hljs-string">'/'</span> + exports.pkginfo.version
   },
 
-  secure: <span class="literal">false</span>,
-  cookie: <span class="string">'twauth'</span>,
+  secure: <span class="hljs-literal">false</span>,
+  cookie: <span class="hljs-string">'twauth'</span>,
   cookie_options: {},
-  cookie_secret: <span class="literal">null</span>,
+  cookie_secret: <span class="hljs-literal">null</span>,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Set <code>skipQueue</code> to true to disable the queueing mechanism:
+requests will be made in real time, but the rating limit
+protection will be disabled.</p>
+<p>The queue can be re-enabled per-request by setting skipQueue
+to true individually using <code>rest.queueRequest()</code>.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  skipQueue: <span class="hljs-literal">false</span>,
 
   urls: {
-    appAuth: <span class="string">'https://api.twitter.com/oauth2/token'</span>,
-    restBase: <span class="string">'https://api.twitter.com/1.1'</span>
+    appAuth: <span class="hljs-string">'https://api.twitter.com/oauth2/token'</span>,
+    restBase: <span class="hljs-string">'https://api.twitter.com/1.1'</span>
   }
 };</pre></div></div>
             

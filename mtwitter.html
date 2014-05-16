@@ -71,12 +71,12 @@
               
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="string">'use strict'</span>;
+            <div class="content"><div class='highlight'><pre><span class="hljs-pi">'use strict'</span>;
 
-<span class="keyword">var</span> _         = require(<span class="string">'underscore'</span>);
-<span class="keyword">var</span> defaults  = require(<span class="string">'./defaults'</span>);
+<span class="hljs-keyword">var</span> _         = <span class="hljs-built_in">require</span>(<span class="hljs-string">'underscore'</span>);
+<span class="hljs-keyword">var</span> defaults  = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./defaults'</span>);
 
-module.exports = <span class="function"><span class="keyword">function</span> <span class="title">Twitter</span><span class="params">(options)</span> {</span></pre></div></div>
+module.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Twitter</span><span class="hljs-params">(options)</span> {</span></pre></div></div>
             
         </li>
         
@@ -92,8 +92,8 @@ called differently.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">if</span> (!(<span class="keyword">this</span> <span class="keyword">instanceof</span> Twitter)) {
-    <span class="keyword">return</span> <span class="keyword">new</span> Twitter(options);
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">if</span> (!(<span class="hljs-keyword">this</span> <span class="hljs-keyword">instanceof</span> Twitter)) {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Twitter(options);
   }</pre></div></div>
             
         </li>
@@ -111,7 +111,7 @@ argument to this function.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">this</span>.options = _.extend(defaults.options, options);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">this</span>.options = _.extend(defaults.options, options);</pre></div></div>
             
         </li>
         
@@ -126,8 +126,8 @@ argument to this function.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> rest = <span class="keyword">new</span> (require(<span class="string">'./rest'</span>))(<span class="keyword">this</span>.options);
-  <span class="keyword">this</span>.rest = rest;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> rest = <span class="hljs-keyword">new</span> (<span class="hljs-built_in">require</span>(<span class="hljs-string">'./rest'</span>))(<span class="hljs-keyword">this</span>.options);
+  <span class="hljs-keyword">this</span>.rest = rest;</pre></div></div>
             
         </li>
         
@@ -135,16 +135,16 @@ argument to this function.</p>
         <li id="section-5">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <h2>Convenience functions over rest.queueRequest().</h2>
+              <h2 id="convenience-functions-over-rest-queuerequest-">Convenience functions over rest.queueRequest().</h2>
 <p><code>params</code> is <em>optional</em> here.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">this</span>.get = <span class="keyword">function</span>(url, params, callback) {
-    <span class="keyword">return</span> rest.queueRequest(<span class="string">'GET'</span>, url, params, callback);
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">this</span>.get = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(url, params, callback)</span> {</span>
+    <span class="hljs-keyword">return</span> rest.queueRequest(<span class="hljs-string">'GET'</span>, url, params, callback);
   };</pre></div></div>
             
         </li>
@@ -161,13 +161,13 @@ value to pick the default: (<code>application/x-www-form-urlencoded</code>)</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">this</span>.post = <span class="keyword">function</span>(url, content, contentType, callback) {
-    <span class="keyword">if</span> (<span class="keyword">typeof</span> contentType === <span class="string">'function'</span>) {
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">this</span>.post = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(url, content, contentType, callback)</span> {</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> contentType === <span class="hljs-string">'function'</span>) {
       callback = contentType;
-      contentType = <span class="literal">null</span>;
+      contentType = <span class="hljs-literal">null</span>;
     }
 
-    <span class="keyword">return</span> rest.queueRequest(<span class="string">'POST'</span>, url, {
+    <span class="hljs-keyword">return</span> rest.queueRequest(<span class="hljs-string">'POST'</span>, url, {
       content: content,
       contentType: contentType
     }, callback);
@@ -186,8 +186,8 @@ value to pick the default: (<code>application/x-www-form-urlencoded</code>)</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="keyword">var</span> stream = <span class="keyword">new</span> (require(<span class="string">'./stream'</span>))(<span class="keyword">this</span>.rest, <span class="keyword">this</span>.options);
-  <span class="keyword">this</span>.stream = stream;
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> stream = <span class="hljs-keyword">new</span> (<span class="hljs-built_in">require</span>(<span class="hljs-string">'./stream'</span>))(<span class="hljs-keyword">this</span>.rest, <span class="hljs-keyword">this</span>.options);
+  <span class="hljs-keyword">this</span>.stream = stream;
 };</pre></div></div>
             
         </li>
