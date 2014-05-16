@@ -1,6 +1,6 @@
 {
   "name": "mtwitter",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Node.js Twitter API",
   "keywords": [
     "twitter",
@@ -33,14 +33,14 @@
   ],
   "licenses": {
     "type": "Public Domain",
-    "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    "url": "https://passcod.name/PUBLIC.txt"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/passcod/mtwitter.git"
   },
   "dependencies": {
-    "jape": "^0.0.1",
+    "jape": "^0.0.3",
     "fantail": "^0.2.0",
     "readable-stream": "^1.0.27-1",
     "pkginfo": "^0.3.0",
