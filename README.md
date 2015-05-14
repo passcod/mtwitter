@@ -5,7 +5,7 @@ Node.js Twitter API
 [![NPM version](https://badge.fury.io/js/mtwitter.svg)](http://npmjs.org/package/mtwitter)
 [![Dependency Status](https://gemnasium.com/passcod/mtwitter.svg)](https://gemnasium.com/passcod/mtwitter)
 
-__Not currently maintained, but PR/issues/questions welcome.__
+__This library is unmaintained. Use [twitter](https://www.npmjs.com/package/twitter) or [twit](https://www.npmjs.com/package/twit) instead.__
 
 Instantiation & Keys
 --------------------
