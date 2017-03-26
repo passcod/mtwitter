@@ -42,13 +42,13 @@
   "dependencies": {
     "jape": "^0.0.3",
     "fantail": "^0.2.0",
-    "readable-stream": "^1.0.27-1",
-    "pkginfo": "^0.3.0",
+    "readable-stream": "^2.2.6",
+    "pkginfo": "^0.4.0",
     "request": "^2.34.0",
     "underscore": "^1.6.0"
   },
   "devDependencies": {
-    "docco": "^0.6.0",
+    "docco": "^0.7.0",
     "jshint": "^2.5.0",
     "mocha": "^1.18.0"
   },
@@ -60,5 +60,10 @@
     "test": "./node_modules/.bin/mocha --reporter spec",
     "lint": "./node_modules/.bin/jshint --config=./jshint.json lib test",
     "doc": "./node_modules/.bin/docco -o doc lib/*.js index.js"
+  },
+  "greenkeeper": {
+    "ignore": [
+      "mocha"
+    ]
   }
 }
