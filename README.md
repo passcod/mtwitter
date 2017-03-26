@@ -1,6 +1,8 @@
 Node.js Twitter API
 ===================
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/passcod/mtwitter.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://travis-ci.org/passcod/mtwitter.svg)](https://travis-ci.org/passcod/mtwitter)
 [![NPM version](https://badge.fury.io/js/mtwitter.svg)](http://npmjs.org/package/mtwitter)
 [![Dependency Status](https://gemnasium.com/passcod/mtwitter.svg)](https://gemnasium.com/passcod/mtwitter)
