@@ -50,7 +50,7 @@
   "devDependencies": {
     "docco": "^0.7.0",
     "jshint": "^2.5.0",
-    "mocha": "^3.2.0"
+    "mocha": "^1.18.0"
   },
   "engines": {
     "node": ">=0.10.0"
@@ -60,5 +60,10 @@
     "test": "./node_modules/.bin/mocha --reporter spec",
     "lint": "./node_modules/.bin/jshint --config=./jshint.json lib test",
     "doc": "./node_modules/.bin/docco -o doc lib/*.js index.js"
+  },
+  "greenkeeper": {
+    "ignore": [
+      "mocha"
+    ]
   }
 }
